@@ -1,0 +1,35 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&subset=korean");
+@import "./reset";
+
+
+#wrap {
+    position:relative;
+    // overflow:hidden;
+}
+
+.inner {
+    @include widthGuide();
+}
+
+#header .inner {
+    position:relative;
+}
+
+#header .logo {
+    width:150px;
+    margin:0 auto;
+    background:url("../images//logo.png") no-repeat center / 100%;
+    text-indent:-999px;
+    overflow:hidden;
+
+    a {
+        display:block;
+    }
+}
+
+#header .menu-nav {
+    position:absolute;
+    top:0;
+    left:0;
+}

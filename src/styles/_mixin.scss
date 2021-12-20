@@ -1,0 +1,236 @@
+@import "./var";
+
+// 폰트
+@mixin textType($size:$_fontSize, $weight:$_fontWeight, $color:$_fontColor, $lineH:$_lineHeight){
+    font-size:$size;
+    font-weight:$weight;
+    color:$color;
+    line-height:$lineH;
+}
+
+//absolute
+@mixin positionAb($width:100%, $top:0px, $left:0px, $right:auto) {
+    position:absolute;
+    top:$top;
+    left:$left;
+    right:$right;
+    width:$width;
+}
+
+//float or absolute 범용적 박스
+@mixin hybridBox($position:relative, $width:100%) {
+    position:$position;
+    width:$width;
+    &:after{
+        content:"";
+        display:block;
+        clear:both;
+    }
+}
+
+//clear
+@mixin clear {
+    content:"";
+    display:block;
+    clear:both;
+}
+
+// 말줄임
+@mixin ellipsis($line: 1) {
+    @if ($line == 1) {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    } @else {
+        display: -webkit-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: $line;
+    }
+}
+
+// 버튼 hover 모션
+@mixin btnMotion($bg:#fff, $activeBg:#2f7d4e, $time:0.4s) {
+    position:relative;
+    display:inline-block;
+    overflow:hidden;
+
+    &:before {
+        content:"";
+        display:block;
+        width:calc(100% + 2px);
+        height:100%;
+        @include positionAb(100%, 100%, 0);
+        background-color:$bg;
+        border-radius:100% 100% 0 0;
+        transition:all $time ease;
+        z-index:0;
+    }
+
+    & > span {
+        position:relative;
+        z-index:1;
+    }
+
+    &.on, &:hover, &:active {
+        &:before {
+            height:190%;
+            top:-90%;
+            background-color:$activeBg;
+        }
+    }
+}
+
+@mixin btnCenterMotion($width:80px, $height:80px, $time:0.4s, $bg:#fff, $activeBg:#2f7d4e) {
+    position:relative;
+    min-width:auto !important;
+    width:$width !important;
+    height:$height !important;
+    padding:0 !important;
+    border-radius:50% !important;
+    overflow:hidden;
+    // transition:all $time ease;
+    transform:scale(1);
+
+    &:before {
+        content:"";
+        display:block;
+        height:0;
+        @include positionAb(0, 50%, 50%);
+        transform:translate(-50%, -50%);
+        background-color:$bg;
+        border-radius:50%;
+        transition:all $time ease;
+        z-index:0;
+    }
+
+    & > span {
+        position:relative;
+        z-index:1;
+    }
+
+    &:hover, &:active {
+        transform:scale(1.1);
+
+        &:before {
+            width:calc(100% + 2px);
+            height:calc(100% + 2px);
+            background-color:$activeBg;
+        }
+    }
+}
+
+// 리스트 모션
+@mixin listMotion($top:150px, $time:1.2s) {
+    position:relative;
+    top:$top;
+    opacity:0;
+    transition:all $time ease;
+
+    &.active {
+        top:0;
+        opacity:1;
+    }
+}
+
+// inner 너비 가이드
+@mixin widthGuide($width:1380px) {
+    width:$width;
+    max-width:calc(100% - 240px);
+    margin:0 auto;
+
+    @include desktop(){
+        width:calc(100% - 160px);
+        max-width:calc(100% - 160px);
+    }
+
+    @include tablet(){
+        width:92%;
+        max-width:92%;
+    }
+}
+
+//media query
+@mixin desktop-big {
+    @media all and (min-width:1921px){
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media all and (max-width:#{$breakpoint-desktop}){
+        @content;
+    }
+}
+
+@mixin desktop-small {
+    @media all and (max-width:#{$breakpoint-desktop-small}){
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media all and (max-width:#{$breakpoint-tablet}){
+        @content;
+    }
+}
+
+@mixin mobile {
+    @media all and (max-width:#{$breakpoint-mobile}){
+        @content;
+    }
+}
+
+@mixin mobile-small {
+    @media all and (max-width:#{$breakpoint-mobile-small}){
+        @content;
+    }
+}
+
+@mixin only-desktop-small {
+    @media all and (min-width:#{$breakpoint-tablet}) and (max-width:#{$breakpoint-desktop-small}){
+        @content;
+    }
+}
+
+@mixin only-min-desktop {
+    @media all and (min-width:#{$breakpoint-tablet}){
+        @content;
+    }
+}
+@mixin only-min-desktop-wide {
+    @media all and (min-width:#{$breakpoint-desktop-wide}){
+        @content;
+    }
+}
+
+//가상선택자 before, after absolut일 경우
+@mixin virtualAB ($top, $left, $right, $width, $height){
+    content:'';
+    display: block;
+    position:absolute;
+    top:$top;
+    left:$left;
+    right:$right;
+    width:$width;
+    height:$height;
+}
+//가상선택자 before, after inlineblock 경우
+@mixin virtualIB ($width, $height){
+    content:'';
+    display: inline-block;
+    width:$width;
+    height:$height;
+}
+
+//mont-B
+@mixin montB(){
+    font-family: "mont-B", "Noto Sans KR", "맑은 고딕", "Malgun Gothic", sans-serif;
+}
+@mixin montM(){
+    font-family: "mont-M", "Noto Sans KR", "맑은 고딕", "Malgun Gothic", sans-serif;
+}
+@mixin montR(){
+    font-family: "mont-R", "Noto Sans KR", "맑은 고딕", "Malgun Gothic", sans-serif;
+}
