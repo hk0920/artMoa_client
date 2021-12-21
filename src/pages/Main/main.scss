@@ -1,0 +1,115 @@
+@import "../../styles/var";
+@import "../../styles/mixin";
+
+.main-vis-wrap {
+  position:relative;
+  height:100vh;
+  
+  .next-info {
+    position:absolute;
+    bottom:0;
+    left:calc(100% - 768px);
+    min-width:535px;
+    padding:40px 50px 40px 120px;
+    background:#eee;
+
+    &:before {
+      @include virtualAB(55px, 0, 80px, 2px);
+      background:$_pointColor;
+    }
+
+    .tit {
+      font-size:30px;
+    }
+  }
+}
+.main-vis {
+  height:100%;
+  
+  &:before {
+    @include virtualAB(0, 0, calc(100% - 768px), 100%);
+    background:#d9e7e7;
+    background:-moz-linear-gradient(left,  #d9e7e7 0%, #b4d3d3 100%);
+    background:-webkit-linear-gradient(left,  #d9e7e7 0%,#b4d3d3 100%);
+    background:linear-gradient(to right,  #d9e7e7 0%,#b4d3d3 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#d9e7e7', endColorstr='#b4d3d3',GradientType=1 );
+  }
+
+  .swiper-slide {
+    padding:240px 120px 240px 235px;
+
+    &:after {
+      @include clear();
+    }
+
+    .txt-div {
+      float:left;
+      width:calc(100% - 648px);
+      height:100%;
+      padding:100px;
+      background:#fff;
+
+      .tit {
+        position:relative;
+        display:inline-block;
+        font-size:70px;
+        font-weight:bold;
+        color:#1a1a1d;
+
+        &:after {
+          @include virtualAB(auto, auto, 90px, 6px);
+          bottom:0;
+          right:0;
+          background:$_pointColor;
+        }
+      }
+
+      .txt {
+        margin:20px 0 30px;
+      }
+
+      .more-btn {
+        display:inline-block;
+        width:260px;
+        height:60px;
+        color:#fff;
+        line-height:60px;
+        background:$_pointColor;
+        text-align:center;
+      }
+    }
+
+    .img-div {
+      position:relative;
+      float:left;
+      width:648px;
+      height:100%;
+      overflow:hidden;
+
+      img {
+        @include positionAb(100%, 50%, 50%);
+        transform:translate(-50%, -50%);
+      }
+    }
+  }
+}
+
+.tab-btn {
+  a {
+    display:inline-block;
+    margin-right:60px;
+
+    &:last-child {
+      margin-right:0;
+    }
+
+    &.active {
+      font-weight:bold;
+      color:#333;
+    }
+  }
+}
+
+.main-sec {
+  margin:100px 0;
+}
