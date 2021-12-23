@@ -1,7 +1,6 @@
 import React from "react";
 import {Link} from 'react-router-dom';
 import {Swiper, SwiperSlide} from "swiper/react";
-import jquery from "jquery";
 import $ from "jquery";
 
 import "swiper/css";
@@ -19,19 +18,19 @@ SwiperCore.use([EffectFade,Pagination,Navigation]);
 
 const data = [
   {
-    id:1,
+    id:0,
     title:"살바도르 달리",
     text:"스페인의 초현실주의 거장 '살바도르 달리(Salvador Dali)'의 국내 최초 대규모 회고전",
     image:"https://ddp.or.kr/usr/upload/board_thumb/zboardphotogallery0/20211210044757074.jpg" 
   },
   {
-    id:2,
+    id:1,
     title:"라이프 앤 조이",
     text:"위대한 거장 앙리 마티스가 온다! 마티스가 그린 삶과 예술, 그 기쁨 속으로",
     image:"https://modo-phinf.pstatic.net/20211211_38/1639234523343rHDEF_JPEG/mosa4Btrdb.jpeg" 
   },
   {
-    id:3,
+    id:2,
     title:"따뜻한 휴일의 기록",
     text:"따뜻한 빛과 피사체가 균형을 이루는 순간",
     image:"http://www.groundseesaw.co.kr/data/main/file1_1622428115l0o94ushqo.jpg" 
@@ -39,6 +38,28 @@ const data = [
 ]
 
 class MainVis extends React.Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      number:1
+    };
+
+    this.numberChange = this.numberChange.bind(this);
+  }
+
+  numberChange(idx){
+    if(idx < data.length -1){
+      this.setState({
+        number:idx + 1
+      });
+    }else{
+      this.setState({
+        number:0
+      });
+    }
+  }
+
   componentDidMount(){
     $(window).resize(function(){
       var nextInfoPosition = $(".main-vis .swiper-slide").css("padding-bottom").replace("px", "") - $(".main-vis-wrap .next-info").outerHeight();
@@ -50,12 +71,13 @@ class MainVis extends React.Component {
     return(
       <div className="main-vis-wrap">
         <Swiper 
+          className="main-vis"
           effect={"fade"}
           pagination={{"type": "fraction"}} 
           navigation={true}
-          className="main-vis">
+          onSlideChange={(e)=> this.numberChange(e.activeIndex)} >
             {data.map((dt)=>(
-              <SwiperSlide>
+              <SwiperSlide key={dt.id}>
                 <div className="txt-div">
                   <p className="tit">{dt.title}</p>
                   <p className="txt">{dt.text}</p>
@@ -70,7 +92,7 @@ class MainVis extends React.Component {
         </Swiper>
         <div className="next-info">
           <p className="txt">Next</p>
-          <p className="tit">{data[0].title}</p>
+          <p className="tit">{data[this.state.number].title}</p>
         </div>
       </div>
     )

@@ -94,22 +94,6 @@
   }
 }
 
-.tab-btn {
-  a {
-    display:inline-block;
-    margin-right:60px;
-
-    &:last-child {
-      margin-right:0;
-    }
-
-    &.active {
-      font-weight:bold;
-      color:#333;
-    }
-  }
-}
-
 .main-sec {
   margin:100px 0;
 }
