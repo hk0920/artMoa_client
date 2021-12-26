@@ -9,20 +9,43 @@
     position:absolute;
     bottom:0;
     left:calc(100% - 768px);
-    min-width:535px;
+    width:528px;
     padding:40px 50px 40px 120px;
+    color:#1a1a1d;
     background:#eee;
 
     &:before {
-      @include virtualAB(55px, 0, 80px, 2px);
+      @include virtualAB(53px, 0, 80px, 2px);
       background:$_pointColor;
     }
 
     .tit {
       font-size:30px;
+      font-weight:bold;
+      @include ellipsis(1);
+    }
+  }
+
+  .left-util {
+    position:absolute;
+    bottom:240px;
+    left:60px;
+    transform:rotate(-90deg);
+    z-index:1;
+
+    .activeIdx {
+      position:relative;
+      font-weight:bold;
+      color:#1a1a1d;
+
+      &:after {
+        @include virtualAB(10px, 145px, 60px, 1px);
+        background:#1a1a1d;
+      }
     }
   }
 }
+
 .main-vis {
   height:100%;
   
@@ -52,12 +75,14 @@
       .tit {
         position:relative;
         display:inline-block;
-        font-size:70px;
+        max-width:100%;
+        font-size:50px;
         font-weight:bold;
         color:#1a1a1d;
+        @include ellipsis(1);
 
         &:after {
-          @include virtualAB(auto, auto, 90px, 6px);
+          @include virtualAB(auto, auto, 60px, 6px);
           bottom:0;
           right:0;
           background:$_pointColor;
@@ -65,7 +90,8 @@
       }
 
       .txt {
-        margin:20px 0 30px;
+        margin:20px 0 70px;
+        @include ellipsis(1);
       }
 
       .more-btn {
@@ -91,6 +117,30 @@
         transform:translate(-50%, -50%);
       }
     }
+  }
+
+  .swiper-button-prev, .swiper-button-next {
+    width:120px;
+    height:76px;
+    background:#fff url("../../assets/images/main-vis-arrow-icon.png") no-repeat center;
+
+    &:after {
+      display:none;
+    }
+  }
+  .swiper-button-prev {
+    top:auto;
+    bottom:164px;
+    left:auto;
+    right:120px;
+  }
+
+  .swiper-button-next {
+    top:auto;
+    bottom:88px;
+    left:auto;
+    right:120px;
+    transform:rotate(180deg);
   }
 }
 

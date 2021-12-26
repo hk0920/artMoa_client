@@ -5,16 +5,15 @@ import $ from "jquery";
 
 import "swiper/css";
 import "swiper/css/effect-fade";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import "./main.scss";
 
 import SwiperCore, {
-  EffectFade,Pagination,Navigation
+  EffectFade,Navigation
 } from "swiper";
 
-SwiperCore.use([EffectFade,Pagination,Navigation]);
+SwiperCore.use([EffectFade,Navigation]);
 
 const data = [
   {
@@ -42,10 +41,12 @@ class MainVis extends React.Component {
     super(props);
 
     this.state = {
-      number:1
+      number:1,
+      activeIdx:1
     };
 
     this.numberChange = this.numberChange.bind(this);
+    this.activeIdxEvt = this.activeIdxEvt.bind(this);
   }
 
   numberChange(idx){
@@ -56,6 +57,19 @@ class MainVis extends React.Component {
     }else{
       this.setState({
         number:0
+      });
+    }
+  }
+
+  activeIdxEvt(idx){
+    idx = idx+1;
+    if(idx < 10) {
+      this.setState({
+        activeIdx:'0' + idx
+      });
+    }else{
+      this.setState({
+        activeIdx:idx
       });
     }
   }
@@ -73,9 +87,14 @@ class MainVis extends React.Component {
         <Swiper 
           className="main-vis"
           effect={"fade"}
-          pagination={{"type": "fraction"}} 
           navigation={true}
-          onSlideChange={(e)=> this.numberChange(e.activeIndex)} >
+          onInit={(e)=>{
+            this.activeIdxEvt(e.activeIndex);
+          }}
+          onSlideChange={(e)=> {
+            this.numberChange(e.activeIndex);
+            this.activeIdxEvt(e.activeIndex);
+          }} >
             {data.map((dt)=>(
               <SwiperSlide key={dt.id}>
                 <div className="txt-div">
@@ -93,6 +112,9 @@ class MainVis extends React.Component {
         <div className="next-info">
           <p className="txt">Next</p>
           <p className="tit">{data[this.state.number].title}</p>
+        </div>
+        <div className="left-util">
+          <p className="activeIdx">{this.state.activeIdx}</p>
         </div>
       </div>
     )

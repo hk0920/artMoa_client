@@ -17,6 +17,11 @@ class CardList extends React.Component {
 						<Link to="">예정</Link>
 						<Link to="">종료</Link>
 					</div>
+
+					<div className="list-btn">
+						<Link to="" className="card-list-btn">카드형식 정렬</Link>
+						<Link to="" className="board-list-btn">보드형식 정렬</Link>
+					</div>
 				</div>
 				<ul className="list">
 					<li>

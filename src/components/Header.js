@@ -1,9 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {Outlet , NavLink, Link} from 'react-router-dom';
+import $ from 'jquery';
 import GnbNav from './GnbNav';
 import TotalSearch from './TotalSearch';
 
 const Header=()=>{
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  const updateScroll=()=>{
+    setScrollPosition(window.scrollY);
+    if(scrollPosition < window.scrollY){
+      $("#header").addClass("hide");
+    }else{
+      $("#header").removeClass("hide");
+    }
+  }
+
+  useEffect(()=>{
+    window.addEventListener("scroll", updateScroll);
+
+    return()=>{
+      window.removeEventListener("scroll", updateScroll);
+    }
+  });
+
   return (
     <>
       <header id="header">

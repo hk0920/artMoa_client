@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {NavLink} from 'react-router-dom';
+import $ from "jquery";
+import gsap, { Power3 } from 'gsap';
 
 const GnbNav=()=>{
+  const [gnbStatus, setGnbStatus] = useState(false);
+
+  const onClickGnb=(e)=>{
+    setGnbStatus(gnbStatus=>gnbStatus?false:true);
+    if(!gnbStatus){
+      gsap.to($(".gnb"), 0.6, {left:0, ease:Power3.easeOut});
+      $("#header .search-div, #cBody").addClass("gnb-on");
+    }else{
+      gsap.to($(".gnb"), 0.6, {left:"-100%", ease:Power3.easeOut});
+      $("#header .search-div, #cBody").removeClass("gnb-on");
+    }
+  }
+
   return (
     <nav className="menu-nav">
-      <button className="gnb-btn">
+      <p>{gnbStatus}</p>
+      <button className={!gnbStatus?'gnb-btn':'gnb-btn on'} onClick={onClickGnb}>
         <strong>메뉴 열기</strong>
         <span></span>
         <span></span>
