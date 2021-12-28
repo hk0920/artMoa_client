@@ -93,16 +93,6 @@
         margin:20px 0 70px;
         @include ellipsis(1);
       }
-
-      .more-btn {
-        display:inline-block;
-        width:260px;
-        height:60px;
-        color:#fff;
-        line-height:60px;
-        background:$_pointColor;
-        text-align:center;
-      }
     }
 
     .img-div {
@@ -145,5 +135,35 @@
 }
 
 .main-sec {
-  margin:100px 0;
+  margin:120px 0;
+
+  .title-div {
+    margin-bottom:40px;
+  }
+
+  .sec-title {
+    position:relative;
+    display:inline-block;
+    font-size:50px;
+    color:#1a1a1d;
+    
+    &:after {
+      @include virtualAB(auto, auto, 40px, 4px);
+      bottom:0;
+      right:0;
+      background:#b4d3d3;
+    }
+  }
+
+  &.notice-sec {
+    .inner {
+      position:relative;
+    }
+
+    .btn-wrap {
+      @include positionAb(auto, 35px, auto);
+      right:0;
+      margin-top:0;
+    }
+  }
 }

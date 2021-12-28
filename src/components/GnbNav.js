@@ -10,10 +10,10 @@ const GnbNav=()=>{
     setGnbStatus(gnbStatus=>gnbStatus?false:true);
     if(!gnbStatus){
       gsap.to($(".gnb"), 0.6, {left:0, ease:Power3.easeOut});
-      $("#header .search-div, #cBody").addClass("gnb-on");
+      $("#header").addClass("gnb-on");
     }else{
-      gsap.to($(".gnb"), 0.6, {left:"-100%", ease:Power3.easeOut});
-      $("#header .search-div, #cBody").removeClass("gnb-on");
+      gsap.to($(".gnb"), 0.6, {left:-$(".gnb").outerWidth(), ease:Power3.easeOut});
+      $("#header").removeClass("gnb-on");
     }
   }
 
@@ -29,16 +29,16 @@ const GnbNav=()=>{
       
       <ul className="gnb">
         <li>
-          <NavLink to="/intro">소개</NavLink>
+          <NavLink to="/intro">About us</NavLink>
         </li>
         <li>  
-          <NavLink to="/art">전시</NavLink>
+          <NavLink to="/art">Exhibition</NavLink>
         </li>
         <li>  
           <NavLink to="/faq">FAQ</NavLink>
         </li>
         <li>  
-          <NavLink to="/notice">공지사항</NavLink>
+          <NavLink to="/notice">Notice</NavLink>
         </li>
       </ul>
     </nav>

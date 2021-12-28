@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {Outlet , NavLink, Link} from 'react-router-dom';
+import {NavLink, Link} from 'react-router-dom';
 import $ from 'jquery';
 import GnbNav from './GnbNav';
 import TotalSearch from './TotalSearch';
@@ -14,6 +14,14 @@ const Header=()=>{
     }else{
       $("#header").removeClass("hide");
     }
+
+    if($("#cBody").hasClass("main")){
+      if(window.scrollY < $(".main-vis-wrap").height()){
+        $("#header").removeClass("white-type");
+      }else{
+        $("#header").addClass("white-type");
+      }
+    }
   }
 
   useEffect(()=>{
@@ -25,24 +33,20 @@ const Header=()=>{
   });
 
   return (
-    <>
-      <header id="header">
-        <h1 className="logo">
-          <NavLink to="/">아트모아 로고</NavLink>
-        </h1>
-        
-        <GnbNav />
-        
-        <div className="left-util">
-          <Link to="/login">로그인</Link>
-          <Link to="/join">회원가입</Link>
-        </div>
+    <header id="header">
+      <h1 className="logo">
+        <NavLink to="/">아트모아 로고</NavLink>
+      </h1>
+      
+      <GnbNav />
+      
+      <div className="left-util">
+        <Link to="/login">로그인</Link>
+        <Link to="/join">회원가입</Link>
+      </div>
 
-        <TotalSearch />
-      </header>
-
-      <Outlet />
-    </>
+      <TotalSearch />
+    </header>
   )
 }
 

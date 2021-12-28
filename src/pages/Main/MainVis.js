@@ -7,8 +7,6 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 
-import "./main.scss";
-
 import SwiperCore, {
   EffectFade,Navigation
 } from "swiper";

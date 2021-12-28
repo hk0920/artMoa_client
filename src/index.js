@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Root from './Root';
 import './styles/common.scss';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Root/>
+    <App />
   </React.StrictMode>,
   document.getElementById('wrap')
 );
