@@ -1,9 +1,9 @@
 import React from "react";
 import "swiper/css/bundle";
 import CardList from "../../components/CardList";
-import NoticeList from "../../components/NoticeList";
 import MainVis from "./MainVis";
 import "./main.scss";
+import TextList from "../../components/TextList";
 
 const Main=()=>{
   return(
@@ -19,7 +19,7 @@ const Main=()=>{
           <div className="title-div">
             <p className="sec-title">Notice</p>
           </div>
-          <NoticeList />
+          <TextList />
         </div>
       </section>
     </div>

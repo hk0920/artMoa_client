@@ -1,11 +1,11 @@
 import React from "react";
 import {Link} from 'react-router-dom';
 
-class NoticeList extends React.Component {
+class TextList extends React.Component {
   render(){
     return(
       <div className="list-div">
-				<ul className="list notice-type">
+				<ul className="list text-type">
 					<li>
 						<Link to="">
 							<div className="txt-div">
@@ -44,11 +44,11 @@ class NoticeList extends React.Component {
 					</li>
 				</ul>
 				<div className="btn-wrap">
-					<button type="button" className="txt-more-btn">More</button>
+					<button type="button" className="more-btn">More</button>
 				</div>
 			</div>	
     )
   }
 };
 
-export default NoticeList;
+export default TextList;

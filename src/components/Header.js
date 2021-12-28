@@ -17,18 +17,32 @@ const Header=()=>{
 
     if($("#cBody").hasClass("main")){
       if(window.scrollY < $(".main-vis-wrap").height()){
-        $("#header").removeClass("white-type");
+        $("#header").removeClass("bg-type");
       }else{
-        $("#header").addClass("white-type");
+        $("#header").addClass("bg-type");
       }
+    }else{
+      if(window.scrollY < 100){
+        $("#header").removeClass("bg-type").addClass("white-type");
+      }else{
+        $("#header").removeClass("white-type").addClass("bg-type");
+      }
+    }
+  }
+
+  const headerStyle=()=>{
+    if(!$("#cBody").hasClass("main")){
+      $("#header").addClass("white-type");
     }
   }
 
   useEffect(()=>{
     window.addEventListener("scroll", updateScroll);
+    window.addEventListener("load", headerStyle);
 
     return()=>{
       window.removeEventListener("scroll", updateScroll);
+      window.removeEventListener("load", headerStyle);
     }
   });
 

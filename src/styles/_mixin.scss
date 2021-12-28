@@ -50,6 +50,14 @@
   clear:both;
 }
 
+@mixin gradientStyle($bg1:#6ababb, $bg2:$_pointColor) {
+  background:#6ababb; 
+  background:-moz-linear-gradient(-45deg,  $bg1 0%, $bg2 100%); 
+  background:-webkit-linear-gradient(-45deg,  $bg1 0%, $bg2 100%); 
+  background:linear-gradient(135deg,  $bg1 0%, $bg2 100%); 
+  filter:progid:DXImageTransform.Microsoft.gradient( startColorstr=$bg1, endColorstr=$bg2,GradientType=0 );  
+}
+
 @mixin btnMotion($bg:#fff, $activeBg:#2f7d4e, $time:0.4s) {
   position:relative;
   display:inline-block;

@@ -51,11 +51,7 @@
   
   &:before {
     @include virtualAB(0, 0, calc(100% - 768px), 100%);
-    background:#d9e7e7;
-    background:-moz-linear-gradient(left,  #d9e7e7 0%, #b4d3d3 100%);
-    background:-webkit-linear-gradient(left,  #d9e7e7 0%,#b4d3d3 100%);
-    background:linear-gradient(to right,  #d9e7e7 0%,#b4d3d3 100%);
-    filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#d9e7e7', endColorstr='#b4d3d3',GradientType=1 );
+    @include gradientStyle(#d9e7e7, #b4d3d3);
   }
 
   .swiper-slide {
@@ -164,6 +160,31 @@
       @include positionAb(auto, 35px, auto);
       right:0;
       margin-top:0;
+            
+      .more-btn {
+        display:inline-block;
+        width:auto;
+        height:auto;
+        padding-right:0;
+        font-weight:normal;
+        color:#666;
+        line-height:1.5;
+        background:none;
+        transition:all 0.3s ease-out;
+
+        &:hover {
+          position:relative;
+          padding-right:30px;
+          color:#6ababb;
+
+          &:after {
+            @include virtualAB(5px, auto, 20px, 20px);
+            right:0;
+            border-radius:50%;
+            background:#6ababb url("../../assets/images/link-arrow-icon.png") no-repeat center / 25px;
+          }
+        }
+      }
     }
   }
 }

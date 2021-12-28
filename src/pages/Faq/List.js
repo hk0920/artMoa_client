@@ -1,21 +1,21 @@
 import React from "react";
 import "swiper/css/bundle";
-import CardList from "../../components/CardList";
+import Accordion from "../../components/Accordion";
 
-const ArtList=()=>{
+const FaqList=()=>{
   return(
     <div id="cBody">
       <div className="sub-vis">
-        <div className="bg bg1"></div>
-        <h2 className="sub-title">Exhibition</h2>
+        <div className="bg bg3"></div>
+        <h2 className="sub-title">FAQ</h2>
       </div>
       <div className="art-div">
         <div className="inner">
-          <CardList />
+          <Accordion />
         </div>
       </div>
     </div>
   )
 };
 
-export default ArtList;
+export default FaqList;
