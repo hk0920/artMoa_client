@@ -140,7 +140,7 @@
   }
 }
 
-@mixin widthGuide($width:1650) {
+@mixin widthGuide($width:calc(100% - 240px)) {
   width:$width;
   max-width:calc(100% - 240px);
   margin:0 auto;
@@ -154,6 +154,23 @@
     width:92%;
     max-width:92%;
   }
+}
+
+@mixin virtualAB ($top, $left, $width, $height){
+  content:'';
+  display: block;
+  position:absolute;
+  top:$top;
+  left:$left;
+  width:$width;
+  height:$height;
+}
+
+@mixin virtualIB ($width, $height){
+  content:'';
+  display: inline-block;
+  width:$width;
+  height:$height;
 }
 
 @mixin desktop-big {
@@ -208,33 +225,4 @@
   @media all and (min-width:#{$breakpoint-desktop-wide}){
     @content;
   }
-}
-
-@mixin virtualAB ($top, $left, $width, $height){
-  content:'';
-  display: block;
-  position:absolute;
-  top:$top;
-  left:$left;
-  width:$width;
-  height:$height;
-}
-
-@mixin virtualIB ($width, $height){
-  content:'';
-  display: inline-block;
-  width:$width;
-  height:$height;
-}
-
-@mixin montB(){
-  font-family: "mont-B", "Noto Sans KR", "맑은 고딕", "Malgun Gothic", sans-serif;
-}
-
-@mixin montM(){
-  font-family: "mont-M", "Noto Sans KR", "맑은 고딕", "Malgun Gothic", sans-serif;
-}
-
-@mixin montR(){
-  font-family: "mont-R", "Noto Sans KR", "맑은 고딕", "Malgun Gothic", sans-serif;
 }

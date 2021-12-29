@@ -34,6 +34,18 @@ const data = [
   }
 ]
 
+const imgSizeEvt=()=>{
+  $(".main-vis .img-div").each(function(){
+		if($(this).find("img").width() * $(this).height() < $(this).find("img").height() * $(this).width()){
+			$(this).find("img").width($(this).width());
+			$(this).find("img").height("auto");
+		}else{
+			$(this).find("img").width("auto");
+			$(this).find("img").height($(this).height());
+		}
+	});
+}
+
 class MainVis extends React.Component {
   constructor(props){
     super(props);
@@ -76,6 +88,7 @@ class MainVis extends React.Component {
     $(window).resize(function(){
       var nextInfoPosition = $(".main-vis .swiper-slide").css("padding-bottom").replace("px", "") - $(".main-vis-wrap .next-info").outerHeight();
       $(".main-vis-wrap .next-info").css("bottom", nextInfoPosition);
+      imgSizeEvt();
     }).resize();
   }
   
@@ -95,14 +108,14 @@ class MainVis extends React.Component {
           }} >
             {data.map((dt)=>(
               <SwiperSlide key={dt.id}>
+                <div className="img-div">
+                  <img src={dt.image} alt="" />
+                </div>
+
                 <div className="txt-div">
                   <p className="tit">{dt.title}</p>
                   <p className="txt">{dt.text}</p>
                   <Link to="" className="more-btn">About Us</Link>
-                </div>
-    
-                <div className="img-div">
-                  <img src={dt.image} alt="" />
                 </div>
               </SwiperSlide>
             ))}

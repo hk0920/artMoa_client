@@ -9,12 +9,16 @@ const Header=()=>{
 
   const updateScroll=()=>{
     setScrollPosition(window.scrollY);
-    if(scrollPosition < window.scrollY){
-      $("#header").addClass("hide");
-    }else{
+    if(window.scrollY < 50){
       $("#header").removeClass("hide");
+    }else{  
+      if(scrollPosition < window.scrollY){
+        $("#header").addClass("hide");
+      }else{
+        $("#header").removeClass("hide");
+      }
     }
-
+    
     if($("#cBody").hasClass("main")){
       if(window.scrollY < $(".main-vis-wrap").height()){
         $("#header").removeClass("bg-type");
