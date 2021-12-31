@@ -8,6 +8,8 @@ import QuickMenu from './components/QuickMenu';
 import FaqList from './pages/Faq/List';
 import ArtList from './pages/Art/List';
 import NoticeList from './pages/Notice/List';
+import LoginForm from './pages/Member/LoginForm';
+import JoinForm from './pages/Member/JoinForm';
 
 const App=()=>{
 	return (
@@ -19,6 +21,8 @@ const App=()=>{
 				<Route path="/art" element={<ArtList />}></Route>
 				<Route path="/faq" element={<FaqList />}></Route>
 				<Route path="/notice" element={<NoticeList />}></Route>
+				<Route path="/login" element={<LoginForm />}></Route>
+				<Route path="/join" element={<JoinForm />}></Route>
 			</Routes>
 			<Footer />
 			<QuickMenu />

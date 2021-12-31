@@ -1,5 +1,4 @@
 import React from "react";
-import "swiper/css/bundle";
 import Accordion from "../../components/Accordion";
 
 const FaqList=()=>{
@@ -11,7 +10,15 @@ const FaqList=()=>{
       </div>
       <div className="art-div">
         <div className="inner">
-          <Accordion />
+          <div className="list-div">
+            <div className="list-top">
+              <p className="total">총 <span>13</span>개</p>
+            </div>
+            <Accordion />
+            <div className="btn-wrap">
+              <button type="button" className="blue-btn">More</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

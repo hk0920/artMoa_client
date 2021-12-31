@@ -1,5 +1,4 @@
 import React from "react";
-import "swiper/css/bundle";
 import CardList from "../../components/CardList";
 
 const ArtList=()=>{

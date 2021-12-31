@@ -1,5 +1,4 @@
 import React from "react";
-import "swiper/css/bundle";
 import TextList from "../../components/TextList";
 
 const NoticeList=()=>{
@@ -11,7 +10,12 @@ const NoticeList=()=>{
       </div>
       <div className="art-div">
         <div className="inner">
-          <TextList />
+          <div className="list-div">
+            <TextList />
+            <div className="btn-wrap">
+              <button type="button" className="blue-btn">More</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

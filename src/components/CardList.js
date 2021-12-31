@@ -321,7 +321,7 @@ class CardList extends React.Component {
 					</li>
 				</ul>
 				<div className="btn-wrap">
-					<button type="button" className="more-btn">More</button>
+					<button type="button" className="blue-btn">More</button>
 				</div>
 			</div>	
     )

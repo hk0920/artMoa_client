@@ -19,7 +19,12 @@ const Main=()=>{
           <div className="title-div">
             <p className="sec-title">Notice</p>
           </div>
-          <TextList />
+          <div className="list-div">
+            <TextList />
+            <div className="btn-wrap">
+              <button type="button" className="txt-more-btn">More</button>
+            </div>
+          </div>
         </div>
       </section>
     </div>
