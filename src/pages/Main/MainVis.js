@@ -115,7 +115,7 @@ class MainVis extends React.Component {
                 <div className="txt-div">
                   <p className="tit">{dt.title}</p>
                   <p className="txt">{dt.text}</p>
-                  <Link to="" className="more-btn">About Us</Link>
+                  <Link to="" className="blue-btn">About Us</Link>
                 </div>
               </SwiperSlide>
             ))}
