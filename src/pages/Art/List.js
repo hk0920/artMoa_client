@@ -1,6 +1,6 @@
 import React from "react";
-import CardList from "../../components/CardList";
 import axios from 'axios';
+import CardList from "../../components/CardList";
 
 class ArtList extends React.Component {
   constructor(props){
@@ -20,11 +20,11 @@ class ArtList extends React.Component {
         pageNo:"5"
       }
     }).then(res=>{
-      console.log(res.data.response.body.items.item)
+      console.log("리스트" + res.data.response.body.items.item)
       console.log(this.state.dataList);
       this.setState({
-        dataList : res.data.response.body.items.item
-      });
+        dataList:res.data.response.body.items.item
+      })
       console.log(this.state.dataList);
     }).catch(error=>{
       console.log("에러" + error)
@@ -44,7 +44,7 @@ class ArtList extends React.Component {
         </div>
         <div className="art-div">
           <div className="inner">
-            <CardList dataList={this.state.dataList} />
+            <CardList data={this.state.dataList} />
           </div>
         </div>
       </div>

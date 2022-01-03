@@ -42,7 +42,6 @@ class CardList extends React.Component {
   render(){
     return(
       <div className="list-div">
-				{this.props.dataList}
 				<div className="list-top">
 					<div className="tab-btn">
 						<Link to="" className="active">진행중</Link>
@@ -57,7 +56,7 @@ class CardList extends React.Component {
 				</div>
 				<ul className="list card-type">
 					{
-						this.props.dataList.map((item, idx)=>(
+						this.props.data.map((item, idx)=>(
 							<li key={idx}>
 								<Link to="">
 									{item.length}
