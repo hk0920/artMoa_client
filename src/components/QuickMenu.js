@@ -7,10 +7,18 @@ const QuickMenu=()=>{
   const [quickStatus, setQuickStatus] = useState(false);
 
 	const onClickQuick=()=>{
-		setQuickStatus(quickStatus=>quickStatus?false:true);
 		if(!quickStatus){
+			setQuickStatus(true);
 			$(".quick-div").addClass("active");
+
+			$(document).click(function(e){
+				if(e.target.className !== "quick-btn"){
+					setQuickStatus(false);
+					$(".quick-div").removeClass("active");
+				}
+			});
 		}else{
+			setQuickStatus(false);
 			$(".quick-div").removeClass("active");
 		}
 	}

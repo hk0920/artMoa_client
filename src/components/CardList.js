@@ -42,6 +42,7 @@ class CardList extends React.Component {
   render(){
     return(
       <div className="list-div">
+				{this.props.dataList}
 				<div className="list-top">
 					<div className="tab-btn">
 						<Link to="" className="active">진행중</Link>
@@ -55,270 +56,22 @@ class CardList extends React.Component {
 					</div>
 				</div>
 				<ul className="list card-type">
-					<li>
-						<Link to="">
-							<div className="img-div">
-								<img src="https://ddp.or.kr/usr/upload/board_thumb/zboardphotogallery0/20211210044757074.jpg" alt="" />
-							</div>
-							<div className="txt-div">
-								<p className="tit">타이틀 타이틀 타이틀 타이틀 타이틀 타이틀타이틀타이틀타이틀타이틀타이틀</p>
-								<p className="txt">텍스트 텍스트텍스트 텍스트텍스트 텍스트텍스트 텍스트텍스트 텍스트텍스트 텍스트텍스트 텍스트</p>
-							</div>
-						</Link>
-					</li>
-					<li>
-						<Link to="">
-							<div className="img-div">
-								<img src="https://modo-phinf.pstatic.net/20211211_38/1639234523343rHDEF_JPEG/mosa4Btrdb.jpeg" alt="" />
-							</div>
-							<div className="txt-div">
-								<p className="tit">타이틀</p>
-								<p className="txt">텍스트</p>
-							</div>
-						</Link>
-					</li>
-					<li>
-						<Link to="">
-							<div className="img-div">
-								<img src="http://www.groundseesaw.co.kr/data/main/file1_1622428115l0o94ushqo.jpg" alt="" />
-							</div>
-							<div className="txt-div">
-								<p className="tit">타이틀</p>
-								<p className="txt">텍스트</p>
-							</div>
-						</Link>
-					</li>
-					<li>
-						<Link to="">
-							<div className="img-div">
-								<img src="https://ddp.or.kr/usr/upload/board_thumb/zboardphotogallery0/20211210044757074.jpg" alt="" />
-							</div>
-							<div className="txt-div">
-								<p className="tit">타이틀</p>
-								<p className="txt">텍스트</p>
-							</div>
-						</Link>
-					</li>
-					<li>
-						<Link to="">
-							<div className="img-div">
-								<img src="https://modo-phinf.pstatic.net/20211211_38/1639234523343rHDEF_JPEG/mosa4Btrdb.jpeg" alt="" />
-							</div>
-							<div className="txt-div">
-								<p className="tit">타이틀</p>
-								<p className="txt">텍스트</p>
-							</div>
-						</Link>
-					</li>
-					<li>
-						<Link to="">
-							<div className="img-div">
-								<img src="http://www.groundseesaw.co.kr/data/main/file1_1622428115l0o94ushqo.jpg" alt="" />
-							</div>
-							<div className="txt-div">
-								<p className="tit">타이틀</p>
-								<p className="txt">텍스트</p>
-							</div>
-						</Link>
-					</li>
-					<li>
-						<Link to="">
-							<div className="img-div">
-								<img src="https://ddp.or.kr/usr/upload/board_thumb/zboardphotogallery0/20211210044757074.jpg" alt="" />
-							</div>
-							<div className="txt-div">
-								<p className="tit">타이틀</p>
-								<p className="txt">텍스트</p>
-							</div>
-						</Link>
-					</li>
-					<li>
-						<Link to="">
-							<div className="img-div">
-								<img src="https://modo-phinf.pstatic.net/20211211_38/1639234523343rHDEF_JPEG/mosa4Btrdb.jpeg" alt="" />
-							</div>
-							<div className="txt-div">
-								<p className="tit">타이틀</p>
-								<p className="txt">텍스트</p>
-							</div>
-						</Link>
-					</li>
-					<li>
-						<Link to="">
-							<div className="img-div">
-								<img src="http://www.groundseesaw.co.kr/data/main/file1_1622428115l0o94ushqo.jpg" alt="" />
-							</div>
-							<div className="txt-div">
-								<p className="tit">타이틀</p>
-								<p className="txt">텍스트</p>
-							</div>
-						</Link>
-					</li>
-					<li>
-						<Link to="">
-							<div className="img-div">
-								<img src="https://ddp.or.kr/usr/upload/board_thumb/zboardphotogallery0/20211210044757074.jpg" alt="" />
-							</div>
-							<div className="txt-div">
-								<p className="tit">타이틀</p>
-								<p className="txt">텍스트</p>
-							</div>
-						</Link>
-					</li>
-					<li>
-						<Link to="">
-							<div className="img-div">
-								<img src="https://modo-phinf.pstatic.net/20211211_38/1639234523343rHDEF_JPEG/mosa4Btrdb.jpeg" alt="" />
-							</div>
-							<div className="txt-div">
-								<p className="tit">타이틀</p>
-								<p className="txt">텍스트</p>
-							</div>
-						</Link>
-					</li>
-					<li>
-						<Link to="">
-							<div className="img-div">
-								<img src="http://www.groundseesaw.co.kr/data/main/file1_1622428115l0o94ushqo.jpg" alt="" />
-							</div>
-							<div className="txt-div">
-								<p className="tit">타이틀</p>
-								<p className="txt">텍스트</p>
-							</div>
-						</Link>
-					</li>
-					<li>
-						<Link to="">
-							<div className="img-div">
-								<img src="https://ddp.or.kr/usr/upload/board_thumb/zboardphotogallery0/20211210044757074.jpg" alt="" />
-							</div>
-							<div className="txt-div">
-								<p className="tit">타이틀</p>
-								<p className="txt">텍스트</p>
-							</div>
-						</Link>
-					</li>
-					<li>
-						<Link to="">
-							<div className="img-div">
-								<img src="https://modo-phinf.pstatic.net/20211211_38/1639234523343rHDEF_JPEG/mosa4Btrdb.jpeg" alt="" />
-							</div>
-							<div className="txt-div">
-								<p className="tit">타이틀</p>
-								<p className="txt">텍스트</p>
-							</div>
-						</Link>
-					</li>
-					<li>
-						<Link to="">
-							<div className="img-div">
-								<img src="http://www.groundseesaw.co.kr/data/main/file1_1622428115l0o94ushqo.jpg" alt="" />
-							</div>
-							<div className="txt-div">
-								<p className="tit">타이틀</p>
-								<p className="txt">텍스트</p>
-							</div>
-						</Link>
-					</li>
-					<li>
-						<Link to="">
-							<div className="img-div">
-								<img src="https://ddp.or.kr/usr/upload/board_thumb/zboardphotogallery0/20211210044757074.jpg" alt="" />
-							</div>
-							<div className="txt-div">
-								<p className="tit">타이틀</p>
-								<p className="txt">텍스트</p>
-							</div>
-						</Link>
-					</li>
-					<li>
-						<Link to="">
-							<div className="img-div">
-								<img src="https://modo-phinf.pstatic.net/20211211_38/1639234523343rHDEF_JPEG/mosa4Btrdb.jpeg" alt="" />
-							</div>
-							<div className="txt-div">
-								<p className="tit">타이틀</p>
-								<p className="txt">텍스트</p>
-							</div>
-						</Link>
-					</li>
-					<li>
-						<Link to="">
-							<div className="img-div">
-								<img src="http://www.groundseesaw.co.kr/data/main/file1_1622428115l0o94ushqo.jpg" alt="" />
-							</div>
-							<div className="txt-div">
-								<p className="tit">타이틀</p>
-								<p className="txt">텍스트</p>
-							</div>
-						</Link>
-					</li>
-					<li>
-						<Link to="">
-							<div className="img-div">
-								<img src="https://ddp.or.kr/usr/upload/board_thumb/zboardphotogallery0/20211210044757074.jpg" alt="" />
-							</div>
-							<div className="txt-div">
-								<p className="tit">타이틀</p>
-								<p className="txt">텍스트</p>
-							</div>
-						</Link>
-					</li>
-					<li>
-						<Link to="">
-							<div className="img-div">
-								<img src="https://modo-phinf.pstatic.net/20211211_38/1639234523343rHDEF_JPEG/mosa4Btrdb.jpeg" alt="" />
-							</div>
-							<div className="txt-div">
-								<p className="tit">타이틀</p>
-								<p className="txt">텍스트</p>
-							</div>
-						</Link>
-					</li>
-					<li>
-						<Link to="">
-							<div className="img-div">
-								<img src="http://www.groundseesaw.co.kr/data/main/file1_1622428115l0o94ushqo.jpg" alt="" />
-							</div>
-							<div className="txt-div">
-								<p className="tit">타이틀</p>
-								<p className="txt">텍스트</p>
-							</div>
-						</Link>
-					</li>
-					<li>
-						<Link to="">
-							<div className="img-div">
-								<img src="https://ddp.or.kr/usr/upload/board_thumb/zboardphotogallery0/20211210044757074.jpg" alt="" />
-							</div>
-							<div className="txt-div">
-								<p className="tit">타이틀</p>
-								<p className="txt">텍스트</p>
-							</div>
-						</Link>
-					</li>
-					<li>
-						<Link to="">
-							<div className="img-div">
-								<img src="https://modo-phinf.pstatic.net/20211211_38/1639234523343rHDEF_JPEG/mosa4Btrdb.jpeg" alt="" />
-							</div>
-							<div className="txt-div">
-								<p className="tit">타이틀</p>
-								<p className="txt">텍스트</p>
-							</div>
-						</Link>
-					</li>
-					<li>
-						<Link to="">
-							<div className="img-div">
-								<img src="http://www.groundseesaw.co.kr/data/main/file1_1622428115l0o94ushqo.jpg" alt="" />
-							</div>
-							<div className="txt-div">
-								<p className="tit">타이틀</p>
-								<p className="txt">텍스트</p>
-							</div>
-						</Link>
-					</li>
+					{
+						this.props.dataList.map((item, idx)=>(
+							<li key={idx}>
+								<Link to="">
+									{item.length}
+									<div className="img-div">
+										<img src={item[idx].referenceIdentifier} alt="" />
+									</div>
+									<div className="txt-div">
+										<p className="tit">{item[idx].title}</p>
+										<p className="txt">{item[idx].description}</p>
+									</div>
+								</Link>
+							</li>
+						))
+					}
 				</ul>
 				<div className="btn-wrap">
 					<button type="button" className="blue-btn">More</button>

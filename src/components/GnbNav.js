@@ -7,13 +7,22 @@ const GnbNav=()=>{
   const [gnbStatus, setGnbStatus] = useState(false);
 
   const onClickGnb=(e)=>{
-    setGnbStatus(gnbStatus=>gnbStatus?false:true);
     if(!gnbStatus){
-      gsap.to($(".gnb"), 0.6, {left:0, ease:Power3.easeOut});
+      setGnbStatus(true);
       $("#header").addClass("gnb-on");
+      gsap.to($(".gnb"), 0.6, {left:0, ease:Power3.easeOut});
+      
+      $(document).click(function(e){
+        if(e.target.className !== "gnb" && e.target.className !== "gnb-btn on"){
+          setGnbStatus(false);
+          $("#header").removeClass("gnb-on");
+          gsap.to($(".gnb"), 0.6, {left:-$(".gnb").outerWidth(), ease:Power3.easeOut});
+        }
+      })
     }else{
-      gsap.to($(".gnb"), 0.6, {left:-$(".gnb").outerWidth(), ease:Power3.easeOut});
+      setGnbStatus(false);
       $("#header").removeClass("gnb-on");
+      gsap.to($(".gnb"), 0.6, {left:-$(".gnb").outerWidth(), ease:Power3.easeOut});
     }
   }
 

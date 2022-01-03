@@ -11,7 +11,6 @@ const Main=()=>{
       <MainVis />
       <section className="main-sec list-sec">
         <div className="inner">
-          <CardList />
         </div>
       </section>
       <section className="main-sec notice-sec">
