@@ -10,7 +10,15 @@ import "./main.scss";
 function parseStr(dataSet){
   const dataArr = new XMLparser().parseFromString(dataSet).children;
   console.log(dataArr);
+  {
+    dataArr.map((item) => {
+      if(item.name === "msgBody") {
+        console.log(item.children);
+      }
+    });
+  }
 }
+
 class Main extends React.Component {
   constructor(props){
     super(props);
@@ -21,40 +29,16 @@ class Main extends React.Component {
   }
 
   list=()=>{
-    var xhr = new XMLHttpRequest();
-    var url = 'https://cors-anywhere.herokuapp.com/http://www.culture.go.kr/openapi/rest/publicperformancedisplays/period'; /*URL*/
-    var queryParams = '?' + encodeURIComponent('serviceKey') + '=' + 'OApFbw/zxEwtqHKqUyc8QWvBESqtoamTLFLeS7zF7RTUAy1MykuCnHPhQzRBtz8vU76BEmXb2aYcPLMmW7KQkw=='; /*Service Key*/
-    queryParams += '&' + encodeURIComponent('keyword') + '=' + encodeURIComponent(''); /**/
-    queryParams += '&' + encodeURIComponent('sortStdr') + '=' + encodeURIComponent('1'); /**/
-    queryParams += '&' + encodeURIComponent('ComMsgHeader') + '=' + encodeURIComponent(''); /**/
-    queryParams += '&' + encodeURIComponent('RequestTime') + '=' + encodeURIComponent('20100810:23003422'); /**/
-    queryParams += '&' + encodeURIComponent('CallBackURI') + '=' + encodeURIComponent(''); /**/
-    queryParams += '&' + encodeURIComponent('MsgBody') + '=' + encodeURIComponent(''); /**/
-    queryParams += '&' + encodeURIComponent('from') + '=' + encodeURIComponent('20100101'); /**/
-    queryParams += '&' + encodeURIComponent('to') + '=' + encodeURIComponent('20101201'); /**/
+    var url = 'http://cors-anywhere.herokuapp.com/http://www.culture.go.kr/openapi/rest/publicperformancedisplays/period'; /*URL*/
+    var queryParams = '?' + encodeURIComponent('serviceKey') + '=' + 'OApFbw%2FzxEwtqHKqUyc8QWvBESqtoamTLFLeS7zF7RTUAy1MykuCnHPhQzRBtz8vU76BEmXb2aYcPLMmW7KQkw%3D%3D'; /*Service Key*/
     queryParams += '&' + encodeURIComponent('cPage') + '=' + encodeURIComponent('1'); /**/
-    queryParams += '&' + encodeURIComponent('rows') + '=' + encodeURIComponent('10'); /**/
-    queryParams += '&' + encodeURIComponent('place') + '=' + encodeURIComponent('1'); /**/
-    queryParams += '&' + encodeURIComponent('gpsxfrom') + '=' + encodeURIComponent('129.101'); /**/
-    queryParams += '&' + encodeURIComponent('gpsyfrom') + '=' + encodeURIComponent('35.142'); /**/
-    queryParams += '&' + encodeURIComponent('gpsxto') + '=' + encodeURIComponent('129.101'); /**/
-    queryParams += '&' + encodeURIComponent('gpsyto') + '=' + encodeURIComponent('35.142'); /**/
-    // xhr.open('GET', url + queryParams);
-    // xhr.onreadystatechange = function () {
-    //     if (this.readyState == 4) {
-    //         alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
-    //     }
-    // };
-
-    // xhr.send('');
+    queryParams += '&' + encodeURIComponent('rows') + '=' + encodeURIComponent('12'); /**/
 
     axios.get(url + queryParams).then(res=>{
-      console.log(res)
       const dataSet = res.data;
       parseStr(dataSet);
-      console.log(dataSet);
     }).catch(error=>{
-      console.log("에러" + error)
+      console.log("에러" + error);
     });
   }
 

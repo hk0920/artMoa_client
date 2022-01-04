@@ -27,15 +27,21 @@ const Header=()=>{
       }
     }else{
       if(window.scrollY < 100){
-        $("#header").removeClass("bg-type").addClass("white-type");
+        $("#header").removeClass("bg-type");
+        if($(".detail-wrap").length == 0) {
+          $("#header").addClass("white-type");
+        }
       }else{
-        $("#header").removeClass("white-type").addClass("bg-type");
+        $("#header").addClass("bg-type");
+        if($(".detail-wrap").length == 0) {
+          $("#header").removeClass("white-type");
+        }
       }
     }
   }
 
   const headerStyle=()=>{
-    if(!$("#cBody").hasClass("main")){
+    if(!$("#cBody").hasClass("main") && $(".detail-wrap").length == 0){
       $("#header").addClass("white-type");
     }
   }
