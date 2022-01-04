@@ -20,12 +20,9 @@ class ArtList extends React.Component {
         pageNo:"5"
       }
     }).then(res=>{
-      console.log("리스트" + res.data.response.body.items.item)
-      console.log(this.state.dataList);
       this.setState({
         dataList:res.data.response.body.items.item
       })
-      console.log(this.state.dataList);
     }).catch(error=>{
       console.log("에러" + error)
     });
@@ -44,7 +41,7 @@ class ArtList extends React.Component {
         </div>
         <div className="art-div">
           <div className="inner">
-            <CardList data={this.state.dataList} />
+            <CardList dataList={this.state.dataList} />
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from 'react-router-dom';
-import $ from "jquery";
+import $, { data } from "jquery";
 
 const imgSizeEvt=()=>{
 	$(".list .img-div").each(function(){
@@ -56,16 +56,15 @@ class CardList extends React.Component {
 				</div>
 				<ul className="list card-type">
 					{
-						this.props.data.map((item, idx)=>(
+						this.props.dataList.map((item, idx)=>(
 							<li key={idx}>
 								<Link to="">
-									{item.length}
 									<div className="img-div">
-										<img src={item[idx].referenceIdentifier} alt="" />
+										<img src={item.referenceIdentifier} alt="" />
 									</div>
 									<div className="txt-div">
-										<p className="tit">{item[idx].title}</p>
-										<p className="txt">{item[idx].description}</p>
+										<p className="tit">{item.title}</p>
+										<p className="txt">{item.description}</p>
 									</div>
 								</Link>
 							</li>

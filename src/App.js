@@ -10,6 +10,7 @@ import ArtList from './pages/Art/List';
 import NoticeList from './pages/Notice/List';
 import LoginForm from './pages/Member/LoginForm';
 import JoinForm from './pages/Member/JoinForm';
+import Detail from './pages/Art/Detail';
 
 const App=()=>{
 	return (
@@ -19,6 +20,7 @@ const App=()=>{
 				<Route index exact path="/" element={<Main />}></Route>
 				<Route path="/intro" element={<Intro />}></Route>
 				<Route path="/art" element={<ArtList />}></Route>
+				<Route path="/art/detail" element={<Detail />}></Route>
 				<Route path="/faq" element={<FaqList />}></Route>
 				<Route path="/notice" element={<NoticeList />}></Route>
 				<Route path="/login" element={<LoginForm />}></Route>
