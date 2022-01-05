@@ -852,6 +852,14 @@
       .txt {
         margin-top:20px;
         @include ellipsis(5);
+        
+        * {
+          font-size:$_fontSize !important;
+          font-weight:$_fontWeight !important;
+          font-family:$_fontFamily !important;
+          background:none !important;
+          text-align:left !important;
+        }
       }
 
       .date {

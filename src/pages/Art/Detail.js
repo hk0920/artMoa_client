@@ -4,7 +4,7 @@ import DetailLocal from "./DetailLocal";
 import DetailVis from "./DetailVis";
 import "./art.scss";
 
-const Detail=()=>{
+const ArtDetail=()=>{
 	return(
 		<div id="cBody">
 			<div className="detail-wrap">
@@ -18,4 +18,4 @@ const Detail=()=>{
 	)
 }
 
-export default Detail;
+export default ArtDetail;
