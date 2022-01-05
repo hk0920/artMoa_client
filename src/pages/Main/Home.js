@@ -19,15 +19,25 @@ class Main extends React.Component {
 
   parseStr=(dataSet)=>{
     const dataArr = new XMLparser().parseFromString(dataSet).children;
+    let dataList = [];
     // eslint-disable-next-line no-lone-blocks
     {
-      dataArr.map((item)=>  
-        console.log(item.name)
-      )
+      dataArr.map((item) => {
+        if(item.name === "msgBody") {
+          //console.log(item.children);
+          dataList = item.children;
+        }
+      });
+
+      dataList.map((item)=>{
+        if(item.name === "perforList"){
+          console.log(item)
+          this.setState({
+            artData:this.state.artData.concat(item)
+          })
+        }
+      })
     }
-    this.setState({
-      artData : dataArr
-    })
   }
 
   artList=()=>{

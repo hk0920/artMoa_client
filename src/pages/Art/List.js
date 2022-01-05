@@ -1,5 +1,6 @@
 import React from "react";
 import axios from 'axios';
+import XMLparser from "react-xml-parser";
 import CardList from "../../components/CardList";
 
 class ArtList extends React.Component {
@@ -7,24 +8,44 @@ class ArtList extends React.Component {
     super(props);
 
     this.state = {
-      dataList:[]
+      artData:[]
+    }
+  }
+
+  parseStr=(dataSet)=>{
+    const dataArr = new XMLparser().parseFromString(dataSet).children;
+    let dataList = [];
+    // eslint-disable-next-line no-lone-blocks
+    {
+      dataArr.map((item) => {
+        if(item.name === "msgBody") {
+          //console.log(item.children);
+          dataList = item.children;
+        }
+      });
+
+      dataList.map((item)=>{
+        if(item.name === "perforList"){
+          console.log(item)
+          this.setState({
+            artData:this.state.artData.concat(item)
+          })
+        }
+      })
     }
   }
   
   list=()=>{
-    let url="http://api.kcisa.kr/openapi/service/rest/other/getSEMN5601?serviceKey=e3417d31-1b55-49d9-85a7-8211d1ab1069";
+    let url="http://cors-anywhere.herokuapp.com/http://www.culture.go.kr/openapi/rest/publicperformancedisplays/period";
+    var queryParams = '?' + encodeURIComponent('serviceKey') + '=' + 'OApFbw%2FzxEwtqHKqUyc8QWvBESqtoamTLFLeS7zF7RTUAy1MykuCnHPhQzRBtz8vU76BEmXb2aYcPLMmW7KQkw%3D%3D'; /*Service Key*/
+    queryParams += '&' + encodeURIComponent('cPage') + '=' + encodeURIComponent('1'); /**/
+    queryParams += '&' + encodeURIComponent('rows') + '=' + encodeURIComponent('12'); /**/
 
-    axios.get(url, {
-      params:{
-        numOfRows:"12",
-        pageNo:"5"
-      }
-    }).then(res=>{
-      this.setState({
-        dataList:res.data.response.body.items.item
-      })
+    axios.get(url + queryParams).then(res=>{
+      const dataSet = res.data;
+      this.parseStr(dataSet);
     }).catch(error=>{
-      console.log("에러" + error)
+      console.log("에러" + error);
     });
   }
 
@@ -41,7 +62,7 @@ class ArtList extends React.Component {
         </div>
         <div className="art-div">
           <div className="inner">
-            <CardList dataList={this.state.dataList} />
+            <CardList data={this.state.artData} />
           </div>
         </div>
       </div>

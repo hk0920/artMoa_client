@@ -4,18 +4,29 @@ import DetailLocal from "./DetailLocal";
 import DetailVis from "./DetailVis";
 import "./art.scss";
 
-const ArtDetail=()=>{
-	return(
-		<div id="cBody">
-			<div className="detail-wrap">
-				<DetailVis />
-				<div className="inner">
-					<DetailInfo />
+class ArtDetail extends React.Component {
+	constructor(props) {
+		super();
+		console.log(this.props);
+	}
+
+	componentDidMount(){
+		console.log(this.props)
+	}
+
+	render(){
+		return(
+			<div id="cBody">
+				<div className="detail-wrap">
+					<DetailVis />
+					<div className="inner">
+						<DetailInfo />
+					</div>
+					<DetailLocal />
 				</div>
-				<DetailLocal />
 			</div>
-		</div>
-	)
+		)
+	}
 }
 
 export default ArtDetail;

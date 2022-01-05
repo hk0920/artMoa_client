@@ -1,6 +1,7 @@
 import React from "react";
 import {Link} from 'react-router-dom';
 import $ from "jquery";
+import moment from "moment";
 
 const imgSizeEvt=()=>{
 	$(".list .img-div").each(function(){
@@ -40,6 +41,12 @@ class CardList extends React.Component {
 	}
   
   render(){
+		const seq = "";
+		const title = "";
+		const img = "";
+		const startDate = "";
+		const endDate = "";
+
     return(
       <div className="list-div">
 				<div className="list-top">
@@ -58,13 +65,42 @@ class CardList extends React.Component {
 					{
 						this.props.data.map((item, idx)=>(
 							<li key={idx}>
-								<Link to="">
+								{
+									item.children.map((i, idx)=>{
+										console.log(i)
+										if(i.name === "seq") {
+											this.seq = i.value
+										}
+										if(i.name === "title") {
+											this.title = i.value
+										}
+										if(i.name === "thumbnail") {
+											this.img = i.value
+										}
+										if(i.name === "startDate") {
+											this.startDate = i.value
+										}
+										if(i.name === "endDate") {
+											this.endDate = i.value
+										}
+										console.log("idx=>" + idx)
+										console.log(this.title)
+										
+									})
+								}
+								<Link to={{
+									pathname:`/art/detail/${this.seq}`,
+									state:{
+										seq:this.seq,
+										title:this.title
+									}
+								}}>
 									<div className="img-div">
-										<img src={item.referenceIdentifier} alt="" />
+										<img src={this.img} alt="" />
 									</div>
 									<div className="txt-div">
-										<p className="tit">{item.title}</p>
-										<p className="txt">{item.description}</p>
+										<p className="tit">{this.title}</p>
+										<p className="txt">{moment(this.startDate).format("YYYY.MM.DD")} ~ {moment(this.endDate).format("YYYY.MM.DD")}</p>
 									</div>
 								</Link>
 							</li>

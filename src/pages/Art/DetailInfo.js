@@ -11,23 +11,23 @@ const DetailInfo=()=>{
 				<p className="txt">전시 설명전시 설명전시 설명전시 설명전시 설명전시 설명전시 설명전시 설명전시 설명전시 설명전시 설명전시 설명전시 설명전시 설명전시 설명전시 설명전시 설명전시 설명전시 설명전시 설명전시 설명전시 설명</p>
 				<ul className="use-info">
 					<li>
-						<strong class="bold-txt">지역</strong>
+						<strong className="bold-txt">지역</strong>
 						서울
 					</li>
 					<li>
-						<strong class="bold-txt">전시 장소</strong>
+						<strong className="bold-txt">전시 장소</strong>
 						DDP 동대문디자인플라자 배움터 지하 2층 디자인전시관
 					</li>
 					<li>
-						<strong class="bold-txt">전시 기간</strong>
+						<strong className="bold-txt">전시 기간</strong>
 						2021.11.27 ~ 2022.03.20
 					</li>
 					<li>
-						<strong class="bold-txt">티켓 요금</strong>
+						<strong className="bold-txt">티켓 요금</strong>
 						13,000원
 					</li>
 					<li>
-						<strong class="bold-txt">문의처</strong>
+						<strong className="bold-txt">문의처</strong>
 						010-8420-5997
 					</li>
 				</ul>
