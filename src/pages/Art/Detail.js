@@ -1,32 +1,68 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import XMLparser from "react-xml-parser";
+import {useParams} from "react-router-dom";
 import DetailInfo from "./DetailInfo";
 import DetailLocal from "./DetailLocal";
 import DetailVis from "./DetailVis";
 import "./art.scss";
+import axios from "axios";
 
-class ArtDetail extends React.Component {
-	constructor(props) {
-		super();
-		console.log(this.props);
+
+const ArtDetail=()=>{
+	const {seq} = useParams();
+	const [performance, setPerformance] = useState([]);
+	
+	console.log(seq);
+	
+	const parseStr=(dataSet)=>{
+		const dataArr = new XMLparser().parseFromString(dataSet).children;
+		let dataList = [];
+		// eslint-disable-next-line no-lone-blocks
+		{
+			dataArr.map((item) => {
+				if(item.name === "msgBody") {
+					//console.log(item.children);
+					dataList = item.children;
+				}
+			});
+	
+			dataList.map((item) => {
+				if(item.name === "perforInfo"){
+					console.log(item)
+					setPerformance(item.children);
+				}
+			})
+		}
+	}
+	
+	const getData=(seq)=>{
+		let url = "http://cors-anywhere.herokuapp.com/http://www.culture.go.kr/openapi/rest/publicperformancedisplays/d/";
+		var queryParams = '?' + encodeURIComponent('serviceKey') + '=' + 'OApFbw%2FzxEwtqHKqUyc8QWvBESqtoamTLFLeS7zF7RTUAy1MykuCnHPhQzRBtz8vU76BEmXb2aYcPLMmW7KQkw%3D%3D'; /*Service Key*/
+		queryParams += '&' + encodeURIComponent('seq') + '=' + encodeURIComponent(seq); /**/
+	
+		axios.get(url + queryParams).then(res=>{
+			console.log(res.data);
+			parseStr(res.data);
+		}).catch(error=>{
+			console.log(error);
+		})
 	}
 
-	componentDidMount(){
-		console.log(this.props)
-	}
+	useEffect(()=>{
+		getData(seq);
+	})
 
-	render(){
-		return(
-			<div id="cBody">
-				<div className="detail-wrap">
-					<DetailVis />
-					<div className="inner">
-						<DetailInfo />
-					</div>
-					<DetailLocal />
+	return(
+		<div id="cBody">
+			<div className="detail-wrap">
+				<DetailVis />
+				<div className="inner">
+					<DetailInfo />
 				</div>
+				<DetailLocal />
 			</div>
-		)
-	}
+		</div>
+	)
 }
 
 export default ArtDetail;

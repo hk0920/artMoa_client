@@ -31,7 +31,7 @@ class Main extends React.Component {
 
       dataList.map((item)=>{
         if(item.name === "perforList"){
-          console.log(item)
+          //console.log(item)
           this.setState({
             artData:this.state.artData.concat(item)
           })

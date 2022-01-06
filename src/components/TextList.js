@@ -4,6 +4,14 @@ import {Link} from 'react-router-dom';
 class TextList extends React.Component {
 	constructor(props){
 		super();
+		this.state={
+			data:[
+				{
+					title:"",
+					context:""
+				}
+			]
+		}
 	}
 
   render(){
@@ -15,7 +23,7 @@ class TextList extends React.Component {
 							<Link to={{
 								pathname:"/notice/detail",
 								state:{
-									data:item
+									title:item.title,
 								}
 							}}>
 								<div className="txt-div">

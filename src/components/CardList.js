@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import $ from "jquery";
 import moment from "moment";
 
@@ -16,8 +16,8 @@ const imgSizeEvt=()=>{
 }
 
 class CardList extends React.Component {
-  constructor(props){
-		super(props);
+  constructor(){
+		super();
 
 		this.changeListTypeEvt = this.changeListTypeEvt.bind(this);
 	}
@@ -67,7 +67,7 @@ class CardList extends React.Component {
 							<li key={idx}>
 								{
 									item.children.map((i, idx)=>{
-										console.log(i)
+										//console.log(i)
 										if(i.name === "seq") {
 											this.seq = i.value
 										}
@@ -83,17 +83,16 @@ class CardList extends React.Component {
 										if(i.name === "endDate") {
 											this.endDate = i.value
 										}
-										console.log("idx=>" + idx)
-										console.log(this.title)
-										
+										//console.log("idx=>" + idx)
+										//console.log(this.title)
 									})
 								}
 								<Link to={{
-									pathname:`/art/detail/${this.seq}`,
-									state:{
-										seq:this.seq,
-										title:this.title
-									}
+									pathname: "/art/detail/" + this.seq,
+									// state: {
+									// 	seq:this.seq,
+									// 	title:this.title
+									// }
 								}}>
 									<div className="img-div">
 										<img src={this.img} alt="" />
