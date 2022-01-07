@@ -1,10 +1,6 @@
 @import "../../styles/var";
 @import "../../styles/mixin";
 
-.notice-div {
-
-}
-
 .view-div {
 	.title-div {
 		position:relative;
@@ -22,7 +18,7 @@
 		}
 
 		.date {
-			@include positionAb(100px, auto, auto);
+			@include positionAb(auto, auto, auto);
 			bottom:30px;
 			right:30px;
 			font-size:16px;
@@ -31,6 +27,55 @@
 	}	
 
 	.txt-div {
-		padding:30px;
+		padding:60px 30px;
+
+		.nodata {
+			position:relative;
+			margin:100px 0;
+			padding-top:120px;
+			font-size:20px;
+			text-align:center;
+
+			&:before {
+				@include virtualAB(0, 50%, 100px, 100px);
+				transform:translateX(-50%);
+				border-radius:50%;
+				background:$_pointColor url("../../assets/images/no-icon.png") no-repeat center / 50px;
+			}
+		}
+	}
+}
+
+@include mobile(){
+	.view-div {
+		.title-div {
+			padding:15px;
+
+			.tit {
+				font-size:18px;
+			}
+
+			.date {
+				bottom:15px;
+				right:15px;
+				font-size:12px;
+			}
+		}	
+
+		.txt-div {
+			padding:30px 15px;
+
+			.nodata {
+				margin:50px 0;
+				padding-top:60px;
+				font-size:14px;
+
+				&:before {
+					width:50px;
+					height:50px;
+					background-size:25px;
+				}
+			}
+		}
 	}
 }
