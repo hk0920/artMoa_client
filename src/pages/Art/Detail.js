@@ -12,16 +12,17 @@ const ArtDetail=()=>{
 	const {seq} = useParams();
 	const [performance, setPerformance] = useState([]);
 	
-	console.log(seq);
+	//console.log(seq);
 	
 	const parseStr=(dataSet)=>{
 		const dataArr = new XMLparser().parseFromString(dataSet).children;
 		let dataList = [];
+		console.log(dataArr);
 		// eslint-disable-next-line no-lone-blocks
 		{
 			dataArr.map((item) => {
 				if(item.name === "msgBody") {
-					//console.log(item.children);
+					console.log(item.children);
 					dataList = item.children;
 				}
 			});
@@ -36,15 +37,15 @@ const ArtDetail=()=>{
 	}
 	
 	const getData=(seq)=>{
-		let url = "http://cors-anywhere.herokuapp.com/http://www.culture.go.kr/openapi/rest/publicperformancedisplays/d/";
+		let url = "/openapi/rest/publicperformancedisplays/d/";
 		var queryParams = '?' + encodeURIComponent('serviceKey') + '=' + 'OApFbw%2FzxEwtqHKqUyc8QWvBESqtoamTLFLeS7zF7RTUAy1MykuCnHPhQzRBtz8vU76BEmXb2aYcPLMmW7KQkw%3D%3D'; /*Service Key*/
 		queryParams += '&' + encodeURIComponent('seq') + '=' + encodeURIComponent(seq); /**/
 	
-		axios.get(url + queryParams).then(res=>{
-			console.log(res.data);
+		axios.get('/api' + url + queryParams).then(res=>{
+			console.log(res);
 			parseStr(res.data);
 		}).catch(error=>{
-			console.log(error);
+			console.log(error.response);
 		})
 	}
 

@@ -41,12 +41,12 @@ class Main extends React.Component {
   }
 
   artList=()=>{
-    var url = 'http://cors-anywhere.herokuapp.com/http://www.culture.go.kr/openapi/rest/publicperformancedisplays/period'; /*URL*/
+    var url = '/openapi/rest/publicperformancedisplays/period'; /*URL*/
     var queryParams = '?' + encodeURIComponent('serviceKey') + '=' + 'OApFbw%2FzxEwtqHKqUyc8QWvBESqtoamTLFLeS7zF7RTUAy1MykuCnHPhQzRBtz8vU76BEmXb2aYcPLMmW7KQkw%3D%3D'; /*Service Key*/
     queryParams += '&' + encodeURIComponent('cPage') + '=' + encodeURIComponent('1'); /**/
     queryParams += '&' + encodeURIComponent('rows') + '=' + encodeURIComponent('12'); /**/
 
-    axios.get(url + queryParams).then(res=>{
+    axios.get('/api' + url + queryParams).then(res=>{
       const dataSet = res.data;
       this.parseStr(dataSet);
     }).catch(error=>{

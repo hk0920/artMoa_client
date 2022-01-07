@@ -1041,8 +1041,9 @@
 
       .txt-div {
         .txt {
+          max-height:86px;
           margin-top:10px;
-          @include ellipsis(4);
+          @include ellipsis(3);
         }
 
         .date {
