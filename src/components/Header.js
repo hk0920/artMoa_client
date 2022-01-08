@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import {NavLink, Link} from 'react-router-dom';
+import {NavLink, Link, Outlet} from 'react-router-dom';
 import $ from 'jquery';
 import GnbNav from './GnbNav';
 import TotalSearch from './TotalSearch';
+import * as CommonEvt from "../CommonEvt";
 
 const Header=()=>{
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [pageChange, setPageChange] = useState(false);
 
   const updateScroll=()=>{
     setScrollPosition(window.scrollY);
@@ -28,48 +30,44 @@ const Header=()=>{
     }else{
       if(window.scrollY < 100){
         $("#header").removeClass("bg-type");
-        if($(".detail-wrap").length == 0) {
+        if($(".detail-wrap").length === 0) {
           $("#header").addClass("white-type");
         }
       }else{
         $("#header").addClass("bg-type");
-        if($(".detail-wrap").length == 0) {
+        if($(".detail-wrap").length === 0) {
           $("#header").removeClass("white-type");
         }
       }
     }
   }
 
-  const headerStyle=()=>{
-    if(!$("#cBody").hasClass("main") && $(".detail-wrap").length == 0){
-      $("#header").addClass("white-type");
-    }
-  }
-
   useEffect(()=>{
     window.addEventListener("scroll", updateScroll);
-    window.addEventListener("load", headerStyle);
+    CommonEvt.headerStyle();
 
     return()=>{
       window.removeEventListener("scroll", updateScroll);
-      window.removeEventListener("load", headerStyle);
     }
-  });
+  },[]);
 
   return (
     <header id="header">
+      <input type="checkbox" defaultChecked={pageChange}/>
       <h1 className="logo">
-        <NavLink to="/">아트모아 로고</NavLink>
+        <NavLink to="/" onClick={CommonEvt.headerStyle()}>아트모아 로고</NavLink>
       </h1>
       
       <GnbNav />
       
       <div className="left-util">
-        <Link to="/login">로그인</Link>
-        <Link to="/join">회원가입</Link>
+        <Link to="/login" onClick={CommonEvt.headerStyle()}>로그인</Link>
+        <Link to="/join" onClick={CommonEvt.headerStyle()}>회원가입</Link>
       </div>
 
       <TotalSearch />
+
+      <Outlet />
     </header>
   )
 }

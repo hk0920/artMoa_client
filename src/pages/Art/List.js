@@ -8,7 +8,7 @@ const ArtList=()=> {
   let dataList = [];
 
   useEffect(()=>{
-    list();
+    // list();
   },[])
 
   const parseStr=(dataSet)=>{

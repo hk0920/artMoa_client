@@ -72,8 +72,10 @@ class MainVis extends React.Component {
   }
 
   activeIdxEvt(idx){
-    idx = idx+1;
     if(idx < 10) {
+      if(idx == $(".swiper-slide").length-1){
+        idx = 1;
+      }
       this.setState({
         activeIdx:'0' + idx
       });
@@ -98,6 +100,11 @@ class MainVis extends React.Component {
         <Swiper 
           className="main-vis"
           effect={"fade"}
+          autoplay={{
+            "delay": 2500,
+            "disableOnInteraction": false
+          }}
+          loop={true}
           navigation={true}
           onInit={(e)=>{
             this.activeIdxEvt(e.activeIndex);

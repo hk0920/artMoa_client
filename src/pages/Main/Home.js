@@ -14,7 +14,7 @@ const Main=()=>{
 
   useEffect(()=>{
     console.log("useEffect");
-    getArtList();
+    //getArtList();
     getNoticeList();
   },[]);
 
