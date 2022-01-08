@@ -15,7 +15,7 @@ const Main=()=>{
 
   useEffect(()=>{
     //getArtList();
-    getNoticeList();
+    //getNoticeList();
     CommonEvt.headerStyle();
   },[]);
 
