@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {Link} from 'react-router-dom';
 import {Swiper, SwiperSlide} from "swiper/react";
 import $ from "jquery";
@@ -8,10 +8,11 @@ import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 
 import SwiperCore, {
+  Autoplay,
   EffectFade,Navigation
 } from "swiper";
 
-SwiperCore.use([EffectFade,Navigation]);
+SwiperCore.use([EffectFade,Navigation,Autoplay]);
 
 const data = [
   {
@@ -46,97 +47,80 @@ const imgSizeEvt=()=>{
 	});
 }
 
-class MainVis extends React.Component {
-  constructor(props){
-    super(props);
+const MainVis=()=> {
+  const [number, setNumber] = useState(1);
+  const [activeIdx, setActiveIdx] = useState(1);
 
-    this.state = {
-      number:1,
-      activeIdx:1
-    };
-
-    this.numberChange = this.numberChange.bind(this);
-    this.activeIdxEvt = this.activeIdxEvt.bind(this);
-  }
-
-  numberChange(idx){
-    if(idx < data.length -1){
-      this.setState({
-        number:idx + 1
-      });
-    }else{
-      this.setState({
-        number:0
-      });
+  const numberChange=(idx)=>{
+    if(idx > $(".swiper-slide").length-3){
+      idx = idx-($(".swiper-slide").length-2);
     }
+    setNumber(idx);
   }
 
-  activeIdxEvt(idx){
+  const activeIdxEvt=(idx)=>{
+    if(idx > $(".swiper-slide").length-2){
+      idx = idx-($(".swiper-slide").length-2);
+    }else if(idx === 0) {
+      idx = $(".swiper-slide").length-2;
+    }
+    
     if(idx < 10) {
-      if(idx == $(".swiper-slide").length-1){
-        idx = 1;
-      }
-      this.setState({
-        activeIdx:'0' + idx
-      });
+      setActiveIdx("0" + idx);
     }else{
-      this.setState({
-        activeIdx:idx
-      });
+      setActiveIdx(idx);
     }
   }
 
-  componentDidMount(){
+  useEffect(()=>{
     $(window).resize(function(){
       var nextInfoPosition = $(".main-vis .swiper-slide").css("padding-bottom").replace("px", "") - $(".main-vis-wrap .next-info").outerHeight();
       $(".main-vis-wrap .next-info").css("bottom", nextInfoPosition);
       imgSizeEvt();
     }).resize();
-  }
+  },[])
   
-  render(){
-    return(
-      <div className="main-vis-wrap">
-        <Swiper 
-          className="main-vis"
-          effect={"fade"}
-          autoplay={{
-            "delay": 2500,
-            "disableOnInteraction": false
-          }}
-          loop={true}
-          navigation={true}
-          onInit={(e)=>{
-            this.activeIdxEvt(e.activeIndex);
-          }}
-          onSlideChange={(e)=> {
-            this.numberChange(e.activeIndex);
-            this.activeIdxEvt(e.activeIndex);
-          }} >
-            {data.map((dt)=>(
-              <SwiperSlide key={dt.id}>
-                <div className="img-div">
-                  <img src={dt.image} alt="" />
-                </div>
+  return(
+    <div className="main-vis-wrap">
+      <Swiper 
+        className="main-vis"
+        effect={"fade"}
+        autoplay={{
+          "delay": 3000,
+          "disableOnInteraction": false
+        }}
+        loop={true}
+        navigation={true}
+        onInit={(e)=>{
+          activeIdxEvt(e.activeIndex);
+        }}
+        onSlideChange={(e)=> {
+          numberChange(e.activeIndex);
+          activeIdxEvt(e.activeIndex);
+        }} >
+          {data.map((dt, i)=>(
+            <SwiperSlide key={i}>
+              <div className="img-div">
+                <img src={dt.image} alt="" />
+              </div>
 
-                <div className="txt-div">
-                  <p className="tit">{dt.title}</p>
-                  <p className="txt">{dt.text}</p>
-                  <Link to="" className="blue-btn">About Us</Link>
-                </div>
-              </SwiperSlide>
-            ))}
-        </Swiper>
-        <div className="next-info">
-          <p className="txt">Next</p>
-          <p className="tit">{data[this.state.number].title}</p>
-        </div>
-        <div className="left-util">
-          <p className="activeIdx">{this.state.activeIdx}</p>
-        </div>
+              <div className="txt-div">
+                <p className="tit">{dt.title}</p>
+                <p className="txt">{dt.text}</p>
+                <Link to="" className="blue-btn">About Us</Link>
+              </div>
+            </SwiperSlide>
+          ))}
+      </Swiper>
+      <div className="next-info">
+        <p className="txt">Next</p>
+        <p className="tit">{data[number].title}</p>
       </div>
-    )
-  }
+      <div className="left-util">
+        <p className="activeIdx">{activeIdx}</p>
+      </div>
+    </div>
+  )
 };
 
 export default MainVis;
