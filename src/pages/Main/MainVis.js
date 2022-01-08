@@ -74,9 +74,10 @@ const MainVis=()=> {
   }
 
   const resizeEvt=()=>{
-    console.log("리사이즈");
-    var nextInfoPosition = $(".main-vis .swiper-slide").css("padding-bottom").replace("px", "") - $(".main-vis-wrap .next-info").outerHeight();
-    $(".main-vis-wrap .next-info").css("bottom", nextInfoPosition);
+    var nextInfoPosition = $(".main-vis .swiper-content").offset().top + $(".main-vis .swiper-content").height();
+    $(".main-vis-wrap .next-info").css("top", nextInfoPosition);
+    $(".main-vis .swiper-button-prev").css("top", nextInfoPosition);
+    $(".main-vis .swiper-button-next").css("top", nextInfoPosition + $(".main-vis .swiper-button-next").height());
     imgSizeEvt();
   }
 
@@ -105,14 +106,15 @@ const MainVis=()=> {
         }} >
           {data.map((dt, i)=>(
             <SwiperSlide key={i}>
-              <div className="img-div">
-                <img src={dt.image} alt="" />
-              </div>
-
-              <div className="txt-div">
-                <p className="tit">{dt.title}</p>
-                <p className="txt">{dt.text}</p>
-                <Link to="" className="blue-btn">About Us</Link>
+              <div className="swiper-content">
+                <div className="img-div">
+                  <img src={dt.image} alt="" />
+                </div>
+                <div className="txt-div">
+                  <p className="tit">{dt.title}</p>
+                  <p className="txt">{dt.text}</p>
+                  <Link to="" className="blue-btn">About Us</Link>
+                </div>
               </div>
             </SwiperSlide>
           ))}

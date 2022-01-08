@@ -7,7 +7,7 @@
   
   .next-info {
     position:absolute;
-    bottom:0;
+    top:0;
     left:calc(100% - 768px);
     width:528px;
     padding:40px 50px 40px 120px;
@@ -70,7 +70,8 @@
 
 @include tablet(){
   .main-vis-wrap {
-    height:60vh;
+    min-height:60vh;
+    height:auto;
     
     .next-info {
       left:calc(84% / 1.44);;
@@ -128,10 +129,17 @@
   }
 
   .swiper-slide {
-    padding:12% 120px 12% 235px;
+    position:relative;
 
-    &:after {
-      @include clear();
+    .swiper-content {
+      @include positionAb(100%, 50%, 0);
+      height:calc(100% - 400px);
+      padding:0 120px 0 235px;
+      transform:translateY(-55%);
+
+      &:after {
+        @include clear();
+      }
     }
 
     .txt-div {
@@ -197,14 +205,12 @@
   
   .swiper-button-prev {
     top:auto;
-    bottom:164px;
     left:auto;
     right:120px;
   }
 
   .swiper-button-next {
     top:auto;
-    bottom:88px;
     left:auto;
     right:120px;
     transform:rotate(180deg);
@@ -216,9 +222,14 @@
     &:before {
       width:calc(100% - 550px);
     }
-
+  
     .swiper-slide {
-      padding:12% 100px 12% 150px;
+      position:relative;
+  
+      .swiper-content {
+        height:calc(100% - 300px);
+        padding:0 100px 0 150px;
+      }
 
       .txt-div {
         width:calc(100% - 450px);
@@ -238,6 +249,7 @@
     .swiper-button-prev, .swiper-button-next {
       width:120px;
       height:76px;
+      margin-top:0;
       background:#fff url("../../assets/images/main-vis-arrow-icon.png") no-repeat center;
 
       &:after {
@@ -246,12 +258,10 @@
     }
     .swiper-button-prev {
       right:100px;
-      bottom:105px;
     }
 
     .swiper-button-next {
       right:100px;
-      bottom:30px;
     }
   }
 }
@@ -277,12 +287,21 @@
 
 @include tablet() {
   .main-vis {
+    min-height:60vh;
+    padding:120px 0;
+    
     &:before {
       width:calc(84% / 1.44);
     }
 
     .swiper-slide {
-      padding:120px 8%;
+      height:375px;
+
+      .swiper-content {
+        height:100%;
+        padding:0 8%;
+        transform:translateY(-50%);
+      }
 
       .txt-div {
         width:60%;
@@ -320,12 +339,10 @@
     }
 
     .swiper-button-prev {
-      bottom:74px;
       right:8%;
     }
 
     .swiper-button-next {
-      bottom:24px;
       right:8%;
     }
   }
@@ -333,17 +350,26 @@
 
 @include mobile(){
   .main-vis {
+    padding:0;
     &:before {
       width:80%;
     }
-
+    
     .swiper-slide {
-      position:relative;
       padding:100px 8%;
+      height:100%;
 
-      &:before {
-        @include virtualAB(100px, 8%, 84%, 470px);
-        box-shadow:5px 5px 10px rgba(0, 0, 0, 0.2);
+      .swiper-content {
+        position:relative;
+        top:0;
+        height:100%;
+        padding:0 8%;
+        transform:translateY(0);
+
+        &:before {
+          @include virtualAB(0, 8%, 84%, 470px);
+          box-shadow:5px 5px 10px rgba(0, 0, 0, 0.2);
+        }
       }
 
       .txt-div {
@@ -379,21 +405,19 @@
     }
 
     .swiper-button-prev, .swiper-button-next {
+      top:calc(50% - 20px) !important;
       width:40px;
       background-size:10px auto;
     }
 
     .swiper-button-prev {
-      bottom:auto;
-      top:35%;
+      top:calc(50% - 20px) !important;
       right:auto;
       left:0;
       transform:rotate(-90deg);
     }
 
     .swiper-button-next {
-      bottom:auto;
-      top:35%;
       left:auto;
       right:0;
       transform:rotate(90deg);
