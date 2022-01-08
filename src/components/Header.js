@@ -3,11 +3,9 @@ import {NavLink, Link, Outlet} from 'react-router-dom';
 import $ from 'jquery';
 import GnbNav from './GnbNav';
 import TotalSearch from './TotalSearch';
-import * as CommonEvt from "../CommonEvt";
 
 const Header=()=>{
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [pageChange, setPageChange] = useState(false);
 
   const updateScroll=()=>{
     setScrollPosition(window.scrollY);
@@ -44,7 +42,6 @@ const Header=()=>{
 
   useEffect(()=>{
     window.addEventListener("scroll", updateScroll);
-    CommonEvt.headerStyle();
 
     return()=>{
       window.removeEventListener("scroll", updateScroll);
@@ -53,16 +50,15 @@ const Header=()=>{
 
   return (
     <header id="header">
-      <input type="checkbox" defaultChecked={pageChange}/>
       <h1 className="logo">
-        <NavLink to="/" onClick={CommonEvt.headerStyle()}>아트모아 로고</NavLink>
+        <NavLink to="/">아트모아 로고</NavLink>
       </h1>
       
       <GnbNav />
       
       <div className="left-util">
-        <Link to="/login" onClick={CommonEvt.headerStyle()}>로그인</Link>
-        <Link to="/join" onClick={CommonEvt.headerStyle()}>회원가입</Link>
+        <Link to="/login">로그인</Link>
+        <Link to="/join">회원가입</Link>
       </div>
 
       <TotalSearch />

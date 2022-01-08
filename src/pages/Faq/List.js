@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Accordion from "../../components/Accordion";
+import * as CommonEvt from "../../CommonEvt";
 
 const FaqList=()=>{
+  useEffect(()=>{
+    CommonEvt.headerStyle();
+  })
+
   return(
     <div id="cBody">
       <div className="sub-vis">

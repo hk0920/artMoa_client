@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {Link} from 'react-router-dom';
+import * as CommonEvt from "../../CommonEvt";
 import Accordion from "../../components/Accordion";
 import "./member.scss";
 
 const JoinForm=()=>{
+	useEffect(()=>{
+		CommonEvt.headerStyle();
+	})
+
   return(
     <div id="cBody">
 			<div className="sub-vis">

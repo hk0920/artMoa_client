@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import XMLparser from "react-xml-parser";
 import CardList from "../../components/CardList";
+import * as CommonEvt from "../../CommonEvt";
 
 const ArtList=()=> {
   const [artData, setArtData] = useState([]); 
@@ -9,6 +10,7 @@ const ArtList=()=> {
 
   useEffect(()=>{
     // list();
+    CommonEvt.headerStyle();
   },[])
 
   const parseStr=(dataSet)=>{

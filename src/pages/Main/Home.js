@@ -5,6 +5,7 @@ import XMLparser from "react-xml-parser";
 import MainVis from "./MainVis";
 import CardList from "../../components/CardList";
 import TextList from "../../components/TextList";
+import * as CommonEvt from "../../CommonEvt";
 import "./main.scss";
 
 const Main=()=>{
@@ -16,6 +17,7 @@ const Main=()=>{
     console.log("useEffect");
     //getArtList();
     getNoticeList();
+    CommonEvt.headerStyle();
   },[]);
 
   const parseStr=(dataSet)=>{

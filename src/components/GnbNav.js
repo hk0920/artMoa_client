@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {NavLink} from 'react-router-dom';
 import $ from "jquery";
 import gsap, { Power3 } from 'gsap';
@@ -6,29 +6,39 @@ import gsap, { Power3 } from 'gsap';
 const GnbNav=()=>{
   const [gnbStatus, setGnbStatus] = useState(false);
 
-  const onClickGnb=(e)=>{
+  const onClickGnb=()=>{
+    console.log(gnbStatus)
     if(!gnbStatus){
       setGnbStatus(true);
       $("#header").addClass("gnb-on");
-      gsap.to($(".gnb"), 0.6, {left:0, ease:Power3.easeOut});
-      
-      $(document).click(function(e){
-        if(e.target.className !== "gnb" && e.target.className !== "gnb-btn on"){
-          setGnbStatus(false);
-          $("#header").removeClass("gnb-on");
-          gsap.to($(".gnb"), 0.6, {left:-$(".gnb").outerWidth(), ease:Power3.easeOut});
-        }
-      })
+      gsap.to($(".gnb"), 0.4, {left:0, ease:Power3.easeOut});
     }else{
       setGnbStatus(false);
       $("#header").removeClass("gnb-on");
-      gsap.to($(".gnb"), 0.6, {left:-$(".gnb").outerWidth(), ease:Power3.easeOut});
+      gsap.to($(".gnb"), 0.4, {left:-$(".gnb").outerWidth(), ease:Power3.easeOut});
     }
   }
 
+  const onClickDoc=()=>{
+    $(document).click(function(e){
+      const target = e.target;
+      const targetP = e.target.parentElement;
+      if(gnbStatus){
+        if(target.className !== "gnb" && target.className !== "gnb-btn on" && targetP.className !== "gnb" && targetP.className !== "gnb-btn on"){
+          console.log(e.target.className);
+          setGnbStatus(false);
+          onClickGnb();
+        } 
+      }
+    });
+  }
+
+  useEffect(()=>{
+    onClickDoc();
+  })
+
   return (
     <nav className="menu-nav">
-      <p>{gnbStatus}</p>
       <button className={!gnbStatus?'gnb-btn':'gnb-btn on'} onClick={onClickGnb}>
         <strong>메뉴 열기</strong>
         <span></span>

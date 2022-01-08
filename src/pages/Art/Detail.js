@@ -4,6 +4,7 @@ import {useParams} from "react-router-dom";
 import DetailInfo from "./DetailInfo";
 import DetailLocal from "./DetailLocal";
 import DetailVis from "./DetailVis";
+import * as CommonEvt from "../../CommonEvt";
 import "./art.scss";
 import axios from "axios";
 
@@ -51,6 +52,7 @@ const ArtDetail=()=>{
 
 	useEffect(()=>{
 		getData(seq);
+		CommonEvt.headerStyle();
 	})
 
 	return(

@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {Link} from 'react-router-dom';
+import * as CommonEvt from "../../CommonEvt";
 import "./member.scss";
 
 const LoginForm=()=>{
+	useEffect(()=>{
+		CommonEvt.headerStyle();
+	})
+
   return(
     <div id="cBody">
 			<div className="sub-vis">
