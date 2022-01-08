@@ -38,7 +38,7 @@ const data = [
 const imgSizeEvt=()=>{
   $(".main-vis .swiper-content").each(function(){
     const target = $(this).find(".img-div");
-    console.log($(target).height());
+    console.log($(target).height(), $(target).width());
 		if(target.find("img").width() * target.height() < target.find("img").height() * target.width()){
 			target.find("img").width(target.width());
 			target.find("img").height("auto");
