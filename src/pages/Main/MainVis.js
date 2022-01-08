@@ -36,14 +36,15 @@ const data = [
 ]
 
 const imgSizeEvt=()=>{
-  $(".main-vis .img-div").each(function(){
-    console.log($(this).height());
-		if($(this).find("img").width() * $(this).height() < $(this).find("img").height() * $(this).width()){
-			$(this).find("img").width($(this).width());
-			$(this).find("img").height("auto");
+  $(".main-vis .swiper-content").each(function(){
+    const target = $(this).find(".img-div");
+    console.log($(target).height());
+		if(target.find("img").width() * target.height() < target.find("img").height() * target.width()){
+			target.find("img").width(target.width());
+			target.find("img").height("auto");
 		}else{
-			$(this).find("img").width("auto");
-			$(this).find("img").height($(this).height());
+			target.find("img").width("auto");
+			target.find("img").height(target.height());
 		}
 	});
 }

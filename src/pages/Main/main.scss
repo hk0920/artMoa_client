@@ -133,7 +133,7 @@
 
     .swiper-content {
       @include positionAb(100%, 50%, 0);
-      height:540px;
+      height:calc(100% - 400px);
       padding:0 120px 0 235px;
       transform:translateY(-55%);
 
@@ -196,6 +196,7 @@
   .swiper-button-prev, .swiper-button-next {
     width:120px;
     height:76px;
+    margin-top:0;
     background:#fff url("../../assets/images/main-vis-arrow-icon.png") no-repeat center;
 
     &:after {
@@ -411,7 +412,6 @@
     }
 
     .swiper-button-prev {
-      top:calc(50% - 20px) !important;
       right:auto;
       left:0;
       transform:rotate(-90deg);
