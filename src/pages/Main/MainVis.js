@@ -36,17 +36,21 @@ const data = [
 ]
 
 const imgSizeEvt=()=>{
-  $(".main-vis .swiper-content").each(function(){
-    const target = $(this).find(".img-div");
-    console.log($(target).height(), $(target).width());
-		if(target.find("img").width() * target.height() < target.find("img").height() * target.width()){
-			target.find("img").width(target.width());
-			target.find("img").height("auto");
-		}else{
-			target.find("img").width("auto");
-			target.find("img").height(target.height());
-		}
-	});
+  console.log("왜 안돼!!!");
+  $(".main-vis .swiper-content img").on("load", function(){
+    console.log("이미지 로드 후");
+    $(".main-vis .swiper-content").each(function(){
+      const target = $(this).find(".img-div");
+      console.log($(target).height(), $(target).width());
+      if(target.find("img").width() * target.height() < target.find("img").height() * target.width()){
+        target.find("img").width(target.width());
+        target.find("img").height("auto");
+      }else{
+        target.find("img").width("auto");
+        target.find("img").height(target.height());
+      }
+    });
+  });
 }
 
 const MainVis=()=> {
