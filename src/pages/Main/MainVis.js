@@ -43,11 +43,11 @@ const imgSizeEvt=()=>{
       const target = $(this).find(".img-div");
       console.log($(target).height(), $(target).width());
       if(target.find("img").width() * target.height() < target.find("img").height() * target.width()){
-        target.find("img").width(target.width());
+        target.find("img").width("100%");
         target.find("img").height("auto");
       }else{
         target.find("img").width("auto");
-        target.find("img").height(target.height());
+        target.find("img").height("100%");
       }
     });
   });
