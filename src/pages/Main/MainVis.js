@@ -19,7 +19,7 @@ const data = [
     id:0,
     title:"살바도르 달리",
     text:"스페인의 초현실주의 거장 '살바도르 달리(Salvador Dali)'의 국내 최초 대규모 회고전",
-    image:"https://ddp.or.kr/usr/upload/board_thumb/zboardphotogallery0/20211210044757074.jpg" 
+    image:"./main-vis1.jpg" 
   },
   {
     id:1,
