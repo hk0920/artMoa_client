@@ -14,7 +14,6 @@ const Main=()=>{
   const dataList = [];
 
   useEffect(()=>{
-    console.log("useEffect");
     //getArtList();
     getNoticeList();
     CommonEvt.headerStyle();

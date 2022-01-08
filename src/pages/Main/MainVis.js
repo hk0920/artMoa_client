@@ -37,6 +37,7 @@ const data = [
 
 const imgSizeEvt=()=>{
   $(".main-vis .img-div").each(function(){
+    console.log($(this).height());
 		if($(this).find("img").width() * $(this).height() < $(this).find("img").height() * $(this).width()){
 			$(this).find("img").width($(this).width());
 			$(this).find("img").height("auto");
@@ -72,12 +73,16 @@ const MainVis=()=> {
     }
   }
 
+  const resizeEvt=()=>{
+    console.log("리사이즈");
+    var nextInfoPosition = $(".main-vis .swiper-slide").css("padding-bottom").replace("px", "") - $(".main-vis-wrap .next-info").outerHeight();
+    $(".main-vis-wrap .next-info").css("bottom", nextInfoPosition);
+    imgSizeEvt();
+  }
+
   useEffect(()=>{
-    $(window).resize(function(){
-      var nextInfoPosition = $(".main-vis .swiper-slide").css("padding-bottom").replace("px", "") - $(".main-vis-wrap .next-info").outerHeight();
-      $(".main-vis-wrap .next-info").css("bottom", nextInfoPosition);
-      imgSizeEvt();
-    }).resize();
+    resizeEvt();
+    window.addEventListener("resize", resizeEvt);
   },[])
   
   return(
