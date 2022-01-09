@@ -1,18 +1,11 @@
 import React, { useEffect, useState } from "react";
-import {Link} from 'react-router-dom';
-import {Swiper, SwiperSlide} from "swiper/react";
+import { Link } from 'react-router-dom';
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { Autoplay, EffectFade, Navigation } from "swiper";
 import $ from "jquery";
-
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
-
-import SwiperCore, {
-  Autoplay,
-  EffectFade,Navigation
-} from "swiper";
-
-SwiperCore.use([EffectFade,Navigation,Autoplay]);
 
 const data = [
   {
@@ -35,25 +28,34 @@ const data = [
   }
 ]
 
-const imgSizeEvt=()=>{
-  console.log("왜 안돼!!!");
-  $(".main-vis .swiper-content").each(function(){
-    const target = $(this).find(".img-div");
-    console.log($(target).height(), $(target).width());
-    if(target.find("img").width() * target.height() < target.find("img").height() * target.width()){
-      target.find("img").width("100%");
-      target.find("img").height("auto");
-    }else{
-      target.find("img").width("auto");
-      target.find("img").height("100%");
-    }
-  });
-}
-
 const MainVis=()=> {
+  const [swiper, setSwiper] = useState(null);
   const [load, setLoad] = useState(false);
+  const [windowSize, setWindowSize] = useState({width:window.innerWidth});
   const [number, setNumber] = useState(1);
   const [activeIdx, setActiveIdx] = useState(1);
+
+  SwiperCore.use([EffectFade,Navigation,Autoplay]);
+
+  const swiperPrams = {
+    effect:"fade",
+    autoplay:{
+      "delay": 10000,
+      "disableOnInteraction": false
+    },
+    loop:true,
+    navigation:true,
+    onSwiper:setSwiper,
+    onInit:(e)=>{
+      resizeEvt();
+      numberChange(e.activeIndex);
+      activeIdxEvt(e.activeIndex);
+    },
+    onSlideChange:(e)=> {
+      numberChange(e.activeIndex);
+      activeIdxEvt(e.activeIndex);
+    }
+  }
 
   const numberChange=(idx)=>{
     if(idx > $(".swiper-slide").length-3){
@@ -76,44 +78,50 @@ const MainVis=()=> {
     }
   }
 
+  const imgSizeEvt=()=>{
+    $(".main-vis .swiper-content").each(function(){
+      const target = $(this).find(".img-div");
+      if(target.find("img").width() * target.height() < target.find("img").height() * target.width()){
+        target.find("img").width(target.width());
+        target.find("img").height("auto");
+      }else{
+        target.find("img").width("auto");
+        target.find("img").height(target.height());
+      }
+    });
+  }
+
   const resizeEvt=()=>{
+    imgSizeEvt();
+
     var nextInfoPosition = $(".main-vis .swiper-content").offset().top + $(".main-vis .swiper-content").height();
     $(".main-vis-wrap .next-info").css("top", nextInfoPosition);
     $(".main-vis .swiper-button-prev").css("top", nextInfoPosition);
     $(".main-vis .swiper-button-next").css("top", nextInfoPosition + $(".main-vis .swiper-button-next").height());
-    imgSizeEvt();
   }
 
   useEffect(()=>{
-    console.log(document.readyState);
-    setLoad(true);
-    if(load){
-      console.log(document.readyState + "완료");
-      resizeEvt();
-      window.addEventListener("resize", resizeEvt);
+    resizeEvt();
+    
+    let resizeTimer
+    let windowSizer = () => { 
+      clearTimeout(resizeTimer)
+      resizeTimer = setTimeout(()=>{
+        setWindowSize({width:document.body.clientWidth});
+        resizeEvt();
+        console.log("windowSize=>" + document.body.clientWidth);
+      },10);
+    }
+    window.addEventListener('resize', windowSizer);
+
+    return()=>{
+      window.removeEventListener("resize", resizeEvt);
     }
   })
   
   return(
     <div className="main-vis-wrap">
-      <Swiper 
-        className="main-vis"
-        effect={"fade"}
-        autoplay={{
-          "delay": 10000,
-          "disableOnInteraction": false
-        }}
-        loop={true}
-        navigation={true}
-        onInit={(e)=>{
-          console.log("로드");
-          numberChange(e.activeIndex);
-          activeIdxEvt(e.activeIndex);
-        }}
-        onSlideChange={(e)=> {
-          numberChange(e.activeIndex);
-          activeIdxEvt(e.activeIndex);
-        }} >
+      <Swiper {...swiperPrams} ref={setSwiper} className="main-vis" >
           {data.map((dt, i)=>(
             <SwiperSlide key={i}>
               <div className="swiper-content">
