@@ -37,23 +37,21 @@ const data = [
 
 const imgSizeEvt=()=>{
   console.log("왜 안돼!!!");
-  $(".main-vis .swiper-content img").on("load", function(){
-    console.log("이미지 로드 후");
-    $(".main-vis .swiper-content").each(function(){
-      const target = $(this).find(".img-div");
-      console.log($(target).height(), $(target).width());
-      if(target.find("img").width() * target.height() < target.find("img").height() * target.width()){
-        target.find("img").width("100%");
-        target.find("img").height("auto");
-      }else{
-        target.find("img").width("auto");
-        target.find("img").height("100%");
-      }
-    });
+  $(".main-vis .swiper-content").each(function(){
+    const target = $(this).find(".img-div");
+    console.log($(target).height(), $(target).width());
+    if(target.find("img").width() * target.height() < target.find("img").height() * target.width()){
+      target.find("img").width("100%");
+      target.find("img").height("auto");
+    }else{
+      target.find("img").width("auto");
+      target.find("img").height("100%");
+    }
   });
 }
 
 const MainVis=()=> {
+  const [load, setLoad] = useState(false);
   const [number, setNumber] = useState(1);
   const [activeIdx, setActiveIdx] = useState(1);
 
@@ -87,9 +85,14 @@ const MainVis=()=> {
   }
 
   useEffect(()=>{
-    resizeEvt();
-    window.addEventListener("resize", resizeEvt);
-  },[])
+    console.log(document.readyState);
+    setLoad(true);
+    if(load){
+      console.log(document.readyState + "완료");
+      resizeEvt();
+      window.addEventListener("resize", resizeEvt);
+    }
+  })
   
   return(
     <div className="main-vis-wrap">
@@ -97,12 +100,14 @@ const MainVis=()=> {
         className="main-vis"
         effect={"fade"}
         autoplay={{
-          "delay": 3000,
+          "delay": 10000,
           "disableOnInteraction": false
         }}
         loop={true}
         navigation={true}
         onInit={(e)=>{
+          console.log("로드");
+          numberChange(e.activeIndex);
           activeIdxEvt(e.activeIndex);
         }}
         onSlideChange={(e)=> {
