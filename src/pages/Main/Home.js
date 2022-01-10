@@ -18,9 +18,7 @@ const Main=()=>{
   },[]);
 
   const getArtList=()=>{
-    var url = "http://61.102.114.235:19090/support/exhibition/list";
-
-    axios.get(url, {
+    axios.get("/httpApi/support/exhibition/list", {
       headers:{
         "X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA",
       },
