@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import XMLparser from "react-xml-parser";
-import {useParams} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import DetailInfo from "./DetailInfo";
 import DetailLocal from "./DetailLocal";
 import DetailVis from "./DetailVis";
@@ -10,30 +10,23 @@ import axios from "axios";
 
 
 const ArtDetail=()=>{
-	const {seq} = useParams();
+	const location = useLocation();
+	const seq = location.state.seq;
 	const [performance, setPerformance] = useState([]);
-	
-	//console.log(seq);
 	
 	const parseStr=(dataSet)=>{
 		const dataArr = new XMLparser().parseFromString(dataSet).children;
-		let dataList = [];
-		console.log(dataArr);
 		// eslint-disable-next-line no-lone-blocks
 		{
 			dataArr.map((item) => {
 				if(item.name === "msgBody") {
-					console.log(item.children);
-					dataList = item.children;
+					item.children.map((perforData) => {
+						if(perforData.name === "perforInfo"){
+							setPerformance(perforData.children);
+						}
+					})
 				}
 			});
-	
-			dataList.map((item) => {
-				if(item.name === "perforInfo"){
-					console.log(item)
-					setPerformance(item.children);
-				}
-			})
 		}
 	}
 	
@@ -42,8 +35,7 @@ const ArtDetail=()=>{
 		var queryParams = '?' + encodeURIComponent('serviceKey') + '=' + 'OApFbw%2FzxEwtqHKqUyc8QWvBESqtoamTLFLeS7zF7RTUAy1MykuCnHPhQzRBtz8vU76BEmXb2aYcPLMmW7KQkw%3D%3D'; /*Service Key*/
 		queryParams += '&' + encodeURIComponent('seq') + '=' + encodeURIComponent(seq); /**/
 	
-		axios.get('/api' + url + queryParams).then(res=>{
-			console.log(res);
+		axios.get('/artApi' + url + queryParams).then(res=>{
 			parseStr(res.data);
 		}).catch(error=>{
 			console.log(error.response);
@@ -52,15 +44,16 @@ const ArtDetail=()=>{
 
 	useEffect(()=>{
 		getData(seq);
+		//console.log(title, description, thumbnail, area, place, startDate, endDate, phone);
 		CommonEvt.headerStyle();
-	})
+	},[])
 
 	return(
 		<div id="cBody">
 			<div className="detail-wrap">
-				<DetailVis />
+				<DetailVis data={performance} />
 				<div className="inner">
-					<DetailInfo />
+					<DetailInfo data={performance} />
 				</div>
 				<DetailLocal />
 			</div>

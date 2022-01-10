@@ -1,50 +1,42 @@
 import React, { useEffect, useState } from "react";
+import {Link} from 'react-router-dom';
 import axios from 'axios';
-import XMLparser from "react-xml-parser";
 import CardList from "../../components/CardList";
 import * as CommonEvt from "../../CommonEvt";
 
 const ArtList=()=> {
-  const [artData, setArtData] = useState([]); 
-  let dataList = [];
-
-  useEffect(()=>{
-    // list();
+	const [artData, setArtData] = useState([]);
+	const [moreDataCnt, setMoreDataCnt] = useState(0);
+  const dataSize = 8;
+	
+	useEffect(()=>{
+		getData();
     CommonEvt.headerStyle();
-  },[])
+		window.addEventListener("resize", CommonEvt.imgSizeEvt(".list .img-div"));
 
-  const parseStr=(dataSet)=>{
-    const dataArr = new XMLparser().parseFromString(dataSet).children;
-    // eslint-disable-next-line no-lone-blocks
-    {
-      dataArr.map((item)=>{
-        if(item.name==="msgBody"){
-          item.children.map((data)=>{
-            if(data.name === "perforList"){
-              dataList.push(data);
-            }
-          })
-        }
-      })
-    }
-  }
-  
-  const list=()=>{
-    let url="/openapi/rest/publicperformancedisplays/period";
-    var queryParams = '?' + encodeURIComponent('serviceKey') + '=' + 'OApFbw%2FzxEwtqHKqUyc8QWvBESqtoamTLFLeS7zF7RTUAy1MykuCnHPhQzRBtz8vU76BEmXb2aYcPLMmW7KQkw%3D%3D'; /*Service Key*/
-    queryParams += '&' + encodeURIComponent('cPage') + '=' + encodeURIComponent('1'); /**/
-    queryParams += '&' + encodeURIComponent('rows') + '=' + encodeURIComponent('12'); /**/
+		return()=>{
+			window.removeEventListener("resize", CommonEvt.imgSizeEvt(".list .img-div"));
+		}
+	},[]);
 
-    axios.get("/api" + url + queryParams).then(res=>{
-      const dataSet = res.data;
-      console.log(res);
-      //parseStr(dataSet);
-      setArtData(dataList);
-      //console.log(artData)
+	const getData=()=>{
+    var url = "/support/exhibition/list";
+    axios.get("/backDb" + url, {
+      headers:{
+        "X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA",
+      },
+			params:{
+				page:moreDataCnt,
+				size:dataSize
+			}
+    }).then(res=>{
+			const dataSet = res.data.data.list;
+			setArtData(artData.concat(dataSet));
+			setMoreDataCnt(moreDataCnt + parseInt(dataSize));
     }).catch(error=>{
       console.log("에러" + error);
     });
-  }
+	}
 
   return(
     <div id="cBody">
@@ -54,7 +46,24 @@ const ArtList=()=> {
       </div>
       <div className="art-div">
         <div className="inner">
-          <CardList data={artData} />
+          <div className="list-div">
+            <div className="list-top">
+              <div className="tab-btn">
+                <Link to="" className="active">진행중</Link>
+                <Link to="">예정</Link>
+                <Link to="">종료</Link>
+              </div>
+
+              <div className="list-btn">
+                <button type="button" className="card-list-btn active" onClick={(e)=>CommonEvt.changeListTypeEvt(e.target)}>카드형식 정렬</button>
+                <button type="button" className="board-list-btn" onClick={(e)=>CommonEvt.changeListTypeEvt(e.target)}>보드형식 정렬</button>
+              </div>
+            </div>
+            <CardList data={artData} pageNum="0" sizeNum="8"/>
+            <div className="btn-wrap">
+              <button type="button" className="blue-btn" onClick={getData}>More</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

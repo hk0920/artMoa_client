@@ -1,15 +1,35 @@
 import React from "react";
 
-const DetailVis=()=>{
+const DetailVis=({data})=>{
+	const getDataArr = data;
+	const dataInfo = {
+		title:"",
+		subTitle:"",
+		thumbnail:""
+	};
+
+	getDataArr.map((item)=>{
+		if(item.name === "title"){
+			dataInfo.title = item.value;
+		}
+		if(item.name === "subTitle"){
+			dataInfo.subTitle = item.value;
+		}
+		if(item.name === "imgUrl"){
+			dataInfo.thumbnail = item.value;
+		}
+		console.log(item.name);
+	})
+	
 	return(
 		<div className="detail-vis">
 			<div className="inner">
 				<div className="img-div">
-					<img src="https://ddp.or.kr/usr/upload/board_thumb/zboardphotogallery0/20211210044757074.jpg" alt="" />
+					<img src={dataInfo.thumbnail} alt="" />
 				</div>
 				<div className="txt-div">
-					<p className="tit">타이틀</p>
-					<p className="txt">전시 설명 내용</p>
+					<p className="tit">{dataInfo.title}</p>
+					<p className="txt">{dataInfo.subTitle}</p>
 				</div>
 			</div>
 		</div>

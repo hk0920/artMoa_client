@@ -7,44 +7,32 @@ import CardList from "../../components/CardList";
 import TextList from "../../components/TextList";
 import * as CommonEvt from "../../CommonEvt";
 import "./main.scss";
+import { Link } from "react-router-dom";
 
 const Main=()=>{
   const [artData, setArtData] = useState([]);
   const [noticeData, setNoticeData] = useState([]);
-  const dataList = [];
 
   useEffect(()=>{
-    //getArtList();
-    //getNoticeList();
     CommonEvt.headerStyle();
+    getArtList();
   },[]);
 
-  const parseStr=(dataSet)=>{
-    const dataArr = new XMLparser().parseFromString(dataSet).children;
-    // eslint-disable-next-line no-lone-blocks
-    {
-      dataArr.map((item)=>{
-        if(item.name==="msgBody"){
-          item.children.map((data)=>{
-            if(data.name === "perforList"){
-              dataList.push(data);
-            }
-          })
-        }
-      })
-    }
-  }
-
   const getArtList=()=>{
-    var url = '/openapi/rest/publicperformancedisplays/period'; /*URL*/
-    var queryParams = '?' + encodeURIComponent('serviceKey') + '=' + 'OApFbw%2FzxEwtqHKqUyc8QWvBESqtoamTLFLeS7zF7RTUAy1MykuCnHPhQzRBtz8vU76BEmXb2aYcPLMmW7KQkw%3D%3D'; /*Service Key*/
-    queryParams += '&' + encodeURIComponent('cPage') + '=' + encodeURIComponent('1'); /**/
-    queryParams += '&' + encodeURIComponent('rows') + '=' + encodeURIComponent('12'); /**/
+    var url = "/support/exhibition/list";
 
-    axios.get('/api' + url + queryParams).then(res=>{
-      const dataSet = res.data;
-      parseStr(dataSet);
-      setArtData(dataList);
+    axios.get("/backDb" + url, {
+      headers:{
+        "X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA",
+      },
+      params:{
+        page:0,
+        size:4
+      }
+    }).then(res=>{
+      console.log(res.data.data.list);
+      const dataSet = res.data.data.list;
+      setArtData(dataSet);
     }).catch(error=>{
       console.log("에러" + error);
     });
@@ -70,7 +58,24 @@ const Main=()=>{
       <MainVis />
       <section className="main-sec list-sec">
         <div className="inner">
-          <CardList data={artData} />
+          <div className="list-div">
+            <div className="list-top">
+              <div className="tab-btn">
+                <Link to="" className="active">진행중</Link>
+                <Link to="">예정</Link>
+                <Link to="">종료</Link>
+              </div>
+
+              <div className="list-btn">
+                <button type="button" className="card-list-btn active" onClick={(e)=>CommonEvt.changeListTypeEvt(e.target)}>카드형식 정렬</button>
+                <button type="button" className="board-list-btn" onClick={(e)=>CommonEvt.changeListTypeEvt(e.target)}>보드형식 정렬</button>
+              </div>
+            </div>
+            <CardList data={artData} />
+            <div className="btn-wrap">
+              <Link to="/art" className="blue-btn">More</Link>
+            </div>
+          </div>	
         </div>
       </section>
       <section className="main-sec notice-sec">
