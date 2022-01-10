@@ -22,7 +22,7 @@ const App=()=>{
 				<Route index exact path="/" element={<Main />}></Route>
 				<Route path="/intro" element={<Intro />}></Route>
 				<Route path="/art" element={<ArtList />}></Route>
-				<Route path="/art/detail/" element={<ArtDetail />}></Route>
+				<Route path="/art/detail/:seq" element={<ArtDetail />}></Route>
 				<Route path="/faq" element={<FaqList />}></Route>
 				<Route path="/faq/write" element={<FaqWrite />}></Route>
 				<Route path="/notice" element={<NoticeList />}></Route>

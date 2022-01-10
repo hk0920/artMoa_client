@@ -20,8 +20,8 @@ const ArtList=()=> {
 	},[]);
 
 	const getData=()=>{
-    var url = "/support/exhibition/list";
-    axios.get("/backDb" + url, {
+    var url = "http://61.102.114.235:19090/support/exhibition/list";
+    axios.get(url, {
       headers:{
         "X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA",
       },

@@ -18,7 +18,6 @@ const DetailVis=({data})=>{
 		if(item.name === "imgUrl"){
 			dataInfo.thumbnail = item.value;
 		}
-		console.log(item.name);
 	})
 	
 	return(

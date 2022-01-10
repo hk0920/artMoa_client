@@ -10,7 +10,9 @@ const CardList=(data)=> {
 			{
 				dataArr.map((item, idx)=>(
 					<li key={idx}>
-						<Link to="/art/detail/" state={{seq:item.seq,}}>
+						<Link to={{
+							pathname: "/art/detail/" + item.seq
+						}}>
 							<div className="img-div">
 								<img src={item.thumbnail} alt="" />
 							</div>

@@ -10,9 +10,9 @@ import axios from "axios";
 
 
 const ArtDetail=()=>{
-	const location = useLocation();
-	const seq = location.state.seq;
+	const seq = useParams("seq").seq;
 	const [performance, setPerformance] = useState([]);
+	console.log(seq);
 	
 	const parseStr=(dataSet)=>{
 		const dataArr = new XMLparser().parseFromString(dataSet).children;

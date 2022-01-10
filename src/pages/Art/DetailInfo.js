@@ -43,7 +43,6 @@ const DetailInfo=({data})=>{
 		if(item.name === "endDate"){
 			dataInfo.endDate = item.value;
 		}
-		console.log(item.name);
 	})
 	
 	return(
