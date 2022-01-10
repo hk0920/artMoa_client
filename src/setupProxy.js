@@ -1,17 +1,6 @@
 const {createProxyMiddleware} = require('http-proxy-middleware');
 
-module.exports = function(app){ 
-	app.use(
-		"/backDb" ,
-		createProxyMiddleware({
-			target:"http://61.102.114.235:19090",
-			changeOrigin:true,
-			pathRewrite:{
-				'^/backDb':''
-			}
-		})
-	)
-	
+module.exports = function(app){
 	app.use(
 		"/artApi" ,
 		createProxyMiddleware({

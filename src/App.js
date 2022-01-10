@@ -6,6 +6,7 @@ import Main from './pages/Main/Home';
 import Footer from './components/Footer';
 import QuickMenu from './components/QuickMenu';
 import FaqList from './pages/Faq/List';
+import FaqWrite from './pages/Faq/Write';
 import ArtList from './pages/Art/List';
 import ArtDetail from './pages/Art/Detail';
 import NoticeList from './pages/Notice/List';
@@ -23,6 +24,7 @@ const App=()=>{
 				<Route path="/art" element={<ArtList />}></Route>
 				<Route path="/art/detail/" element={<ArtDetail />}></Route>
 				<Route path="/faq" element={<FaqList />}></Route>
+				<Route path="/faq/write" element={<FaqWrite />}></Route>
 				<Route path="/notice" element={<NoticeList />}></Route>
 				<Route path="/notice/detail" element={<NoticeDetail />}></Route>
 				<Route path="/login" element={<LoginForm />}></Route>
