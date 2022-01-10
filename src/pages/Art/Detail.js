@@ -31,11 +31,11 @@ const ArtDetail=()=>{
 	}
 	
 	const getData=(seq)=>{
-		let url = "/openapi/rest/publicperformancedisplays/d/";
+		let url = "http://www.culture.go.kr/openapi/rest/publicperformancedisplays/d/";
 		var queryParams = '?' + encodeURIComponent('serviceKey') + '=' + 'OApFbw%2FzxEwtqHKqUyc8QWvBESqtoamTLFLeS7zF7RTUAy1MykuCnHPhQzRBtz8vU76BEmXb2aYcPLMmW7KQkw%3D%3D'; /*Service Key*/
 		queryParams += '&' + encodeURIComponent('seq') + '=' + encodeURIComponent(seq); /**/
 	
-		axios.get('/artApi' + url + queryParams).then(res=>{
+		axios.get(url + queryParams).then(res=>{
 			parseStr(res.data);
 		}).catch(error=>{
 			console.log(error.response);

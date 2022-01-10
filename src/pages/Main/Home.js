@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "swiper/css/bundle";
 import axios from "axios";
-import XMLparser from "react-xml-parser";
 import MainVis from "./MainVis";
 import CardList from "../../components/CardList";
 import TextList from "../../components/TextList";
@@ -19,9 +18,9 @@ const Main=()=>{
   },[]);
 
   const getArtList=()=>{
-    var url = "/support/exhibition/list";
+    var url = "http://61.102.114.235:19090/support/exhibition/list";
 
-    axios.get("/backDb" + url, {
+    axios.get(url, {
       headers:{
         "X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA",
       },
