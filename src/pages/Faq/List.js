@@ -15,7 +15,7 @@ const FaqList=()=>{
 	const getData=()=>{
 		var url = "/support/faq/list";
 
-		axios.get("httpApi" + url, {
+		axios.get("/httpApi" + url, {
 			headers:{
         "X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA",
 			}

@@ -29,7 +29,7 @@ const FaqWrite=()=>{
     setContent(e.target.content.value);
 
     let url = "/support/faq/save";
-    axios.post("httpApi" + url, {
+    axios.post("/httpApi" + url, {
       headers:{
         "X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA"
       },
