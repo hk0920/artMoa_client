@@ -16,10 +16,10 @@ const JoinForm=()=>{
 				<h2 className="sub-title">회원가입</h2>
 			</div>
 			<div className="inner join-div">
-				<p className="title">이용약관</p>
+				<p className="content-tit">이용약관</p>
 				<Accordion />
 
-				<p className="title">회원정보 입력</p>
+				<p className="content-tit">회원정보 입력</p>
 				<form action="" method="post" name="join">
 					<div className="form-div">
 						<dl className="form-dl">

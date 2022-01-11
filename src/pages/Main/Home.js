@@ -57,15 +57,19 @@ const Main=()=>{
         <div className="inner">
           <div className="list-div">
             <div className="list-top">
-              <div className="tab-btn">
-                <Link to="" className="active">진행중</Link>
-                <Link to="">예정</Link>
-                <Link to="">종료</Link>
+              <div className="left-div">
+                <div className="tab-btn">
+                  <Link to="" className="active">진행중</Link>
+                  <Link to="">예정</Link>
+                  <Link to="">종료</Link>
+                </div>
               </div>
 
-              <div className="list-btn">
-                <button type="button" className="card-list-btn active" onClick={(e)=>CommonEvt.changeListTypeEvt(e.target)}>카드형식 정렬</button>
-                <button type="button" className="board-list-btn" onClick={(e)=>CommonEvt.changeListTypeEvt(e.target)}>보드형식 정렬</button>
+              <div className="right-div">
+                <div className="list-btn">
+                  <button type="button" className="card-list-btn active" onClick={(e)=>CommonEvt.changeListTypeEvt(e.target)}>카드형식 정렬</button>
+                  <button type="button" className="board-list-btn" onClick={(e)=>CommonEvt.changeListTypeEvt(e.target)}>보드형식 정렬</button>
+                </div>
               </div>
             </div>
             <CardList data={artData} />

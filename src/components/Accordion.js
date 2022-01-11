@@ -1,16 +1,34 @@
 import React from "react";
+import $ from "jquery";
 
-const Accordion=()=>{
+const Accordion=({data})=>{
+	const dataArr = data;
+
+	const onClick=(e)=>{
+		const target = e.target;
+		if(target.className === "tit" || target.className === "accordion-btn"){
+			const accorBtn = $(target).parents("li");
+			if(!accorBtn.hasClass("active")){
+				accorBtn.siblings().removeClass("active");
+				accorBtn.addClass("active");
+			}else{
+				accorBtn.removeClass("active");
+			}
+		}
+	}
+
   return(
 		<ul className="accordion-list">
-			<li className="active">
-				<button type="button" className="accordion-btn">
-					<p className="tit">faq 질문</p>
-				</button>
-				<div className="content-div">
-					faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq <br/><br/>답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변<br/><br/>답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변faq 답변 faq 답변
-				</div>
-			</li>
+			{
+				dataArr.map((item)=>(
+					<li key={item.id}>
+						<button type="button" className="accordion-btn" onClick={onClick}>
+							<p className="tit">{item.title}</p>
+						</button>
+						<div className="content-div">{item.content}</div>
+					</li>
+				))
+			}
 		</ul>
   )
 };

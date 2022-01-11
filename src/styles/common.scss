@@ -398,6 +398,16 @@
       @include widthGuide();
     }
   }  
+
+  .content-tit {
+    margin:100px 0 20px;
+		font-size:25px;
+		color:#1a1a1d;
+
+		&:first-child {
+			margin-top:0;
+		}
+  }
 }
 
 @include mobile(){
@@ -409,7 +419,12 @@
       .sub-title {
         font-size:25px;
       }
-    }  
+    } 
+    
+    .content-tit {
+      margin:50px 0 10px;
+			font-size:20px;
+    }
   }
 }
 
@@ -644,30 +659,29 @@
 }
 
 .list-top {
-  margin-bottom:40px;
+  margin-bottom:20px;
 
   &::after {
     @include clear();
   }
 
-  .tab-btn {
+  .left-div {
     float:left;
+  }
+
+  .right-div {
+    float:right;
   }
 
   .total {
-    float:left;
     font-weight:bold;
     color:#1a1a1d;
-  }
-
-  .list-btn {
-    float:right;
   }
 }
 
 @include mobile(){
   .list-top {
-    margin-bottom:20px;
+    margin-bottom:10px;
   }
 }
 

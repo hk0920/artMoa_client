@@ -80,24 +80,3 @@
 		}
 	}
 }
-
-.join-div {
-	& > .title {
-		margin:100px 0 20px;
-		font-size:25px;
-		color:#1a1a1d;
-
-		&:first-child {
-			margin-top:0;
-		}
-	}
-}
-
-@include mobile(){
-	.join-div {
-		& > .title {
-			margin:50px 0 10px;
-			font-size:20px;
-		}
-	}
-}
