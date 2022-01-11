@@ -7,7 +7,6 @@ const GnbNav=()=>{
   const [gnbStatus, setGnbStatus] = useState(false);
 
   const onClickGnb=()=>{
-    console.log(gnbStatus)
     if(!gnbStatus){
       setGnbStatus(true);
       $("#header").addClass("gnb-on");
@@ -25,7 +24,6 @@ const GnbNav=()=>{
       const targetP = e.target.parentElement;
       if(gnbStatus){
         if(target.className !== "gnb" && target.className !== "gnb-btn on" && targetP.className !== "gnb" && targetP.className !== "gnb-btn on"){
-          console.log(e.target.className);
           setGnbStatus(false);
           onClickGnb();
         } 
