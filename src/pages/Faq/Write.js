@@ -12,7 +12,6 @@ const FaqWrite=({type})=>{
     type:"",
     title:"",
     content:"",
-    delYn:"",
     expYn:"",
     register:""
   });
@@ -24,7 +23,7 @@ const FaqWrite=({type})=>{
       setFaqTitle("FAQ 등록");
       setBody({
         type:"SVA",
-        delYn:"Y"
+        expYn:"Y"
       })
     }else if(location.pathname === "/faq/update"){
       let faqId = location.state.idx;
@@ -106,7 +105,7 @@ const FaqWrite=({type})=>{
         type:target.id,
         title:body.title,
         content:body.content,
-        delYn:body.delYn
+        expYn:body.expYn
       })
     }
     if(target.name === "expYn"){
@@ -114,7 +113,7 @@ const FaqWrite=({type})=>{
         type:body.type,
         title:body.title,
         content:body.content,
-        delYn:target.id
+        expYn:target.id
       })
     }
     console.log(body);
@@ -156,11 +155,11 @@ const FaqWrite=({type})=>{
                 </dt>
                 <dd>
                   <div className="radio-txt">
-                    <input type="radio" name="expYn" id="Y" checked={body.delYn==="Y"?true:false} onChange={chkType} />
+                    <input type="radio" name="expYn" id="Y" checked={body.expYn==="Y"?true:false} onChange={chkType} />
                     <label htmlFor="Y">노출</label>
                   </div>
                   <div className="radio-txt">
-                    <input type="radio" name="expYn" id="N" checked={body.delYn==="N"?true:false} onChange={chkType}/>
+                    <input type="radio" name="expYn" id="N" checked={body.expYn==="N"?true:false} onChange={chkType}/>
                     <label htmlFor="N">미노출</label>
                   </div>
                 </dd>
