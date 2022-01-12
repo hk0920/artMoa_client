@@ -1,8 +1,11 @@
 import React from "react";
 import $ from "jquery";
+import { Link, useLocation } from "react-router-dom";
 
 const Accordion=({data})=>{
 	const dataArr = data;
+	const location = useLocation();
+	console.log(location.pathname === "/faq");
 
 	const onClick=(e)=>{
 		const target = e.target;
@@ -25,7 +28,18 @@ const Accordion=({data})=>{
 						<button type="button" className="accordion-btn" onClick={onClick}>
 							<p className="tit">{item.title}</p>
 						</button>
-						<div className="content-div">{item.content}</div>
+						<div className="content-div">
+							{item.content}
+								
+							{
+								location.pathname === "/faq"?		
+									<div className="btn-wrap">
+										<Link to="/faq/update" state={{idx:item.id}} className="blue-btn sm">수정</Link>
+										<button type="button" className="blue-btn sm">삭제</button>
+									</div>
+								:""
+							}
+						</div>
 					</li>
 				))
 			}

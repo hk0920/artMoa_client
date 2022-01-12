@@ -4,10 +4,22 @@ import * as CommonEvt from "../../CommonEvt";
 import Accordion from "../../components/Accordion";
 import "./member.scss";
 
+const termData = [
+	{
+		title:"이용약관 동의",
+		content:"이용약관 내용"
+	},
+	{
+		title:"약관2",
+		content:"약관2 내용"
+	}
+]
+
 const JoinForm=()=>{
 	useEffect(()=>{
 		CommonEvt.headerStyle();
 	})
+
 
   return(
     <div id="cBody">
@@ -17,7 +29,7 @@ const JoinForm=()=>{
 			</div>
 			<div className="inner join-div">
 				<p className="content-tit">이용약관</p>
-				<Accordion />
+				<Accordion data={termData}/>
 
 				<p className="content-tit">회원정보 입력</p>
 				<form action="" method="post" name="join">

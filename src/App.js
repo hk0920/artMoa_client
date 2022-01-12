@@ -13,6 +13,7 @@ import NoticeList from './pages/Notice/List';
 import NoticeDetail from './pages/Notice/Detail';
 import LoginForm from './pages/Member/LoginForm';
 import JoinForm from './pages/Member/JoinForm';
+import FaqAdmin from './pages/Faq/Admin';
 
 const App=()=>{
 	return (
@@ -24,7 +25,9 @@ const App=()=>{
 				<Route path="/art" element={<ArtList />}></Route>
 				<Route path="/art/detail/:seq" element={<ArtDetail />}></Route>
 				<Route path="/faq" element={<FaqList />}></Route>
-				<Route path="/faq/write" element={<FaqWrite />}></Route>
+				<Route path="/faq/admin" element={<FaqAdmin />}></Route>
+				<Route path="/faq/save" element={<FaqWrite type={"save"} />}></Route>
+				<Route path="/faq/update" element={<FaqWrite type={"update"} />}></Route>
 				<Route path="/notice" element={<NoticeList />}></Route>
 				<Route path="/notice/detail" element={<NoticeDetail />}></Route>
 				<Route path="/login" element={<LoginForm />}></Route>

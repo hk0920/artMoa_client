@@ -1,51 +1,128 @@
 import React, { useEffect, useState } from "react";
 import {useForm} from "react-hook-form";
 import axios from "axios";
+import $ from "jquery";
 import * as CommonEvt from "../../CommonEvt";
 import "./faq.scss";
+import { useLocation } from "react-router-dom";
 
-const FaqWrite=()=>{
-  const [type, setType] = useState();
-  const [expYn, setExpYn] = useState();
-  const [title, setTitle] = useState();
-  const [content, setContent] = useState();
-  
+const FaqWrite=({type})=>{
+  const [body, setBody] = useState({
+    id:"",
+    type:"",
+    title:"",
+    content:"",
+    delYn:"",
+    expYn:"",
+    register:""
+  });
+  const [faqTitle, setFaqTitle] = useState();
+  const location = useLocation();
+
+  const getData=()=>{
+    if(location.pathname === "/faq/save"){
+      setFaqTitle("FAQ 등록");
+      setBody({
+        type:"SVA",
+        delYn:"Y"
+      })
+    }else if(location.pathname === "/faq/update"){
+      let faqId = location.state.idx;
+      setFaqTitle("FAQ 수정");
+
+      let url = "/support/faq/detail";
+      axios.get("/httpApi" + url, {
+        headers:{
+          "X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA"
+        },
+        params:{
+          id:faqId
+        }
+      }).then((res)=>{
+        const data = res.data.data.info;
+        setBody({
+          id:faqId,
+          type:data.type,
+          title:data.title,
+          content:data.content
+        })
+      }).catch((error)=>{
+        console.log(error);
+      })
+    }
+  }
+
   useEffect(()=>{
-    CommonEvt.headerStyle();
+    getData();
   },[])
 
   const onSubmit=(e)=>{
     for(var i=0; i<e.target.type.length; i++){
       if(e.target.type[i].checked){
-        setType(e.target.type[i].id);
+        body.type = e.target.type[i].id;
       }
     }
     for(var i=0; i<e.target.expYn.length; i++){
       if(e.target.expYn[i].checked){
-        setType(e.target.expYn[i].id);
+        body.expYn = e.target.expYn[i].id;
       }
     }
-    setTitle(e.target.title.value);
-    setContent(e.target.content.value);
+    body.title = e.target.title.value;
+    body.content = e.target.content.value;
 
-    let url = "/support/faq/save";
-    axios.post("/httpApi" + url, {
-      headers:{
-        "X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA"
-      },
-      params:{
-        "type":type,
-        "title":title,
-        "content":content,
-        "expYn":expYn,
-        "register":"test01"
-      }
-    }).then((res)=>{
-      console.log(res);
-    }).catch((error)=>{
-      console.log(error);
-    })
+    if(type === "save"){
+      let url = "/support/faq/save";
+      axios.post("/httpApi" + url, body, {
+        headers:{
+          "X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA"
+        }
+      }).then((res)=>{
+        console.log(res);
+      }).catch((error)=>{
+        console.log(error);
+      })
+    }else if(type === "update"){
+      console.log("수정");
+      console.log(body);
+
+      let url = "/support/faq";
+      axios.put("/httpApi" + url, body, {
+        headers:{
+          "X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA"
+        }
+      }).then((res)=>{
+        console.log(res);
+      }).catch((error)=>{
+        console.log(error.response.data);
+      })
+    }
   }
+
+  const chkType=(e)=>{
+    const target = e.target;
+
+    if(target.name === "type"){
+      setBody({
+        type:target.id,
+        title:body.title,
+        content:body.content,
+        delYn:body.delYn
+      })
+    }
+    if(target.name === "expYn"){
+      setBody({
+        type:body.type,
+        title:body.title,
+        content:body.content,
+        delYn:target.id
+      })
+    }
+    console.log(body);
+  }
+
+  useEffect(()=>{
+    CommonEvt.headerStyle();
+  },[])
 
   return(
     <div id="cBody">
@@ -55,7 +132,7 @@ const FaqWrite=()=>{
       </div>
       <div className="faq-div inner">
         <div className="write-form">
-          <p className="content-tit">FAQ 등록</p>
+          <p className="content-tit">{faqTitle}</p>
           <form method="post" name="join" onSubmit={function(e){e.preventDefault(); onSubmit(e)}}>
             <div className="form-div">
               <dl className="form-dl">
@@ -64,11 +141,11 @@ const FaqWrite=()=>{
                 </dt>
                 <dd>
                   <div className="radio-txt">
-                    <input type="radio" name="type" id="SVA" defaultChecked/>
+                    <input type="radio" name="type" id="SVA" checked={body.type==="SVA"} onChange={chkType} />
                     <label htmlFor="SVA">서비스 이용</label>
                   </div>
                   <div className="radio-txt">
-                    <input type="radio" name="type" id="ETC"/>
+                    <input type="radio" name="type" id="ETC" checked={body.type==="ETC"} onChange={chkType} />
                     <label htmlFor="ETC">기타</label>
                   </div>
                 </dd>
@@ -79,11 +156,11 @@ const FaqWrite=()=>{
                 </dt>
                 <dd>
                   <div className="radio-txt">
-                    <input type="radio" name="expYn" id="Y" defaultChecked />
+                    <input type="radio" name="expYn" id="Y" checked={body.delYn==="Y"?true:false} onChange={chkType} />
                     <label htmlFor="Y">노출</label>
                   </div>
                   <div className="radio-txt">
-                    <input type="radio" name="expYn" id="N" />
+                    <input type="radio" name="expYn" id="N" checked={body.delYn==="N"?true:false} onChange={chkType}/>
                     <label htmlFor="N">미노출</label>
                   </div>
                 </dd>
@@ -93,7 +170,7 @@ const FaqWrite=()=>{
                   질문 <span className="required">*</span>
                 </dt>
                 <dd>
-                  <input type="text" placeholder="질문을 입력해주세요." name="title" />
+                  <input type="text" placeholder="질문을 입력해주세요." name="title" defaultValue={body.title}/>
                 </dd>
               </dl>
               <dl className="form-dl">
@@ -101,7 +178,7 @@ const FaqWrite=()=>{
                   내용 <span className="required">*</span>
                 </dt>
                 <dd>
-                  <textarea placeholder="내용을 입력해주세요." name="content" />
+                  <textarea placeholder="내용을 입력해주세요." name="content" defaultValue={body.content} />
                 </dd>
               </dl>
             </div>

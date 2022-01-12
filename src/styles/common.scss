@@ -445,6 +445,7 @@
     padding-left:30px;
     font-size:16px;
     line-height:20px;
+    vertical-align:top;
 
     &:after {
       @include virtualAB(0, 0, 20px, 20px);
@@ -461,7 +462,8 @@
     display:none;
 
     &:checked + label:before {
-      display:block;
+      opacity:1;
+      z-index:1;
     }
   }
 
@@ -474,9 +476,8 @@
 
     &:before {
       @include virtualAB(8px, 8px, 5px, 5px);
-      display:none;
       background:$_pointColor;
-      z-index:1;
+      opacity:0;
     }
 
     &:after {
@@ -1102,7 +1103,7 @@
 
     .content-div {
       display:none;
-      padding:20px 60px 30px;
+      padding:0 60px 30px;
     }
 
     &.active {
@@ -1135,7 +1136,7 @@
       }
 
       .content-div {
-        padding:10px 30px 30px;
+        padding:0 30px 30px;
       }
     }
   }

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 import axios from "axios";
-import Accordion from "../../components/Accordion";
+import BoardRowItem from "../../components/BoardRowItem";
 import * as CommonEvt from "../../CommonEvt";
 
-const FaqList=()=>{
-  const [faqData, setFaqData] = useState([]);
+const FaqAdmin=()=>{
+	const [faqData, setFaqData] = useState([]);
 
   useEffect(()=>{
     getData();
@@ -26,9 +26,10 @@ const FaqList=()=>{
 			console.log(err);
 		})
 	}
+	console.log(faqData);
 
-  return(
-    <div id="cBody">
+	return (
+		<div id="cBody">
       <div className="sub-vis">
         <div className="bg bg3"></div>
         <h2 className="sub-title">FAQ</h2>
@@ -43,17 +44,31 @@ const FaqList=()=>{
               <p className="total">총 <span>{faqData.length}</span>개</p>
             </div>
             <div className="right-div">
-              <Link to="/faq/save" className="blue-btn sm">글쓰기</Link>
+              <Link to="/faq/update" className="blue-btn sm">수정</Link>
+              <Link to="/faq/save" className="blue-btn sm">삭제</Link>
             </div>
           </div>
-          <Accordion data={faqData}/>
+
+					<div className="table-div">
+						<table>
+							<thead>
+								<th className="check"></th>
+								<th className="num">No</th>
+								<th className="type">분류</th>
+								<th className="title">타이틀</th>
+							</thead>
+							<tbody>
+								<BoardRowItem data={faqData}/>
+							</tbody>
+						</table>
+					</div>
           <div className="btn-wrap">
             <button type="button" className="blue-btn">More</button>
           </div>
         </div>
       </div>
     </div>
-  )
-};
+	)
+}
 
-export default FaqList;
+export default FaqAdmin;

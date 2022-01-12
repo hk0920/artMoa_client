@@ -21,4 +21,61 @@
 			line-height:50px;
 		}
 	}
+
+	.accordion-list {
+		li {
+			.accordion-btn {
+				padding-left:80px;
+
+				&:before {
+					@include virtualAB(24px, 30px, 20px, auto);
+					transform:translateY(0);
+					content:"Q";
+					font-size:25px;
+					color:$_pointColor;
+					background:none;
+				}
+				
+				&::after {
+					display:none;
+				}
+			}
+
+			.content-div {
+				padding-left:80px;
+			}
+		}
+	}
+
+	.table-div {
+		border-top:2px solid #e5e5e5;
+
+		table {
+			th, td {
+				padding:10px 20px;
+				border-bottom:1px solid #e5e5e5;
+				text-align:center;
+			}
+
+			thead {
+				th {		
+					background:#f5f5f5;
+				}
+
+				.check, .num {
+					width:80px;
+				}
+
+				.type {
+					width:150px;
+				}
+			}
+
+			tbody {
+				td:last-child {
+					text-align:left;
+				}
+			}
+		}
+	}
 }

@@ -46,7 +46,7 @@ const Header=()=>{
     return()=>{
       window.removeEventListener("scroll", updateScroll);
     }
-  },[]);
+  });
 
   return (
     <header id="header">
