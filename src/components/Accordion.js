@@ -1,6 +1,7 @@
 import React from "react";
 import $ from "jquery";
 import { Link, useLocation } from "react-router-dom";
+import axios from "axios";
 
 const Accordion=({data})=>{
 	const dataArr = data;
@@ -20,6 +21,23 @@ const Accordion=({data})=>{
 		}
 	}
 
+	const deleteEvt=(e)=>{
+		let id = {
+			id:e.target.value
+		}
+		console.log(id);
+		let url = "/support/faq";
+		axios.delete("/httpApi" + url, id, {
+			headers:{
+				"X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA"
+			}
+		}).then((res)=>{
+			console.log(res);
+		}).catch((error)=>{
+			console.log(error.response.data);
+		})
+	}
+
   return(
 		<ul className="accordion-list">
 			{
@@ -35,7 +53,7 @@ const Accordion=({data})=>{
 								location.pathname === "/faq"?		
 									<div className="btn-wrap">
 										<Link to="/faq/update" state={{idx:item.id}} className="blue-btn sm">수정</Link>
-										<button type="button" className="blue-btn sm">삭제</button>
+										<button type="button" className="blue-btn sm" value={item.id} onClick={deleteEvt}>삭제</button>
 									</div>
 								:""
 							}
