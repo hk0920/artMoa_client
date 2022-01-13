@@ -19,6 +19,18 @@ const termData = [
 	}
 ]
 
+const pwdValidation=(e)=>{
+	var regExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,20}$/;
+	const pwd = e.target.value;
+
+	console.log(pwd);
+	if(!regExp.test(pwd)) {
+		console.log("안맞음")
+	}else{
+		console.log("통과");
+	}
+}
+
 const JoinForm=()=>{
 	const [member, setMember] = useState({
 		email:"",
@@ -27,7 +39,7 @@ const JoinForm=()=>{
 		gender:""
 	});
 	const [memberEmail, setMemberEmail] = useState({
-		email:""
+		to:""
 	});
 	const [idMsg, setIdMsg] = useState({
 		type:"",
@@ -53,7 +65,7 @@ const JoinForm=()=>{
 		}
 		
 		setMemberEmail({
-			email:emailVal
+			to:emailVal
 		});
 		let url = "/member/count-by/email";
 		axios.post("/httpApi" + url, memberEmail, {
@@ -82,12 +94,14 @@ const JoinForm=()=>{
 
 	const sendEmail=(e_addr)=>{
 		setMemberEmail({
-			email:e_addr
+			to:e_addr
 		});
 
 		let url = "/member/auth-email";
-		console.log("탄다" + e_addr);
-		axios.post("/httpApi" + url, memberEmail,{
+		console.log("e_addr =>" + e_addr);
+		axios.post("/httpApi" + url, {
+			to:e_addr
+		},{
 			headers:{
 				"X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA"
 			}
@@ -96,6 +110,9 @@ const JoinForm=()=>{
 		}).catch((error)=>{
 			console.log(error);
 		})
+	}
+
+	const pwdCheck=(e)=>{
 
 	}
 
@@ -140,7 +157,7 @@ const JoinForm=()=>{
 								비밀번호 <span className="required">*</span>
 							</dt>
 							<dd>
-								<input type="password" placeholder="비밀번호" name="pwd" />
+								<input type="password" placeholder="비밀번호" name="pwd" onChange={pwdValidation}/>
 								<p className="info-txt">비밀번호는 영문(대/소문자)과 숫자, 특수문자 포함, 8-24이내로 입력하세요.</p>
 							</dd>
 						</dl>
@@ -149,7 +166,7 @@ const JoinForm=()=>{
 								비밀번호 확인 <span className="required">*</span>
 							</dt>
 							<dd>
-								<input type="password" placeholder="비밀번호" name="pwd" />
+								<input type="password" placeholder="비밀번호" name="pwd2" onChange={pwdCheck}/>
 								<p className="info-txt">비밀번호를 다시 한번 입력하세요.</p>
 							</dd>
 						</dl>
