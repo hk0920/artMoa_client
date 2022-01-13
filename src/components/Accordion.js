@@ -1,12 +1,12 @@
 import React from "react";
-import $ from "jquery";
+import $, { data } from "jquery";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Accordion=(props)=>{
 	const dataArr = props.data;
 	const location = useLocation();
-	console.log(dataArr);
+	console.log(dataArr.data)
 	
 	const onClickActive=(e)=>{
 		const target = e.target;
@@ -24,6 +24,11 @@ const Accordion=(props)=>{
   return(
 		<ul className="accordion-list">
 			{
+				dataArr.data === null?
+					<div className="no-data">
+						<p>게시물이 없습니다.</p>
+					</div>
+				:
 				dataArr.map((item)=>(
 					<li key={item.id}>
 						<button type="button" className="accordion-btn" onClick={onClickActive}>

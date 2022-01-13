@@ -4,6 +4,8 @@ import TextList from "../../components/TextList";
 
 const NoticeList=()=>{
   const [data, setData] = useState([]);
+	const [moreDataCnt, setMoreDataCnt] = useState(1);
+  const dataSize = 8;
   
   useEffect(()=>{
     getData();
@@ -14,12 +16,13 @@ const NoticeList=()=>{
     
     axios.get(url,{
       params:{
-        numOfRows:12,
-        pageNo:1
+        numOfRows:dataSize,
+        pageNo:moreDataCnt
       }
     }).then(res=>{
-      //console.log(res);
-      setData(res.data.response.body.items.item);
+      const dataSet = res.data.response.body.items.item;
+      setData(data.concat(dataSet));
+			setMoreDataCnt(moreDataCnt + parseInt(dataSize));
     }).catch(error=>{
       console.log("에러" + error);
     })
@@ -36,7 +39,7 @@ const NoticeList=()=>{
           <div className="list-div">
             <TextList data={data} />
             <div className="btn-wrap">
-              <button type="button" className="blue-btn">More</button>
+              <button type="button" className="blue-btn" onClick={getData}>More</button>
             </div>
           </div>
         </div>

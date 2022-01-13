@@ -15,6 +15,7 @@ const Main=()=>{
   useEffect(()=>{
     CommonEvt.headerStyle();
     getArtList();
+    getNoticeList();
   },[]);
 
   const getArtList=()=>{
@@ -40,7 +41,7 @@ const Main=()=>{
 
     axios.get(url,{
       params:{
-        numOfRows:8,
+        numOfRows:4,
         pageNo:1
       }
     }).then(res=>{

@@ -16,11 +16,31 @@
 		color:#1a1a1d;
 	}
 
-	.list-top{
-		.total {
-			line-height:50px;
+	.list-div {
+		&::after{
+			@include clear();
+		}
+
+		.tab-btn {
+			float:left;
+			margin-bottom:20px;
+		}
+
+		.search-div {
+			float:right;
+			margin-bottom:20px;
+		}
+
+		.list-top{
+			margin-top:20px;
+			clear:both;
+
+			.total {
+				margin-top:23px;
+			}
 		}
 	}
+
 
 	.accordion-list {
 		li {

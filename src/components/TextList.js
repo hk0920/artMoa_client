@@ -3,16 +3,11 @@ import {Link} from 'react-router-dom';
 
 const TextList=(data)=>{
 	const dataArr = data.data;
-	const [dataList, setDataList] = useState([]);
 	
-	useEffect(()=>{
-		setDataList(dataArr);
-	});
-
 	return(
 		<ul className="list text-type">
 			{
-				dataList.map((item, idx)=>(
+				dataArr.map((item, idx)=>(
 					<li key={idx}>
 						<Link to={"/notice/detail"} state={{info:item}}>
 							<div className="txt-div">

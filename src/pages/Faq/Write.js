@@ -44,7 +44,8 @@ const FaqWrite=({type})=>{
           id:faqId,
           type:data.type,
           title:data.title,
-          content:data.content
+          content:data.content,
+          expYn:data.expYn
         })
       }).catch((error)=>{
         console.log(error);
@@ -63,7 +64,7 @@ const FaqWrite=({type})=>{
       }
     }
     for(var i=0; i<e.target.expYn.length; i++){
-      if(e.target.expYn[i].checked){
+      if(e.target.expYn[i].checked ){
         body.expYn = e.target.expYn[i].id;
       }
     }

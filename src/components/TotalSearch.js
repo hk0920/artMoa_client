@@ -1,15 +1,24 @@
 import React , { useState } from 'react';
 import $ from "jquery";
 
-const TotalSearch=()=>{
+const TotalSearch=(props)=>{
   const [srchStatus, setSrchStatus] = useState(false);
 
   const onClickSrch=(e)=>{
+    const target = e.target;
+    const searchTxt = $(target).prev("input[name=search-input]").val();
     setSrchStatus(srchStatus=>srchStatus?false:true);
-    if(srchStatus){
-      $(".search-div").removeClass("on");
+
+    if(!srchStatus){
+      if($(target).parents("#header").length > 0){
+        $(target).parents(".search-div").addClass("on");
+      }else{
+        props.searchEvt(searchTxt);
+      }
     }else{
-      $(".search-div").addClass("on");
+      if($(target).parents("#header").length > 0){
+        $(target).parents(".search-div").removeClass("on");
+      }
     }
   }
 

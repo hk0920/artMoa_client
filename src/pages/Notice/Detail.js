@@ -40,7 +40,12 @@ const NoticeDetail=()=>{
 
 					<div className="txt-div">
 						{
-							data.description===null?<p className="nodata">상세내용이 없습니다.</p>:data.description
+							data.description===null?
+								<div className="no-data">
+									<p>상세내용이 없습니다.</p>
+								</div>
+							:
+								data.description
 						}
 					</div>
 				</div>
