@@ -6,10 +6,12 @@ import "./member.scss";
 
 const termData = [
 	{
+		id:0,
 		title:"이용약관 동의",
 		content:"이용약관 내용"
 	},
 	{
+		id:1,
 		title:"약관2",
 		content:"약관2 내용"
 	}
@@ -19,7 +21,6 @@ const JoinForm=()=>{
 	useEffect(()=>{
 		CommonEvt.headerStyle();
 	})
-
 
   return(
     <div id="cBody">

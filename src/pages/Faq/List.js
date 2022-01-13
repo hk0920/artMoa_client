@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import axios from "axios";
 import Accordion from "../../components/Accordion";
 import * as CommonEvt from "../../CommonEvt";
@@ -9,7 +9,7 @@ const FaqList=()=>{
 
   useEffect(()=>{
     getData();
-    CommonEvt.headerStyle();
+    CommonEvt.headerStyle();    
   },[]);
 
 	const getData=()=>{
@@ -21,9 +21,31 @@ const FaqList=()=>{
 			}
 		}).then((res) => {
       const dataSet = res.data.data.list;
-      setFaqData(faqData.concat(dataSet));
+      setFaqData(dataSet);
 		}).catch((err) => {
 			console.log(err);
+		})
+	}
+  
+  const deleteEvt=(e)=>{
+		let id = e.target.value;
+
+		if(!window.confirm("정말 삭제하시겠습니까?")){
+			return;
+		}	
+
+		let url = "/support/faq";
+		axios.delete("/httpApi" + url, {
+			headers:{
+				"X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA"
+			},
+			data:{
+				id:id
+			}
+		}).then((res)=>{
+      getData();
+		}).catch((error)=>{
+			console.log(error.response.data);
 		})
 	}
 
@@ -46,7 +68,7 @@ const FaqList=()=>{
               <Link to="/faq/save" className="blue-btn sm">글쓰기</Link>
             </div>
           </div>
-          <Accordion data={faqData}/>
+          <Accordion data={faqData} deleteEvt={deleteEvt}/>
           <div className="btn-wrap">
             <button type="button" className="blue-btn">More</button>
           </div>

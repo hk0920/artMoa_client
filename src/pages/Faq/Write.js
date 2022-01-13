@@ -4,7 +4,7 @@ import axios from "axios";
 import $ from "jquery";
 import * as CommonEvt from "../../CommonEvt";
 import "./faq.scss";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const FaqWrite=({type})=>{
   const [body, setBody] = useState({
@@ -17,6 +17,7 @@ const FaqWrite=({type})=>{
   });
   const [faqTitle, setFaqTitle] = useState();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const getData=()=>{
     if(location.pathname === "/faq/save"){
@@ -76,7 +77,8 @@ const FaqWrite=({type})=>{
           "X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA"
         }
       }).then((res)=>{
-        console.log(res);
+        //console.log(res);
+        navigate("/faq");
       }).catch((error)=>{
         console.log(error);
       })
@@ -91,6 +93,7 @@ const FaqWrite=({type})=>{
         }
       }).then((res)=>{
         console.log(res);
+        navigate("/faq");
       }).catch((error)=>{
         console.log(error.response.data);
       })
@@ -102,6 +105,7 @@ const FaqWrite=({type})=>{
 
     if(target.name === "type"){
       setBody({
+        id:body.id,
         type:target.id,
         title:body.title,
         content:body.content,
@@ -110,6 +114,7 @@ const FaqWrite=({type})=>{
     }
     if(target.name === "expYn"){
       setBody({
+        id:body.id,
         type:body.type,
         title:body.title,
         content:body.content,

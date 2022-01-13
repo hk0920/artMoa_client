@@ -526,6 +526,14 @@
 .btn-wrap {
   margin-top:60px;
   text-align:center;
+
+  & > * {
+    margin-right:10px;
+
+    &:last-child {
+      margin-right:0;
+    }
+  }
 }
 
 .tab-btn {
@@ -563,6 +571,26 @@
     line-height:50px;
   }
 }
+
+.white-btn {
+  display:inline-block;
+  min-width:260px;
+  height:60px;
+  font-weight:bold;
+  color:#6ababb;
+  line-height:60px;
+  background:#fff;
+  border:1px solid $_pointColor;
+  text-align:center;
+
+  &.sm {
+    min-width:130px;
+    height:50px;
+    font-size:16px;
+    line-height:50px;
+  }
+}
+
 
 .txt-more-btn {
   display:inline-block;
@@ -1104,6 +1132,10 @@
     .content-div {
       display:none;
       padding:0 60px 30px;
+
+      pre {
+        font-family:$_fontFamily;
+      }
     }
 
     &.active {
