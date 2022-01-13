@@ -60,6 +60,30 @@
 	}
 }
 
+.join-div {
+	.certify-div {
+		display:inline-block;
+		margin-left:40px;
+
+		.tit {
+			display:inline-block;
+			margin-right:20px;
+			font-size:16px;
+			line-height:42px;
+		}
+
+		input {
+			width:200px;
+			height:42px;
+			font-size:16px;
+		}
+
+		.certify-btn {
+			margin-left:10px;
+		}
+	}
+}
+
 @include mobile(){
 	.login-div {
 		width:92%;

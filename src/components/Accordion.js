@@ -6,7 +6,6 @@ import axios from "axios";
 const Accordion=(props)=>{
 	const dataArr = props.data;
 	const location = useLocation();
-	console.log(dataArr.data)
 	
 	const onClickActive=(e)=>{
 		const target = e.target;

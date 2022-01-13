@@ -58,6 +58,8 @@ const FaqWrite=({type})=>{
   },[])
 
   const onSubmit=(e)=>{
+    e.preventDefault(); 
+    
     for(var i=0; i<e.target.type.length; i++){
       if(e.target.type[i].checked){
         body.type = e.target.type[i].id;
@@ -138,7 +140,7 @@ const FaqWrite=({type})=>{
       <div className="faq-div inner">
         <div className="write-form">
           <p className="content-tit">{faqTitle}</p>
-          <form method="post" name="join" onSubmit={function(e){e.preventDefault(); onSubmit(e)}}>
+          <form method="post" name="faq-form" onSubmit={onSubmit}>
             <div className="form-div">
               <dl className="form-dl">
                 <dt>

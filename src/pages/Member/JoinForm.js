@@ -1,5 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {Link} from 'react-router-dom';
+import axios from "axios";
+import $ from "jquery";
 import * as CommonEvt from "../../CommonEvt";
 import Accordion from "../../components/Accordion";
 import "./member.scss";
@@ -18,9 +20,84 @@ const termData = [
 ]
 
 const JoinForm=()=>{
+	const [member, setMember] = useState({
+		email:"",
+		pwd:"",
+		birthday:"",
+		gender:""
+	});
+	const [memberEmail, setMemberEmail] = useState({
+		email:""
+	});
+	const [idMsg, setIdMsg] = useState({
+		type:"",
+		msg:""
+	});
+
 	useEffect(()=>{
 		CommonEvt.headerStyle();
 	})
+
+	const onSubmit=(e)=>{
+		e.preventDefault(); 
+	}
+
+	const overLapEvt=(e)=>{
+		const target = e.target;
+		const emailVal = $(target).prev("input[name=email]").val().trim();
+		
+		if(emailVal === "") {
+			alert("이메일을 입력해주세요.");
+			$(target).prev("input[name=email]").focus();
+			return;
+		}
+		
+		setMemberEmail({
+			email:emailVal
+		});
+		let url = "/member/count-by/email";
+		axios.post("/httpApi" + url, memberEmail, {
+			headers:{
+				"X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA"
+			}
+		}).then((res)=> {
+			const useMember = res.data.data;
+			console.log(useMember);
+			if(useMember === 0){
+				setIdMsg({
+					type:"success",
+					msg:"사용 가능한 이메일입니다. 전송된 인증번호를 입력해주세요."
+				});
+				sendEmail(emailVal);
+			}else{
+				setIdMsg({
+					type:"error",
+					msg:"이미 사용 중인 이메일입니다."
+				});
+			}
+		}).catch((error)=>{
+			console.log(error);
+		})
+	}
+
+	const sendEmail=(e_addr)=>{
+		setMemberEmail({
+			email:e_addr
+		});
+
+		let url = "/member/auth-email";
+		console.log("탄다" + e_addr);
+		axios.post("/httpApi" + url, memberEmail,{
+			headers:{
+				"X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA"
+			}
+		}).then((res)=>{
+			console.log(res);
+		}).catch((error)=>{
+			console.log(error);
+		})
+
+	}
 
   return(
     <div id="cBody">
@@ -33,7 +110,7 @@ const JoinForm=()=>{
 				<Accordion data={termData}/>
 
 				<p className="content-tit">회원정보 입력</p>
-				<form action="" method="post" name="join">
+				<form method="post" name="join" onSubmit={onSubmit}>
 					<div className="form-div">
 						<dl className="form-dl">
 							<dt>
@@ -41,7 +118,21 @@ const JoinForm=()=>{
 							</dt>
 							<dd>
 								<input type="text" placeholder="abc@email.com" name="email" />
-								<button type="button" className="blue-btn sm">중복 확인</button>
+								<button type="button" className="blue-btn sm" onClick={overLapEvt}>중복 확인</button>
+								{
+									idMsg.type==="success"?
+										<div className="certify-div">
+											<span className="tit">인증번호</span>
+											<input type="text" name="certify" placeholder="인증번호" />
+											<button type="button" className="white-btn x-sm certify-btn">인증확인</button>
+										</div>
+									:""
+								}
+								{
+									idMsg.msg!==""?
+										<p className={idMsg.type==="success"?"info-txt success":"info-txt error"}>{idMsg.msg}</p>
+									:""
+								}
 							</dd>
 						</dl>
 						<dl className="form-dl">
@@ -55,7 +146,7 @@ const JoinForm=()=>{
 						</dl>
 						<dl className="form-dl">
 							<dt>
-								비밀번호 <span className="required">*</span>
+								비밀번호 확인 <span className="required">*</span>
 							</dt>
 							<dd>
 								<input type="password" placeholder="비밀번호" name="pwd" />
