@@ -112,7 +112,6 @@ const MainVis=()=> {
 
   useEffect(()=>{
     resizeEvt();
-    
     window.addEventListener('resize', windowSizer);
 
     return()=>{
