@@ -38,9 +38,6 @@ const JoinForm=()=>{
 		birthday:"",
 		gender:""
 	});
-	const [memberEmail, setMemberEmail] = useState({
-		to:""
-	});
 	const [idMsg, setIdMsg] = useState({
 		type:"",
 		msg:""
@@ -64,11 +61,11 @@ const JoinForm=()=>{
 			return;
 		}
 		
-		setMemberEmail({
-			to:emailVal
+		setMember({
+			email:emailVal
 		});
 		let url = "/member/count-by/email";
-		axios.post("/httpApi" + url, memberEmail, {
+		axios.post("/httpApi" + url, member, {
 			headers:{
 				"X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA"
 			}
@@ -93,15 +90,9 @@ const JoinForm=()=>{
 	}
 
 	const sendEmail=(e_addr)=>{
-		setMemberEmail({
-			to:e_addr
-		});
-
 		let url = "/member/auth-email";
 		console.log("e_addr =>" + e_addr);
-		axios.post("/httpApi" + url, {
-			to:e_addr
-		},{
+		axios.post("/httpApi" + url, {to:e_addr},{
 			headers:{
 				"X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA"
 			}
