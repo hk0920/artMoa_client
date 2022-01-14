@@ -100,22 +100,23 @@ const MainVis=()=> {
     $(".main-vis .swiper-button-next").css("top", nextInfoPosition + $(".main-vis .swiper-button-next").height());
   }
 
+  
+  let resizeTimer
+  let windowSizer = () => { 
+    clearTimeout(resizeTimer)
+    resizeTimer = setTimeout(()=>{
+      setWindowSize({width:document.body.clientWidth});
+      resizeEvt();
+    },10);
+  }
+
   useEffect(()=>{
     resizeEvt();
     
-    let resizeTimer
-    let windowSizer = () => { 
-      clearTimeout(resizeTimer)
-      resizeTimer = setTimeout(()=>{
-        setWindowSize({width:document.body.clientWidth});
-        resizeEvt();
-        console.log("windowSize=>" + document.body.clientWidth);
-      },10);
-    }
     window.addEventListener('resize', windowSizer);
 
     return()=>{
-      window.removeEventListener("resize", resizeEvt);
+      window.removeEventListener("resize", windowSizer);
     }
   })
   

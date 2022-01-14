@@ -364,11 +364,11 @@
         position:relative;
         top:0;
         height:100%;
-        padding:0 8%;
+        padding:0;
         transform:translateY(0);
 
         &:before {
-          @include virtualAB(0, 8%, 84%, 470px);
+          @include virtualAB(0, 0, 100%, 470px);
           box-shadow:5px 5px 10px rgba(0, 0, 0, 0.2);
         }
       }
@@ -406,6 +406,7 @@
     }
 
     .swiper-button-prev, .swiper-button-next {
+      display:none;
       top:calc(50% - 20px) !important;
       width:40px;
       background-size:10px auto;
