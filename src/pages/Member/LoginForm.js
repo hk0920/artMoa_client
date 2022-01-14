@@ -8,6 +8,10 @@ const LoginForm=()=>{
 		CommonEvt.headerStyle();
 	})
 
+	const onSubmit=()=>{
+		
+	}
+
   return(
     <div id="cBody">
 			<div className="sub-vis">
@@ -15,7 +19,7 @@ const LoginForm=()=>{
 				<h2 className="sub-title">로그인</h2>
 			</div>
 			<div className="login-div">
-				<form action="" method="post" name="login">
+				<form action="" method="post" name="login" onSubmit={onSubmit}>
 					<div className="login-form">
 						<input type="text" name="email" placeholder="이메일"/>
 						<input type="password" name="pwd" placeholder="비밀번호"/>
@@ -31,7 +35,7 @@ const LoginForm=()=>{
 						</div>
 					</div>
 					<div className="btn-wrap">
-						<button className="blue-btn">로그인</button>
+						<button type="submit" className="blue-btn">로그인</button>
 					</div>
 				</form>
 			</div>
