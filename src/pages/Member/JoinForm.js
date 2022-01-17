@@ -190,8 +190,8 @@ const JoinForm=()=>{
 	}
 
 	const sendEmail=(e_addr)=>{
-		console.log("e_addr =>" + e_addr);
-		CommonEvt.api.post("/httpApi/member/auth-email", {to:e_addr}).then((res)=>{
+		console.log("e_addr =>" + e_addr.toString());
+		CommonEvt.api.post("/httpApi/member/auth-email", {to:e_addr.toString()}).then((res)=>{
 			console.log(res);
 		}).catch((error)=>{
 			console.log(error);
