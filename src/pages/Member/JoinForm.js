@@ -153,6 +153,8 @@ const JoinForm=()=>{
 	const overLapEvt=(e)=>{
 		const target = e.target;
 		const emailVal = $(target).prev("input[name=email]").val().trim();
+
+		console.log(emailVal);
 		
 		if(!emailChk){	
 			if(emailVal === "") {
@@ -163,13 +165,9 @@ const JoinForm=()=>{
 			$(target).prev("input[name=email]").focus();
 			return;
 		}
-		
+
 		if(emailChk){
-			setMember({
-				email:emailVal
-			});
-			
-			CommonEvt.api.post("/httpApi/member/count-by/email", member).then((res)=> {
+			CommonEvt.api.post("/httpApi/member/count-by/email", {email:emailVal}).then((res)=> {
 				const useMember = res.data.data;
 				if(useMember === 0){
 					setIdMsg({
@@ -190,12 +188,21 @@ const JoinForm=()=>{
 	}
 
 	const sendEmail=(e_addr)=>{
-		console.log("e_addr =>" + e_addr.toString());
-		CommonEvt.api.post("/httpApi/member/auth-email", {to:"gmlrb920@naver.com"}).then((res)=>{
+		CommonEvt.api.post("/httpApi/member/auth-email", {to:e_addr}).then((res)=>{
 			console.log(res);
 		}).catch((error)=>{
 			console.log(error);
 		})
+	}
+
+	const emailChkEvt=(e)=>{
+		const certify = $(e.target).prev("input[name=certify]").val();
+		console.log($(e.target).prev("input[name=certify]").val());
+		CommonEvt.api.post("/httpApi/member/check-email", {to:"gmlrb920@naver.com", number:certify}).then((res)=>{
+			console.log(res);
+		}).catch((error)=>{
+			console.log(error);
+		})	
 	}
 
 	const onSubmit=(e)=>{
@@ -252,7 +259,7 @@ const JoinForm=()=>{
 										<div className="certify-div">
 											<span className="tit">인증번호</span>
 											<input type="text" name="certify" placeholder="인증번호" />
-											<button type="button" className="white-btn x-sm certify-btn">인증확인</button>
+											<button type="button" className="white-btn x-sm certify-btn" onClick={emailChkEvt}>인증확인</button>
 										</div>
 									:""
 								}
