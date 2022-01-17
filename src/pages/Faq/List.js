@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {Link, useLocation} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import $ from "jquery";
 import Accordion from "../../components/Accordion";
 import * as CommonEvt from "../../CommonEvt";
-import TotalSearch from "../../components/TotalSearch";
 
 const FaqList=()=>{
   const [faqData, setFaqData] = useState([]);
@@ -90,7 +89,6 @@ const FaqList=()=>{
             <button type="button" value="SVA" onClick={(e)=>clickTab(e)}>서비스</button>
             <button type="button" value="ETC" onClick={(e)=>clickTab(e)}>기타</button>
           </div>
-          <TotalSearch searchEvt={searchEvt}/>
           <div className="list-top">
             <div className="left-div">
               <p className="total">총 <span>{faqData.data===null?0:faqData.length}</span>개</p>

@@ -82,7 +82,7 @@ const Main=()=>{
           <div className="list-div">
             <TextList data={noticeData}/>
             <div className="btn-wrap">
-              <button type="button" className="txt-more-btn">More</button>
+              <Link to="/notice" className="txt-more-btn">More</Link>
             </div>
           </div>
         </div>

@@ -50,9 +50,9 @@ const QuickMenu=()=>{
 			<div className="quick-div">
 				<button type="button" className="quick-btn" onClick={onClickQuick}>퀵메뉴 열기</button>
 				<div className="quick-menu">
-					<Link to="" className="pick-link"><span>추천전시</span></Link>
-					<Link to="" className="notice-link"><span>공지사항</span></Link>
-					<Link to="" className="faq-link"><span>FAQ</span></Link>
+					<Link to="/art" className="pick-link"><span>추천전시</span></Link>
+					<Link to="/notice" className="notice-link"><span>공지사항</span></Link>
+					<Link to="/faq" className="faq-link"><span>FAQ</span></Link>
 				</div>
 			</div>
 			<button type="button" className="top-btn" onClick={onClickTop}>위로 이동</button>

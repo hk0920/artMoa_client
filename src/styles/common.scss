@@ -930,12 +930,13 @@
         margin-top:20px;
         @include ellipsis(5);
         
-        * {
-          font-size:$_fontSize !important;
-          font-weight:$_fontWeight !important;
-          font-family:$_fontFamily !important;
-          background:none !important;
-          text-align:left !important;
+        
+        pre {
+          font-size:$_fontSize;
+          font-weight:$_fontWeight;
+          font-family:$_fontFamily;
+          background:none;
+          white-space:pre-wrap;
         }
       }
 
