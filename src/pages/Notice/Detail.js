@@ -1,28 +1,45 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import * as CommonEvt from "../../CommonEvt";
 import "./notice.scss";
 
 const NoticeDetail=()=>{
 	const location = useLocation();
 	const [data, setData] = useState({
+		id:"",
 		title:"",
-		description:"",
+		content:"",
 		date:"",
 		url:"",
 		viewCnt:""
 	});
+	const navigate = useNavigate();
 
 	useEffect(()=>{
 		setData({
+			id:location.state.info.id,
 			title:location.state.info.title,
 			publisher:location.state.info.publisher,
-			description:location.state.info.description,
-			date:location.state.info.regDate,
-			url:location.state.info.url,
-			viewCnt:location.state.info.viewCnt
+			content:location.state.info.content,
+			date:location.state.info.registerTime,
+			viewCnt:location.state.info.readCnt
 		})
-		console.log(location.state.info);
 	},[])
+
+	const deleteEvt=(e)=>{
+		const id = e.target.value;
+		console.log(id);
+		CommonEvt.api.delete("/httpApi/support/notice",{
+			data:{
+				id:id
+			}
+		}).then((res)=>{
+			console.log(res);
+			navigate("/notice");
+		}).catch((err)=>{
+			console.log(err)
+		})
+	}
 
 	return(
 		<div id="cBody">
@@ -40,17 +57,18 @@ const NoticeDetail=()=>{
 
 					<div className="txt-div">
 						{
-							data.description===null?
+							data.content===null?
 								<div className="no-data">
 									<p>상세내용이 없습니다.</p>
 								</div>
 							:
-								data.description
+								<pre>{data.content}</pre>
 						}
 					</div>
 				</div>
 				<div className="btn-wrap">
-					<a href={data.url} className="blue-btn">More</a>
+					<Link to="/notice/update" state={{idx:data.id}} className="white-btn">수정</Link>
+					<button type="button" className="white-btn" value={data.id} onClick={deleteEvt}>삭제</button>
 				</div>
 			</div>
 		</div>

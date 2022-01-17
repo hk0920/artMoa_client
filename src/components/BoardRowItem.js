@@ -13,8 +13,10 @@ const BoardRowItem=({data})=>{
 					</div>
 				</td>
 				<td>{-(idx - data.length)}</td>
-				<td>{item.type}</td>
 				<td>{item.title}</td>
+				<td>{item.register}</td>
+				<td>{item.readCnt}</td>
+				<td>{item.registerTime}</td>
 			</tr>
 		))
 	)

@@ -104,3 +104,34 @@
 		}
 	}
 }
+
+.join-div {
+	pre {
+		white-space:pre-wrap;
+	}
+}
+
+.term-div {
+	p {
+		margin:20px 0;
+
+		&:first-child {
+			margin-top:0;
+		}
+
+		&.indent {
+			margin:10px 0;
+			padding-left:25px;
+		}
+	}
+
+	ul li {
+		margin-bottom:10px;
+		background:none;
+		border:none;
+
+		&:last-child {
+			margin-bottom:0;
+		}
+	}
+}

@@ -1,5 +1,6 @@
 
 import $ from 'jquery';
+import axios from 'axios';
 
 export const headerStyle=()=>{
 	if(!$("#cBody").hasClass("main") && $(".detail-wrap").length === 0){
@@ -32,19 +33,13 @@ export const changeListTypeEvt=(target)=>{
 	}else{
 		$(target).parents(".list-div").find(".list").removeClass("card-type").addClass("board-type");
 	}
-	imgSizeEvt();
+
+	const imgTarget = $(target).parents(".list-div").find(".img-div");
+	imgSizeEvt(imgTarget);
 }
 
-export const axios=(url, )=>{
-	// axios.get('/api' + url, {
-	// 	headers:{
-	// 		"X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA",
-	// 	}
-	// }).then(res=>{
-	// 	console.log(res.data.data.list);
-	// 	const dataSet = res.data.data.list;
-	// 	setArtData(dataSet);
-	// }).catch(error=>{
-	// 	console.log("에러" + error);
-	// });
-}
+export const api = axios.create({
+	headers:{
+		"X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA",
+	}
+})

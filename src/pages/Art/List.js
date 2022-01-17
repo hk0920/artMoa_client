@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {Link} from 'react-router-dom';
-import axios from 'axios';
 import CardList from "../../components/CardList";
 import * as CommonEvt from "../../CommonEvt";
 
@@ -20,11 +19,7 @@ const ArtList=()=> {
 	},[]);
 
 	const getData=()=>{
-    var url = "/support/exhibition/list";
-    axios.get("/httpApi" + url, {
-      headers:{
-        "X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA",
-      },
+    CommonEvt.api.get("/httpApi/support/exhibition/list", {
 			params:{
 				page:moreDataCnt,
 				size:dataSize

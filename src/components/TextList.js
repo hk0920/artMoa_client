@@ -12,9 +12,10 @@ const TextList=(data)=>{
 						<Link to={"/notice/detail"} state={{info:item}}>
 							<div className="txt-div">
 								<p className="tit">{item.title}</p>
-								<div className="txt" dangerouslySetInnerHTML={{__html:item.description}}>
+								<div className="txt">
+									<pre>{item.content}</pre>
 								</div>
-								<p className="date">{item.regDate}</p>
+								<p className="date">{item.registerTime.substring(0,10)}</p>
 							</div>
 						</Link>
 					</li>

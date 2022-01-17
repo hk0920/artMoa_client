@@ -3,41 +3,38 @@ import {useForm} from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 import $ from "jquery";
 import * as CommonEvt from "../../CommonEvt";
-import "./faq.scss";
 
-const FaqWrite=({type})=>{
+const NoticeWrite=({type})=>{
   const [body, setBody] = useState({
     id:"",
-    type:"",
     title:"",
     content:"",
     expYn:"",
     register:""
   });
-  const [faqTitle, setFaqTitle] = useState();
+  const [noticeTitle, setNoticeTitle] = useState();
   const location = useLocation();
   const navigate = useNavigate();
 
   const getData=()=>{
-    if(location.pathname === "/faq/save"){
-      setFaqTitle("FAQ 등록");
+    if(location.pathname === "/notice/save"){
+      setNoticeTitle("공지사항 등록");
       setBody({
-        type:"SVA",
         expYn:"Y"
       })
-    }else if(location.pathname === "/faq/update"){
-      let faqId = location.state.idx;
-      setFaqTitle("FAQ 수정");
+    }else if(location.pathname === "/notice/update"){
+      let noticeIdx = location.state.idx;
+      console.log(noticeIdx);
+      setNoticeTitle("공지사항 수정");
 
-      CommonEvt.api.get("/httpApi/support/faq/detail", {
+      CommonEvt.api.get("/httpApi/support/notice/detail", {
         params:{
-          id:faqId
+          id:noticeIdx
         }
       }).then((res)=>{
         const data = res.data.data.info;
         setBody({
-          id:faqId,
-          type:data.type,
+          id:noticeIdx,
           title:data.title,
           content:data.content,
           expYn:data.expYn
@@ -55,11 +52,6 @@ const FaqWrite=({type})=>{
   const onSubmit=(e)=>{
     e.preventDefault(); 
     
-    for(var i=0; i<e.target.type.length; i++){
-      if(e.target.type[i].checked){
-        body.type = e.target.type[i].id;
-      }
-    }
     for(var i=0; i<e.target.expYn.length; i++){
       if(e.target.expYn[i].checked ){
         body.expYn = e.target.expYn[i].id;
@@ -69,8 +61,8 @@ const FaqWrite=({type})=>{
     body.content = e.target.content.value;
 
     if(type === "save"){
-      CommonEvt.api.post("/httpApi/support/faq/save", body).then((res)=>{
-        navigate("/faq");
+      CommonEvt.api.post("/httpApi/support/notice/save", body).then((res)=>{
+        navigate("/notice");
       }).catch((error)=>{
         console.log(error);
       })
@@ -78,9 +70,9 @@ const FaqWrite=({type})=>{
       console.log("수정");
       console.log(body);
 
-      CommonEvt.api.put("/httpApi/support/faq", body).then((res)=>{
+      CommonEvt.api.put("/httpApi/support/notice", body).then((res)=>{
         console.log(res);
-        navigate("/faq");
+        navigate("/notice");
       }).catch((error)=>{
         console.log(error.response.data);
       })
@@ -90,24 +82,14 @@ const FaqWrite=({type})=>{
   const chkType=(e)=>{
     const target = e.target;
 
-    if(target.name === "type"){
-      setBody({
-        id:body.id,
-        type:target.id,
-        title:body.title,
-        content:body.content,
-        expYn:body.expYn
-      })
-    }
-    if(target.name === "expYn"){
-      setBody({
-        id:body.id,
-        type:body.type,
-        title:body.title,
-        content:body.content,
-        expYn:target.id
-      })
-    }
+    setBody({
+      id:body.id,
+      type:body.type,
+      title:body.title,
+      content:body.content,
+      expYn:target.id
+    })
+
     console.log(body);
   }
 
@@ -118,29 +100,14 @@ const FaqWrite=({type})=>{
   return(
     <div id="cBody">
       <div className="sub-vis">
-        <div className="bg bg3"></div>
-        <h2 className="sub-title">FAQ</h2>
+        <div className="bg bg4"></div>
+        <h2 className="sub-title">Notice</h2>
       </div>
-      <div className="faq-div inner">
+      <div className="notice-div inner">
         <div className="write-form">
-          <p className="content-tit">{faqTitle}</p>
-          <form method="post" name="faq-form" onSubmit={onSubmit}>
+          <p className="content-tit">{noticeTitle}</p>
+          <form method="post" name="notice-form" onSubmit={onSubmit}>
             <div className="form-div">
-              <dl className="form-dl">
-                <dt>
-                  구분 <span className="required">*</span>
-                </dt>
-                <dd>
-                  <div className="radio-txt">
-                    <input type="radio" name="type" id="SVA" checked={body.type==="SVA"} onChange={chkType} />
-                    <label htmlFor="SVA">서비스 이용</label>
-                  </div>
-                  <div className="radio-txt">
-                    <input type="radio" name="type" id="ETC" checked={body.type==="ETC"} onChange={chkType} />
-                    <label htmlFor="ETC">기타</label>
-                  </div>
-                </dd>
-              </dl>
               <dl className="form-dl">
                 <dt>
                   노출여부 <span className="required">*</span>
@@ -158,10 +125,10 @@ const FaqWrite=({type})=>{
               </dl>
               <dl className="form-dl">
                 <dt>
-                  질문 <span className="required">*</span>
+                  제목 <span className="required">*</span>
                 </dt>
                 <dd>
-                  <input type="text" placeholder="질문을 입력해주세요." name="title" defaultValue={body.title}/>
+                  <input type="text" placeholder="제목을 입력해주세요." name="title" defaultValue={body.title}/>
                 </dd>
               </dl>
               <dl className="form-dl">
@@ -183,4 +150,4 @@ const FaqWrite=({type})=>{
   )
 };
 
-export default FaqWrite;
+export default NoticeWrite;

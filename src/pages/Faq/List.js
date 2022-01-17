@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {Link, useLocation} from 'react-router-dom';
-import axios from "axios";
 import $ from "jquery";
 import Accordion from "../../components/Accordion";
 import * as CommonEvt from "../../CommonEvt";
@@ -19,12 +18,7 @@ const FaqList=()=>{
   },[]);
 
 	const getData=()=>{
-		var url = "/support/faq/list";
-
-		axios.get("/httpApi" + url, {
-			headers:{
-        "X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA",
-			},
+		CommonEvt.api.get("/httpApi/support/faq/list", {
       params:{
         type:param.type,
         expYn:param.expYn
@@ -49,11 +43,7 @@ const FaqList=()=>{
 			return;
 		}	
 
-		let url = "/support/faq";
-		axios.delete("/httpApi" + url, {
-			headers:{
-				"X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA"
-			},
+		CommonEvt.api.delete("/httpApi/support/faq", {
 			data:{
 				id:id
 			}

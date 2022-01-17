@@ -12,7 +12,6 @@ import axios from "axios";
 const ArtDetail=()=>{
 	const seq = useParams("seq").seq;
 	const [performance, setPerformance] = useState([]);
-	console.log(seq);
 	
 	const parseStr=(dataSet)=>{
 		const dataArr = new XMLparser().parseFromString(dataSet).children;
@@ -44,7 +43,6 @@ const ArtDetail=()=>{
 
 	useEffect(()=>{
 		getData(seq);
-		//console.log(title, description, thumbnail, area, place, startDate, endDate, phone);
 		CommonEvt.headerStyle();
 	},[])
 

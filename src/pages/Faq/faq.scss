@@ -66,36 +66,4 @@
 			}
 		}
 	}
-
-	.table-div {
-		border-top:2px solid #e5e5e5;
-
-		table {
-			th, td {
-				padding:10px 20px;
-				border-bottom:1px solid #e5e5e5;
-				text-align:center;
-			}
-
-			thead {
-				th {		
-					background:#f5f5f5;
-				}
-
-				.check, .num {
-					width:80px;
-				}
-
-				.type {
-					width:150px;
-				}
-			}
-
-			tbody {
-				td:last-child {
-					text-align:left;
-				}
-			}
-		}
-	}
 }

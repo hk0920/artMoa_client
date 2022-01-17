@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "swiper/css/bundle";
-import axios from "axios";
 import MainVis from "./MainVis";
 import CardList from "../../components/CardList";
 import TextList from "../../components/TextList";
@@ -19,16 +18,12 @@ const Main=()=>{
   },[]);
 
   const getArtList=()=>{
-    axios.get("/httpApi/support/exhibition/list", {
-      headers:{
-        "X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA",
-      },
+    CommonEvt.api.get("/httpApi/support/exhibition/list", {
       params:{
         page:0,
         size:4
       }
     }).then(res=>{
-      console.log(res.data.data.list);
       const dataSet = res.data.data.list;
       setArtData(dataSet);
     }).catch(error=>{
@@ -37,15 +32,14 @@ const Main=()=>{
   }
 
   const getNoticeList=()=>{
-    var url = "http://api.kcisa.kr/openapi/service/rest/meta2020/getKOCAnotice?serviceKey=7d58e468-50c5-4c98-89be-819d8fdcff3f";
-
-    axios.get(url,{
+    CommonEvt.api.get("/httpApi/support/notice/list",{
       params:{
-        numOfRows:4,
-        pageNo:1
+        page:0,
+        size:4
       }
     }).then(res=>{
-      setNoticeData(res.data.response.body.items.item);
+      const dataSet = res.data.data.list;
+      setNoticeData(dataSet);
     }).catch(error=>{
       console.log(error);
     })

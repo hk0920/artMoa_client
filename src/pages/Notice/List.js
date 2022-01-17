@@ -1,10 +1,13 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import TextList from "../../components/TextList";
+import * as CommonEvt from "../../CommonEvt";
+import TotalSearch from "../../components/TotalSearch";
+import { Link } from "react-router-dom";
 
 const NoticeList=()=>{
   const [data, setData] = useState([]);
-	const [moreDataCnt, setMoreDataCnt] = useState(1);
+  const total = "";
+	const [moreDataCnt, setMoreDataCnt] = useState(0);
   const dataSize = 8;
   
   useEffect(()=>{
@@ -12,19 +15,17 @@ const NoticeList=()=>{
   },[])
 
   const getData=()=>{
-    let url = "http://api.kcisa.kr/openapi/service/rest/meta2020/getKOCAnotice?serviceKey=7d58e468-50c5-4c98-89be-819d8fdcff3f";
-    
-    axios.get(url,{
+    CommonEvt.api.get("/httpApi/support/notice/list", {
       params:{
-        numOfRows:dataSize,
-        pageNo:moreDataCnt
+        page:moreDataCnt,
+        size:dataSize
       }
-    }).then(res=>{
-      const dataSet = res.data.response.body.items.item;
+    }).then((res)=>{ 
+      const dataSet = res.data.data.list;
       setData(data.concat(dataSet));
-			setMoreDataCnt(moreDataCnt + parseInt(dataSize));
-    }).catch(error=>{
-      console.log("에러" + error);
+      setMoreDataCnt(moreDataCnt + 1);
+    }).catch((err) => {
+      console.log(err)
     })
   }
 
@@ -34,13 +35,20 @@ const NoticeList=()=>{
         <div className="bg bg4"></div>
         <h2 className="sub-title">Notice</h2>
       </div>
-      <div className="notice-div">
-        <div className="inner">
-          <div className="list-div">
-            <TextList data={data} />
-            <div className="btn-wrap">
-              <button type="button" className="blue-btn" onClick={getData}>More</button>
+      <div className="notice-div inner">
+        <div className="list-div">
+          <TotalSearch />
+          <div className="list-top">
+            <div className="left-div">
+              <p className="total">총 <span>{data.length}</span>개</p>
             </div>
+            <div className="right-div">
+              <Link to="/notice/save" className="blue-btn sm">글쓰기</Link>
+            </div>
+          </div>
+          <TextList data={data} />
+          <div className="btn-wrap">
+            <button type="button" className="blue-btn" onClick={getData}>More</button>
           </div>
         </div>
       </div>

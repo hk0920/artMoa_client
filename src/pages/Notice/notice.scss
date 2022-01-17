@@ -1,6 +1,53 @@
 @import "../../styles/var";
 @import "../../styles/mixin";
 
+.notice-div {
+	.list-div {
+		&::after {
+			@include clear();
+		}
+
+		.list-top {
+			clear:both;
+		}
+
+		.search-div {
+			float:right;
+			margin-bottom:20px;
+		}
+	}
+
+	.write-form {
+		input, textarea {
+			width:100%;
+		}
+
+		textarea {
+			height:400px;
+		}
+	}
+
+	.table-div {
+		thead {
+			.check, .num {
+				width:80px;
+			}
+	
+			.writer, .read{
+				width:200px;
+			}
+	
+			.date {
+				width:250px;
+			}
+		}
+
+		.chk-txt label {
+			padding-left:20px;
+		}
+	}
+}
+
 .view-div {
 	.title-div {
 		position:relative;
@@ -28,6 +75,10 @@
 
 	.txt-div {
 		padding:60px 30px;
+
+		pre {
+			white-space: pre-wrap;
+		}
 
 		.nodata {
 			position:relative;

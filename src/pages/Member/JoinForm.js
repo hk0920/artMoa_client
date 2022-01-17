@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
 import {Link, useNavigate} from 'react-router-dom';
-import axios from "axios";
 import $ from "jquery";
 import * as CommonEvt from "../../CommonEvt";
 import Accordion from "../../components/Accordion";
 import "./member.scss";
+import Term1 from "./Term1";
+import Term2 from "./Term2";
 
 const termData = [
 	{
 		id:0,
 		title:"이용약관 동의",
-		content:"이용약관 내용"
+		content:<Term1 />
 	},
 	{
 		id:1,
-		title:"약관2",
-		content:"약관2 내용"
+		title:"개인 정보 처리 방침",
+		content:<Term2 />
 	}
 ]
 
@@ -167,12 +168,8 @@ const JoinForm=()=>{
 			setMember({
 				email:emailVal
 			});
-			let url = "/member/count-by/email";
-			axios.post("/httpApi" + url, member, {
-				headers:{
-					"X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA"
-				}
-			}).then((res)=> {
+			
+			CommonEvt.api.post("/httpApi/member/count-by/email", member).then((res)=> {
 				const useMember = res.data.data;
 				if(useMember === 0){
 					setIdMsg({
@@ -193,13 +190,8 @@ const JoinForm=()=>{
 	}
 
 	const sendEmail=(e_addr)=>{
-		let url = "/member/auth-email";
 		console.log("e_addr =>" + e_addr);
-		axios.post("/httpApi" + url, {to:e_addr},{
-			headers:{
-				"X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA"
-			}
-		}).then((res)=>{
+		CommonEvt.api.post("/httpApi/member/auth-email", {to:e_addr}).then((res)=>{
 			console.log(res);
 		}).catch((error)=>{
 			console.log(error);
@@ -225,11 +217,7 @@ const JoinForm=()=>{
 			console.log(member);
 
 			let url = "/member/join/save";
-			axios.post("/httpApi" + url, member, {
-				headers:{
-					"X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA"
-				}
-			}).then((res)=>{
+			CommonEvt.api.post("/httpApi" + url, member).then((res)=>{
 				console.log(res);
 				alert("회원가입 완료되었습니다.");
 				navigate("/");
