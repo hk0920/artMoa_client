@@ -6,6 +6,7 @@ import Accordion from "../../components/Accordion";
 import "./member.scss";
 import Term1 from "./Term1";
 import Term2 from "./Term2";
+import Timer from "../../components/Timer";
 
 const termData = [
 	{
@@ -31,6 +32,10 @@ const JoinForm=()=>{
 		type:"",
 		msg:""
 	});
+	const [certiMsg, setCertiMsg] = useState({
+		type:"",
+		msg:""
+	});
 	const [pwdMsg, setPwdMsg] = useState({
 		type:"",
 		msg:""
@@ -43,6 +48,7 @@ const JoinForm=()=>{
 		type:"",
 		msg:""
 	});
+	const [isEmailSend, setIsEmailSend] = useState(false);
 	const [emailChk, setEmailChk] = useState(false);
 	const navigate = useNavigate();
 
@@ -50,7 +56,6 @@ const JoinForm=()=>{
 		CommonEvt.headerStyle();
 	});
 
-		
 	const emailValidation=(e)=>{
 		var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 		const email = e.target.value;
@@ -60,12 +65,13 @@ const JoinForm=()=>{
 				type:"error",
 				msg:"이메일 형식이 올바르지 않습니다."
 			});
+			setEmailChk(false);
 		}else{
-			setEmailChk(true);
 			setIdMsg({
 				type:"error",
 				msg:""
-			})
+			});
+			setEmailChk(true);
 		}
 	}
 
@@ -112,7 +118,6 @@ const JoinForm=()=>{
 
 	const pwdCheck=(e)=>{
 		const pwd2 = e.target.value;
-		console.log(pwd2);
 		if(pwd2 !== member.pwd) {
 			setPwdMsg2({
 				type:"error",
@@ -153,8 +158,6 @@ const JoinForm=()=>{
 	const overLapEvt=(e)=>{
 		const target = e.target;
 		const emailVal = $(target).prev("input[name=email]").val().trim();
-
-		console.log(emailVal);
 		
 		if(!emailChk){	
 			if(emailVal === "") {
@@ -189,17 +192,35 @@ const JoinForm=()=>{
 
 	const sendEmail=(e_addr)=>{
 		CommonEvt.api.post("/httpApi/member/auth-email", {to:e_addr}).then((res)=>{
-			console.log(res);
+			console.log("이메일 전송 성공");
+			setIsEmailSend(true);
 		}).catch((error)=>{
 			console.log(error);
+			setIsEmailSend(false);
 		})
 	}
 
-	const emailChkEvt=(e)=>{
+	const certifyChkEvt=(e)=>{
 		const certify = $(e.target).prev("input[name=certify]").val();
-		console.log($(e.target).prev("input[name=certify]").val());
-		CommonEvt.api.post("/httpApi/member/check-email", {to:"gmlrb920@naver.com", number:certify}).then((res)=>{
-			console.log(res);
+		const emailVal = $(e.target).parents("dd").find("input[name=email]").val();
+		const emailInfo = {
+			to:emailVal,
+			number:certify
+		}
+
+		CommonEvt.api.post("/httpApi/member/check-email", emailInfo).then((res)=>{
+			const result = res.data.data;
+			if(result === "success"){
+				setCertiMsg({
+					type:"success",
+					msg:"인증 성공"
+				});
+			}else{
+				setCertiMsg({
+					type:"error",
+					msg:"인증 실패"
+				});
+			}
 		}).catch((error)=>{
 			console.log(error);
 		})	
@@ -218,6 +239,9 @@ const JoinForm=()=>{
 		}
 		
 		console.log(idMsg.type, pwdMsg.type, pwdMsg2.type, birthMsg.type);
+		if(certiMsg.type !== "success"){
+			alert("이메일 인증해주세요.");
+		}
 		if(idMsg.type !== "success" || pwdMsg.type !== "success" || pwdMsg2.type !== "success" || birthMsg.type !== "success"){
 			alert("회원정보 조건을 다시 확인해주세요.");
 		}else{
@@ -259,13 +283,19 @@ const JoinForm=()=>{
 										<div className="certify-div">
 											<span className="tit">인증번호</span>
 											<input type="text" name="certify" placeholder="인증번호" />
-											<button type="button" className="white-btn x-sm certify-btn" onClick={emailChkEvt}>인증확인</button>
+											<button type="button" className="white-btn x-sm certify-btn" onClick={certifyChkEvt}>인증확인</button>
+											{
+												certiMsg.msg!==""?
+													<span className={certiMsg.type==="error"?"info-txt error":"info-txt success"}>{certiMsg.msg}</span>
+												:""
+											}
+											{isEmailSend?<Timer />:""}
 										</div>
 									:""
 								}
 								{
 									idMsg.msg!==""?
-										<p className={idMsg.type==="error"?"info-txt error":"info-txt"}>{idMsg.msg}</p>
+										<p className={idMsg.type==="error"?"info-txt error":"info-txt success"}>{idMsg.msg}</p>
 									:""
 								}
 							</dd>

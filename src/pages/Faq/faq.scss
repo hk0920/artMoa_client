@@ -17,27 +17,13 @@
 	}
 
 	.list-div {
-		&::after{
-			@include clear();
-		}
-
-		.tab-btn {
-			float:left;
-			margin-bottom:20px;
-		}
-
-		.search-div {
-			float:right;
-			margin-bottom:20px;
-		}
-
 		.list-top{
 			margin-top:20px;
 			clear:both;
 
-			.total {
-				margin-top:23px;
-			}
+			.tab-btn {
+				margin-top:10px;
+			}	
 		}
 	}
 
@@ -63,6 +49,48 @@
 
 			.content-div {
 				padding-left:80px;
+			}
+		}
+	}
+}
+
+@include mobile(){
+	.faq-div {
+		textarea {
+			height:250px;
+		}
+
+		.title-div {
+			margin-bottom:40px;
+			font-size:16px;
+		}
+
+		.list-div {
+			.list-top{
+				margin-top:10px;
+
+				.tab-btn {
+					margin-top:5px;
+				}	
+			}
+		}
+
+		.accordion-list {
+			li {
+				.accordion-btn {
+					padding-left:30px;
+
+					&:before {
+						top:14px;
+						width:15px;
+						left:10px;
+						font-size:16px;
+					}
+				}
+
+				.content-div {
+					padding-left:30px;
+				}
 			}
 		}
 	}

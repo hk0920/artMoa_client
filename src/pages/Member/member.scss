@@ -30,7 +30,7 @@
 		.find-div {
 			float:right;
 
-			a {
+			button {
 				position:relative;
 				margin-right:8px;
 				padding-right:10px;
@@ -81,6 +81,21 @@
 		.certify-btn {
 			margin-left:10px;
 		}
+
+		.info-txt {
+			display:inline-block;
+			margin-left:10px;
+		}
+	}
+
+	.timer {
+		display:inline-block;
+		margin-left:10px;
+		font-size:16px;
+
+		&.error {
+			color:#f95858;
+		}
 	}
 }
 
@@ -91,11 +106,13 @@
 	
 		.login-util {
 			.find-div {
-				a {
+				button {
 					font-size:14px;
+					line-height:15px;
+					vertical-align:top;
 	
 					&:after {
-						top:8px;
+						top:5px;
 						width:3px;
 						height:3px;
 					}
@@ -132,6 +149,31 @@
 
 		&:last-child {
 			margin-bottom:0;
+		}
+	}
+}
+
+.mypage-div {
+	.info-div {
+		padding:50px;
+		background:#f5f5f5;
+
+		.tit {
+			margin-bottom:20px;
+			font-size:25px;
+			color:#1a1a1d;
+		}
+
+		.name {
+			font-weight:bold;
+			color:#6ababb;
+		}
+	}
+
+	.form-div {
+		.txt {
+			margin-right:20px;
+			line-height:50px;
 		}
 	}
 }

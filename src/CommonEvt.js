@@ -3,6 +3,7 @@ import $ from 'jquery';
 import axios from 'axios';
 
 export const headerStyle=()=>{
+	$(window).scrollTop(0);
 	if(!$("#cBody").hasClass("main") && $(".detail-wrap").length === 0){
 		$("#header").addClass("white-type");
 	}else{

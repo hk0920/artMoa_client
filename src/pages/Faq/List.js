@@ -84,27 +84,19 @@ const FaqList=()=>{
           <p className="txt">artMoa 관련 자주 하는 질문을 한곳에 모았습니다.<br/> 아래 질문을 클릭하시면 답변을 확인할 수 있습니다.</p>
         </div>
         <div className="list-div">
-          <div className="tab-btn">
-            <button type="button" value="all" onClick={(e)=>clickTab(e)} className="active">전체</button>
-            <button type="button" value="SVA" onClick={(e)=>clickTab(e)}>서비스</button>
-            <button type="button" value="ETC" onClick={(e)=>clickTab(e)}>기타</button>
-          </div>
           <div className="list-top">
             <div className="left-div">
-              <p className="total">총 <span>{faqData.data===null?0:faqData.length}</span>개</p>
+              <div className="tab-btn">
+                <button type="button" value="all" onClick={(e)=>clickTab(e)} className="active">전체</button>
+                <button type="button" value="SVA" onClick={(e)=>clickTab(e)}>서비스</button>
+                <button type="button" value="ETC" onClick={(e)=>clickTab(e)}>기타</button>
+              </div>
             </div>
             <div className="right-div">
               <Link to="/faq/save" className="blue-btn sm">글쓰기</Link>
             </div>
           </div>
           <Accordion data={faqData} deleteEvt={deleteEvt}/>
-          {
-            faqData.data!==null?
-              <div className="btn-wrap">
-                <button type="button" className="blue-btn">More</button>
-              </div>
-            :""
-          }
         </div>
       </div>
     </div>

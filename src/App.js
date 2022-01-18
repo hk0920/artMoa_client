@@ -15,6 +15,7 @@ import NoticeWrite from './pages/Notice/Write';
 import NoticeDetail from './pages/Notice/Detail';
 import LoginForm from './pages/Member/LoginForm';
 import JoinForm from './pages/Member/JoinForm';
+import MyPage from './pages/Member/MyPage';
 
 const App=()=>{
 	return (
@@ -35,6 +36,7 @@ const App=()=>{
 				<Route path="/notice/update" element={<NoticeWrite type={"update"}/>}></Route>
 				<Route path="/login" element={<LoginForm />}></Route>
 				<Route path="/join" element={<JoinForm />}></Route>
+				<Route path="/mypage" element={<MyPage />}></Route>
 			</Routes>
 			<Footer />
 			<QuickMenu />
