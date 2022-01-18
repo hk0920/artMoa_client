@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
+import $ from "jquery";
 import * as CommonEvt from "../../CommonEvt";
 import FindForm from "./FindForm";
 import "./member.scss";
@@ -7,6 +8,7 @@ import "./member.scss";
 const LoginForm=()=>{
 	const [pop, setPop] = useState(false);
 	const [popType, setPopType] = useState();
+	const navigate = useNavigate();
 
 	useEffect(()=>{
 		CommonEvt.headerStyle();
@@ -20,15 +22,18 @@ const LoginForm=()=>{
 
 	const onSubmit=(e)=>{
 		e.preventDefault(); 
+		let form = new FormData();
+		form.append("username", e.target.username.value);
+		form.append("password", e.target.password.value);
 
-		const login = {
-			username:e.target.email.value,
-			password:e.target.pwd.value
-		}
-		console.log(login);
-
-		CommonEvt.api.post("/httpApi/member/login/action", login).then((res)=>{
+		CommonEvt.api.post("/httpApi/member/login/action", form).then((res)=>{
 			console.log(res);
+			if(res.data.code === "LGN"){
+				navigate("/");
+			}else{
+				alert("아이디/비밀번호가 일치하지 않습니다.");
+				$(e.target.username).focus();
+			}
 		}).catch((error)=>{
 			console.log(error);
 		})
@@ -43,8 +48,8 @@ const LoginForm=()=>{
 			<div className="login-div">
 				<form method="post" name="login" onSubmit={onSubmit}>
 					<div className="login-form">
-						<input type="text" name="email" placeholder="이메일"/>
-						<input type="password" name="pwd" placeholder="비밀번호"/>
+						<input type="text" name="username" placeholder="이메일"/>
+						<input type="password" name="password" placeholder="비밀번호"/>
 					</div>
 					<div className="login-util">
 						<div className="chk-txt">
