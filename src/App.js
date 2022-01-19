@@ -16,10 +16,11 @@ import NoticeDetail from './pages/Notice/Detail';
 import LoginForm from './pages/Member/LoginForm';
 import JoinForm from './pages/Member/JoinForm';
 import MyPage from './pages/Member/MyPage';
+import ScrollToTop from './ScrollToTop';
 
 const App=()=>{
 	return (
-		<BrowserRouter>
+		<>
 			<Header />
 			<Routes>
 				<Route index exact path="/" element={<Main />}></Route>
@@ -40,7 +41,7 @@ const App=()=>{
 			</Routes>
 			<Footer />
 			<QuickMenu />
-		</BrowserRouter>
+		</>
 	)
 }
 

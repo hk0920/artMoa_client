@@ -1,9 +1,9 @@
 
 import $ from 'jquery';
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 
 export const headerStyle=()=>{
-	$(window).scrollTop(0);
 	if(!$("#cBody").hasClass("main") && $(".detail-wrap").length === 0){
 		$("#header").addClass("white-type");
 	}else{
@@ -44,3 +44,37 @@ export const api = axios.create({
 		"X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA",
 	}
 })
+
+export const onLogin=(username, password)=>{
+	let form = new FormData();
+	form.append("username", username);
+	form.append("password", password);
+	console.log(username, password);
+	
+	api.post("/httpApi/member/login/action", form).then((res)=>{
+		console.log(res);
+		if(res.data.code === "LGN"){
+			onLoginSuccess();
+		}else{
+			alert("아이디, 비밀번호가 일치하지 않습니다.");
+		}
+	}).catch((error)=>{
+		console.log(error);
+	})
+}
+
+export const onLoginRefresh=()=>{
+	let form = new FormData();
+	form.append("accessToken", );
+	form.append("refreshToken", );
+	api.post("/httpApi/member/reissue", form).then((res)=>{
+		console.log(res);
+	}).catch((error)=>{
+		console.log(error);
+	})
+}
+
+export const onLoginSuccess=(res)=>{	
+	const {accessToken} = res.data.tokenInfo.accessToken;
+	api.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+}

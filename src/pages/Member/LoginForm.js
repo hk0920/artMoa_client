@@ -4,6 +4,7 @@ import $ from "jquery";
 import * as CommonEvt from "../../CommonEvt";
 import FindForm from "./FindForm";
 import "./member.scss";
+import axios from "axios";
 
 const LoginForm=()=>{
 	const [pop, setPop] = useState(false);
@@ -12,6 +13,7 @@ const LoginForm=()=>{
 
 	useEffect(()=>{
 		CommonEvt.headerStyle();
+		console.log(document.cookie)
 	})
 
 	const popEvt=(e)=>{
@@ -22,21 +24,9 @@ const LoginForm=()=>{
 
 	const onSubmit=(e)=>{
 		e.preventDefault(); 
-		let form = new FormData();
-		form.append("username", e.target.username.value);
-		form.append("password", e.target.password.value);
-
-		CommonEvt.api.post("/httpApi/member/login/action", form).then((res)=>{
-			console.log(res);
-			if(res.data.code === "LGN"){
-				navigate("/");
-			}else{
-				alert("아이디/비밀번호가 일치하지 않습니다.");
-				$(e.target.username).focus();
-			}
-		}).catch((error)=>{
-			console.log(error);
-		})
+		const username = e.target.username.value;
+		const password = e.target.password.value;
+		CommonEvt.onLogin(username, password);
 	}
 
   return(
