@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from "react";
-import {Link, useNavigate} from 'react-router-dom';
-import $ from "jquery";
 import * as CommonEvt from "../../CommonEvt";
 import FindForm from "./FindForm";
 import "./member.scss";
-import axios from "axios";
 
-const LoginForm=()=>{
+const LoginForm=(props)=>{
 	const [pop, setPop] = useState(false);
 	const [popType, setPopType] = useState();
-	const navigate = useNavigate();
-
 	useEffect(()=>{
 		CommonEvt.headerStyle();
-		console.log(document.cookie)
 	})
 
 	const popEvt=(e)=>{

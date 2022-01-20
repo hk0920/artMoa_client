@@ -1,5 +1,5 @@
-import React from 'react';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import React, { useState } from 'react';
+import {Routes, Route} from 'react-router-dom';
 import Header from './components/Header';
 import Intro from './pages/Intro';
 import Main from './pages/Main/Home';
@@ -16,14 +16,14 @@ import NoticeDetail from './pages/Notice/Detail';
 import LoginForm from './pages/Member/LoginForm';
 import JoinForm from './pages/Member/JoinForm';
 import MyPage from './pages/Member/MyPage';
-import ScrollToTop from './ScrollToTop';
+import * as CommonEvt from "./CommonEvt";
 
 const App=()=>{
 	return (
 		<>
 			<Header />
 			<Routes>
-				<Route index exact path="/" element={<Main />}></Route>
+				<Route index path="/" element={<Main />}></Route>
 				<Route path="/intro" element={<Intro />}></Route>
 				<Route path="/art" element={<ArtList />}></Route>
 				<Route path="/art/detail/:seq" element={<ArtDetail />}></Route>

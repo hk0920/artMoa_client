@@ -9,9 +9,11 @@ const MyPage=()=>{
 		birthday:"",
 		gender:""
 	});
+	
 	useEffect(()=>{
 		CommonEvt.headerStyle();
 		getData();
+		CommonEvt.onLoginRefresh();
 	},[])
 
 	const getData=()=>{
@@ -36,7 +38,7 @@ const MyPage=()=>{
 			</div>
 			<div className="inner mypage-div">
 				<div className="info-div">
-					<p class="tit">artMoa를 이용해주셔서 감사합니다.</p>
+					<p className="tit">artMoa를 이용해주셔서 감사합니다.</p>
 					<span className="name">{user.email.split("@")[0]}</span> 님의 회원정보입니다.<br/>
 					회원정보는 개인정보처리방침에 따라 안전하게 보호되며, 회원님의 명백한 동의 없이 공개 또는 제 3자에서 공개되지 않습니다.<br/>
 				</div>
@@ -58,14 +60,14 @@ const MyPage=()=>{
 					<dl className="form-dl">
 						<dt>생년월일</dt>
 						<dd>
-							<span class="txt">{moment(user.birthday.toString()).format("YYYY-MM-DD")}</span>
+							<span className="txt">{moment(user.birthday.toString()).format("YYYY-MM-DD")}</span>
 							<button type="button" className="white-btn sm">생년월일 변경</button>
 						</dd>
 					</dl>
 					<dl className="form-dl">
 						<dt>성별</dt>
 						<dd>
-							<span class="txt">{user.gender==="W"?"여성":"남성"}</span>
+							<span className="txt">{user.gender==="W"?"여성":"남성"}</span>
 							<button type="button" className="white-btn sm">성별 변경</button>
 						</dd>
 					</dl>

@@ -1,7 +1,6 @@
 
 import $ from 'jquery';
 import axios from 'axios';
-import {useNavigate} from 'react-router-dom';
 
 export const headerStyle=()=>{
 	if(!$("#cBody").hasClass("main") && $(".detail-wrap").length === 0){
@@ -42,19 +41,19 @@ export const changeListTypeEvt=(target)=>{
 export const api = axios.create({
 	headers:{
 		"X-CLIENT-KEY":"YSFyQHQjbSRvJWElcHJvamVjdCFA",
-	}
+	},
+	withCredentials:true
 })
 
-export const onLogin=(username, password)=>{
+export const onLogin = (username, password)=>{
 	let form = new FormData();
 	form.append("username", username);
 	form.append("password", password);
-	console.log(username, password);
 	
 	api.post("/httpApi/member/login/action", form).then((res)=>{
-		console.log(res);
 		if(res.data.code === "LGN"){
-			onLoginSuccess();
+			console.log("성공");
+			onLoginSuccess(res);
 		}else{
 			alert("아이디, 비밀번호가 일치하지 않습니다.");
 		}
@@ -65,16 +64,18 @@ export const onLogin=(username, password)=>{
 
 export const onLoginRefresh=()=>{
 	let form = new FormData();
-	form.append("accessToken", );
-	form.append("refreshToken", );
+	form.append("accessToken", document.cookie);
+
 	api.post("/httpApi/member/reissue", form).then((res)=>{
+		console.log("갱신");
 		console.log(res);
 	}).catch((error)=>{
 		console.log(error);
 	})
 }
 
-export const onLoginSuccess=(res)=>{	
+export const onLoginSuccess=(res)=>{
 	const {accessToken} = res.data.tokenInfo.accessToken;
 	api.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+	document.cookie = "accessToken=" + res.data.tokenInfo.accessToken;
 }

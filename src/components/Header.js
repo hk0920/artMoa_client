@@ -58,6 +58,7 @@ const Header=()=>{
       
       <div className="left-util">
         <Link to="/login">로그인</Link>
+        <Link to="/mypage">마이페이지</Link>
         <Link to="/join">회원가입</Link>
       </div>
 
