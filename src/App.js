@@ -32,7 +32,7 @@ const App=()=>{
 				<Route path="/faq/update" element={<FaqWrite type={"update"} />}></Route>
 				<Route path="/notice" element={<NoticeList />}></Route>
 				<Route path="/notice/admin" element={<NoticeAdmin />}></Route>
-				<Route path="/notice/detail" element={<NoticeDetail />}></Route>
+				<Route path="/notice/detail/:id" element={<NoticeDetail />}></Route>
 				<Route path="/notice/save" element={<NoticeWrite type={"save"} />}></Route>
 				<Route path="/notice/update" element={<NoticeWrite type={"update"}/>}></Route>
 				<Route path="/login" element={<LoginForm />}></Route>

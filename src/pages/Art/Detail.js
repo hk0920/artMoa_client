@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import XMLparser from "react-xml-parser";
-import {useLocation, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import DetailInfo from "./DetailInfo";
 import DetailLocal from "./DetailLocal";
 import DetailVis from "./DetailVis";

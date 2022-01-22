@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import * as CommonEvt from "../../CommonEvt";
+import MemberPop from "./MemberPop";
 
 const MyPage=()=>{
 	const [user, setUser] = useState({
@@ -9,6 +11,9 @@ const MyPage=()=>{
 		birthday:"",
 		gender:""
 	});
+	const [pop, setPop] = useState(false);
+	const [popType, setPopType] = useState();
+	const navigate = useNavigate();
 	
 	useEffect(()=>{
 		CommonEvt.headerStyle();
@@ -16,18 +21,30 @@ const MyPage=()=>{
 		CommonEvt.onLoginRefresh();
 	},[])
 
+	const popEvt=(e)=>{
+		const type = e.target.value;
+		setPopType(type);
+		setPop(!pop?true:false);
+	}
+
+	const username = CommonEvt.getCookie("id");
 	const getData=()=>{
-		CommonEvt.api.post("/httpApi/member/find-by/email", {email:"gmlrb920@naver.com"}).then((res)=>{
-			const userInfo = res.data.data.info;
-			setUser({
-				id:userInfo.id,
-				email:userInfo.email,
-				birthday:userInfo.birthday,
-				gender:userInfo.gender
+		if(username === null){
+			navigate("/login");
+			return;
+		}else{
+			CommonEvt.api.post("/httpApi/member/find-by/email", {email:username}).then((res)=>{
+				const userInfo = res.data.data.info;
+				setUser({
+					id:userInfo.id,
+					email:userInfo.email,
+					birthday:userInfo.birthday,
+					gender:userInfo.gender
+				})
+			}).catch((error)=>{
+				console.log(error);
 			})
-		}).catch((error)=>{
-			console.log(error);
-		})
+		}
 	}
 	
 	return(
@@ -54,25 +71,30 @@ const MyPage=()=>{
 					<dl className="form-dl">
 						<dt>비밀번호</dt>
 						<dd>
-							<button type="button" className="white-btn sm">비밀번호 변경</button>
+							<button type="button" className="white-btn sm" value="change-pwd" onClick={popEvt}>비밀번호 변경</button>
 						</dd>
 					</dl>
 					<dl className="form-dl">
 						<dt>생년월일</dt>
 						<dd>
 							<span className="txt">{moment(user.birthday.toString()).format("YYYY-MM-DD")}</span>
-							<button type="button" className="white-btn sm">생년월일 변경</button>
+							<button type="button" className="white-btn sm" value="change-birth" onClick={popEvt}>생년월일 변경</button>
 						</dd>
 					</dl>
 					<dl className="form-dl">
 						<dt>성별</dt>
 						<dd>
 							<span className="txt">{user.gender==="W"?"여성":"남성"}</span>
-							<button type="button" className="white-btn sm">성별 변경</button>
+							<button type="button" className="white-btn sm" value="change-gender" onClick={popEvt}>성별 변경</button>
 						</dd>
 					</dl>
 				</div>
 			</div>
+			{
+				pop?
+					<MemberPop type={popType} user={user} popEvt={popEvt} getData={getData}  />
+				:""
+			}
 		</div>
 	)
 }

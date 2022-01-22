@@ -1408,6 +1408,16 @@
   background:rgba(0,0,0,0.6);
   z-index:12;
 
+  &.change-pop {
+    .modal-inner{
+      width:650px;
+
+      .form-div .form-dl dt {
+        width:170px;
+      }
+    }
+  }
+
   .modal-inner{
     position:fixed;
     top:50%;

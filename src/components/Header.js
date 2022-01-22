@@ -3,9 +3,11 @@ import {NavLink, Link, Outlet} from 'react-router-dom';
 import $ from 'jquery';
 import GnbNav from './GnbNav';
 import TotalSearch from './TotalSearch';
+import * as CommonEvt from "../CommonEvt";
 
 const Header=()=>{
   const [scrollPosition, setScrollPosition] = useState(0);
+  let isLogin = false;
 
   const updateScroll=()=>{
     setScrollPosition(window.scrollY);
@@ -40,6 +42,13 @@ const Header=()=>{
     }
   }
 
+  const cookie = CommonEvt.getCookie("accessToken");
+  if(cookie === null){
+    isLogin = false;
+  }else{
+    isLogin = true;
+  }
+  
   useEffect(()=>{
     window.addEventListener("scroll", updateScroll);
 
@@ -47,6 +56,7 @@ const Header=()=>{
       window.removeEventListener("scroll", updateScroll);
     }
   });
+  
 
   return (
     <header id="header">
@@ -57,9 +67,18 @@ const Header=()=>{
       <GnbNav />
       
       <div className="left-util">
-        <Link to="/login">로그인</Link>
-        <Link to="/mypage">마이페이지</Link>
-        <Link to="/join">회원가입</Link>
+        {
+          !isLogin?
+            <>
+              <Link to="/login">로그인</Link>
+              <Link to="/join">회원가입</Link>
+            </>
+          :
+            <>
+              <Link to="/mypage">마이페이지</Link>
+              <Link to="/mypage">로그아웃</Link>
+            </>
+        }
       </div>
 
       <TotalSearch />

@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import * as CommonEvt from "../../CommonEvt";
-import FindForm from "./FindForm";
 import "./member.scss";
+import MemberPop from "./MemberPop";
 
 const LoginForm=(props)=>{
 	const [pop, setPop] = useState(false);
 	const [popType, setPopType] = useState();
+	const navigate = useNavigate();
 	useEffect(()=>{
 		CommonEvt.headerStyle();
-	})
+		
+		const user = CommonEvt.getCookie("id");
+		if(user !== null){
+			navigate(-1);
+		}
+	},[])
 
 	const popEvt=(e)=>{
-		const type = e.target.value.split("-")[1];
+		const type = e.target.value;
 		setPopType(type);
 		setPop(!pop?true:false);
 	}
@@ -52,7 +59,7 @@ const LoginForm=(props)=>{
 			</div>
 			{
 				pop?
-					<FindForm type={popType} popEvt={popEvt} />
+					<MemberPop type={popType} popEvt={popEvt} />
 				:""
 			}
     </div>

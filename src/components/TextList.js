@@ -10,7 +10,9 @@ const TextList=(data)=>{
 				dataArr !== null?
 					dataArr.map((item, idx)=>(
 						<li key={idx}>
-							<Link to={"/notice/detail"} state={{info:item}}>
+							<Link to={{
+								pathname: "/notice/detail/" + item.id
+							}}>
 								<div className="txt-div">
 									<p className="tit">{item.title}</p>
 									<div className="txt">

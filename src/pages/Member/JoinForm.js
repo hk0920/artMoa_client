@@ -57,48 +57,21 @@ const JoinForm=()=>{
 	});
 
 	const emailValidation=(e)=>{
-		var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-		const email = e.target.value;
-
-		if(!regExp.test(email)){
-			setIdMsg({
-				type:"error",
-				msg:"이메일 형식이 올바르지 않습니다."
-			});
-			setEmailChk(false);
-		}else{
-			setIdMsg({
-				type:"error",
-				msg:""
-			});
-			setEmailChk(true);
-		}
+		let result = CommonEvt.emailValidation(e.target.value);
+		setIdMsg({
+			type:result.type,
+			msg:result.msg
+		});
+		setEmailChk(result.boolean);
 	}
 
 	const pwdValidation=(e)=>{
-		var regExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,24}$/;
-		const pwd = e.target.value;
-		member.pwd = pwd;
-
-		if(pwd === "") {
-			setPwdMsg({
-				type:"error",
-				msg:"비밀번호를 입력해주세요."
-			})
-			return;
-		}
-
-		if(!regExp.test(pwd)) {
-			setPwdMsg({
-				type:"error",
-				msg:"비밀번호 형식이 일치하지 않습니다."
-			})
-		}else{
-			setPwdMsg({
-				type:"success",
-				msg:""
-			})
-		}
+		let result = CommonEvt.pwdValidation(e.target.value);
+		member.pwd = e.target.value;
+		setPwdMsg({
+			type:result.type,
+			msg:result.msg
+		})
 
 		const pwd2 = $(e.target).parents("form[name=join]").find("input[name=pwd2]").val();
 		if(pwd2.length > 0) {
@@ -132,27 +105,18 @@ const JoinForm=()=>{
 	}
 
 	const birthValidation=(e)=>{
-		var regExp = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
-		var numRegExp = /[^0-9]/;
-		const birth = e.target.value;
+		let result = CommonEvt.birthValidation(e.target.value);
 
 		if($(e.target).val().length > 8) {
-			$(e.target).val(birth.substring(0,8));
+			$(e.target).val(e.target.value.substring(0,8));
 		}
-		if(!regExp.test(birth)){
-			if(numRegExp.test(birth)){
-				$(e.target).val("").focus();
-				setBirthMsg({
-					type:"error",
-					msg:"문자열이 포함되어있습니다.숫자만 입력해주세요."
-				})
-			}
-		}else{
-			setBirthMsg({
-				type:"success",
-				msg:""
-			})
+		if(result.type === "error"){
+			$(e.target).val("").focus();
 		}
+		setBirthMsg({
+			type:result.type,
+			msg:result.msg
+		})
 	}
 
 	const overLapEvt=(e)=>{
