@@ -47,7 +47,6 @@ const MemberPop=(props)=>{
 
 	const pwdChk=(e)=>{
 		let result = CommonEvt.pwdValidation(e.target.value);
-		console.log(result);
 		setUser({
 			id:user.id,
 			pwd:e.target.value
@@ -82,7 +81,6 @@ const MemberPop=(props)=>{
 	const onSubmit=(e)=>{
 		e.preventDefault();
 
-		console.log(e.target.name)
 		let url;
 		if(e.target.name === "change-birth"){
 			url = "/httpApi/member/modify/birthday";
@@ -91,8 +89,6 @@ const MemberPop=(props)=>{
 		}else if(e.target.name === "change-pwd"){
 			url = "/httpApi/member/password";
 		}
-
-		console.log(user);
 
 		CommonEvt.api.put(url, user).then((res)=>{
 			props.getData();
