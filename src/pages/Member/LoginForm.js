@@ -8,6 +8,7 @@ const LoginForm=(props)=>{
 	const [pop, setPop] = useState(false);
 	const [popType, setPopType] = useState();
 	const navigate = useNavigate();
+	
 	useEffect(()=>{
 		CommonEvt.headerStyle();
 		

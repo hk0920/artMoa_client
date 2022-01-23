@@ -43,7 +43,7 @@
       background:#fff;
     }
 
-    .left-util a {
+    .left-util a, .left-util button {
       color:#fff;
     }
 
@@ -65,7 +65,7 @@
 
   &.gnb-on {
     .left-util {
-      a {
+      a, button {
         color:#fff;
       }
     }
@@ -171,7 +171,7 @@
   .left-util {
     float:left;
   
-    a {
+    a , button {
       display:inline-block;
       margin-left:55px;
       padding:8px 0 7px;
@@ -239,7 +239,7 @@
     }
 
     .left-util {
-      a {
+      a, button {
         margin-left:35px;
     
         &:first-child {

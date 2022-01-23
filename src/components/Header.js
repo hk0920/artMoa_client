@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {NavLink, Link, Outlet} from 'react-router-dom';
+import {NavLink, Link, Outlet, useNavigate} from 'react-router-dom';
 import $ from 'jquery';
 import GnbNav from './GnbNav';
 import TotalSearch from './TotalSearch';
@@ -8,6 +8,7 @@ import * as CommonEvt from "../CommonEvt";
 const Header=()=>{
   const [scrollPosition, setScrollPosition] = useState(0);
   let isLogin = false;
+  const navigate = useNavigate();
 
   const updateScroll=()=>{
     setScrollPosition(window.scrollY);
@@ -48,6 +49,16 @@ const Header=()=>{
   }else{
     isLogin = true;
   }
+
+  const logoutEvt=()=>{
+    CommonEvt.api.get("/httpApi/member/logout").then((res)=>{
+      CommonEvt.deleteCookie("id");
+      CommonEvt.deleteCookie("accessToken");
+      navigate("/");
+    }).catch((error)=>{
+      console.log(error)
+    })
+  }
   
   useEffect(()=>{
     window.addEventListener("scroll", updateScroll);
@@ -76,7 +87,7 @@ const Header=()=>{
           :
             <>
               <Link to="/mypage">마이페이지</Link>
-              <Link to="/mypage">로그아웃</Link>
+              <button type="button" onClick={logoutEvt}>로그아웃</button>
             </>
         }
       </div>

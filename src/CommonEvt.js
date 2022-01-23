@@ -47,7 +47,9 @@ export const api = axios.create({
 
 api.interceptors.request.use(
 	config=>{
-		config.headers.Authorization = `Bearer ${getCookie("accessToken")}`;
+		if(getCookie("accessToken") !== null){
+			config.headers.Authorization = `Bearer ${getCookie("accessToken")}`;
+		}
 		return config;
 	},
 	error=>{
@@ -116,6 +118,10 @@ export const getCookie=(name)=>{
 	}
 
 	return cookieVal;
+}
+
+export const deleteCookie=(name)=>{
+	document.cookie = name + "=; expires=Thu, 01 Jan 1999 00:00:10 GMT;";
 }
 
 export const emailValidation=(email)=>{

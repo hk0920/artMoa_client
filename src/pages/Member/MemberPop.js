@@ -5,10 +5,10 @@ import * as CommonEvt from "../../CommonEvt";
 const MemberPop=(props)=>{
 	const [title, setTitle] = useState("");
 	const [user, setUser] = useState({
-		id:props.user.id,
-		email:props.user.email,
-		birthday:props.user.birthday,
-		gender:props.user.gender
+		id:"",
+		email:"",
+		birthday:"",
+		gender:""
 	});
 	const [pwdMsg, setPwdMsg] = useState({
 		type:"",
@@ -35,12 +35,23 @@ const MemberPop=(props)=>{
 		}else if(props.type==="change-gender"){
 			setTitle("성별 변경");
 		}
+
+		if(props.type.split("-")[0] === "change"){
+			setUser({
+				id:props.user.id,
+				email:props.user.email,
+				birthday:props.user.birthday,
+				gender:props.user.gender
+			})
+		}
 	},[]);
 
 	const genderChk=(e)=>{
     const target = e.target;
 		setUser({
 			id:user.id,
+			email:user.email,
+			birthday:user.birthday,
 			gender:target.id
 		})
   }
@@ -70,7 +81,9 @@ const MemberPop=(props)=>{
 		}
 		setUser({
 			id:user.id,
-			birthday:targetVal
+			email:user.email,
+			birthday:targetVal,
+			gender:user.gender
 		});
 		setBirthMsg({
 			type:result.type,
@@ -82,7 +95,11 @@ const MemberPop=(props)=>{
 		e.preventDefault();
 
 		let url;
-		if(e.target.name === "change-birth"){
+		if(e.target.name === "find-id"){
+			url = "/httpApi/member/search/email";
+		}else if(e.target.name === "find-pwd"){
+			url = "/httpApi/member/search/password";
+		}else if(e.target.name === "change-birth"){
 			url = "/httpApi/member/modify/birthday";
 		}else if(e.target.name === "change-gender"){
 			url = "/httpApi/member/modify/gender";
@@ -90,13 +107,30 @@ const MemberPop=(props)=>{
 			url = "/httpApi/member/password";
 		}
 
-		CommonEvt.api.put(url, user).then((res)=>{
-			props.getData();
-			alert("회원 정보 변경 완료되었습니다.");
-			$(e.target).parents(".modal-pop").find(".close-btn").click();
-		}).catch((error)=>{
-			console.log(error);
-		})
+		if(e.target.name.split("-")[0] === "find"){
+			if(e.target.name.split("-")[1] === "pwd"){
+				user.email = e.target.email.value;
+			}
+
+			CommonEvt.api.post(url, user).then((res)=>{
+				if(e.target.name.split("-")[1] === "id"){
+					alert("가입된 이메일은 " + res.data.data.email + " 입니다");
+				}else{
+					alert("비밀번호 초기화되었습니다.\n 이메일 확인해주세요");
+				}
+				$(e.target).parents(".modal-pop").find(".close-btn").click();
+			}).catch((error)=>{
+				console.log(error);
+			});
+		}else if(e.target.name.split("-")[0] === "change"){
+			CommonEvt.api.put(url, user).then((res)=>{
+				props.getData();
+				alert("회원 정보 변경 완료되었습니다.");
+				$(e.target).parents(".modal-pop").find(".close-btn").click();
+			}).catch((error)=>{
+				console.log(error);
+			});
+		}
 	}
 
 	return(
