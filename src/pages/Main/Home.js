@@ -23,7 +23,7 @@ const Main=()=>{
     CommonEvt.api.get("/httpApi/support/exhibition/list",{
       params:{
         page:0,
-        size:1
+        size:3
       }
     }).then((res)=>{
       const dataSet = res.data.data.list;
