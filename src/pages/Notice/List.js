@@ -22,7 +22,6 @@ const NoticeList=()=>{
       }
     }).then((res)=>{ 
       const dataSet = res.data.data.list;
-      console.log(dataSet);
       setTotal(res.data.data.total);
       setData(data.concat(dataSet));
       setMoreDataCnt(moreDataCnt + 1);
@@ -37,7 +36,7 @@ const NoticeList=()=>{
       params:{
         page:moreDataCnt,
         size:dataSize,
-        title:srchTxt
+        content:srchTxt
       }
     }).then((res)=>{ 
       const dataSet = res.data.data.list;

@@ -8,14 +8,31 @@ import "./main.scss";
 import { Link } from "react-router-dom";
 
 const Main=()=>{
+  const [visData, setVisData] = useState([]);
   const [artData, setArtData] = useState([]);
   const [noticeData, setNoticeData] = useState([]);
 
   useEffect(()=>{
     CommonEvt.headerStyle();
+    getData();
     getArtList();
     getNoticeList();
   },[]);
+  
+  const getData=()=>{
+    CommonEvt.api.get("/httpApi/support/exhibition/list",{
+      params:{
+        page:0,
+        size:1
+      }
+    }).then((res)=>{
+      const dataSet = res.data.data.list;
+      console.log(dataSet)
+      setVisData(dataSet);
+    }).catch((err)=>{
+      console.log(err);
+    })
+  }
 
   const getArtList=()=>{
     CommonEvt.api.get("/httpApi/support/exhibition/list", {
@@ -47,7 +64,7 @@ const Main=()=>{
 
   return(
     <div id="cBody" className="main">
-      <MainVis />
+      <MainVis data={visData}/>
       <section className="main-sec list-sec">
         <div className="inner">
           <div className="list-div">

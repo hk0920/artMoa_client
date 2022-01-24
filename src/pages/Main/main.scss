@@ -24,6 +24,10 @@
       font-weight:bold;
       @include ellipsis(1);
     }
+
+    .txt2 {
+      font-size:25px;
+    }
   }
 
   .left-util {
@@ -75,17 +79,21 @@
     
     .next-info {
       left:calc(84% / 1.44);;
-      width:250px;
-      padding:20px 20px 20px 60px;
+      width:calc(40% - 70px);
+      padding:20px 20px 20px 40px;
       font-size:16px;
 
       &:before {
         top:32px;
-        width:40px;
+        width:30px;
       }
 
       .tit {
         font-size:20px;
+      }
+
+      .txt2 {
+        font-size:18px;
       }
     }
 
@@ -366,10 +374,14 @@
         height:100%;
         padding:0;
         transform:translateY(0);
+      }
 
-        &:before {
-          @include virtualAB(0, 0, 100%, 470px);
-          box-shadow:5px 5px 10px rgba(0, 0, 0, 0.2);
+      &-active {
+        .swiper-content {
+          &:before {
+            @include virtualAB(0, 0, 100%, 470px);
+            box-shadow:5px 5px 10px rgba(0, 0, 0, 0.2);
+          }
         }
       }
 
