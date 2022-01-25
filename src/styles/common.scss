@@ -376,6 +376,10 @@
   position:relative;
   padding-bottom:80px;
 
+  &.pb0 {
+    padding-bottom:0;
+  }
+
   .sub-vis {
     position:relative;
     padding:280px 0 185px;
@@ -1496,8 +1500,11 @@
 }
 
 #footer {
+  position:relative;
   padding:40px 60px;
   border-top:1px solid #e3eeee;
+  background:#fff;
+  z-index:12;
 
   .logo {
     width:100px;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {Routes, Route} from 'react-router-dom';
 import Header from './components/Header';
-import Intro from './pages/Intro';
+import Intro from './pages/Intro/Intro';
 import Main from './pages/Main/Home';
 import Footer from './components/Footer';
 import QuickMenu from './components/QuickMenu';
@@ -16,7 +16,6 @@ import NoticeDetail from './pages/Notice/Detail';
 import LoginForm from './pages/Member/LoginForm';
 import JoinForm from './pages/Member/JoinForm';
 import MyPage from './pages/Member/MyPage';
-import * as CommonEvt from "./CommonEvt";
 
 const App=()=>{
 	return (
