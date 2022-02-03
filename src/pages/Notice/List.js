@@ -23,8 +23,10 @@ const NoticeList=()=>{
     }).then((res)=>{ 
       const dataSet = res.data.data.list;
       setTotal(res.data.data.total);
-      setData(data.concat(dataSet));
-      setMoreDataCnt(moreDataCnt + 1);
+      if(dataSet !== null){
+        setData(data.concat(dataSet));
+        setMoreDataCnt(moreDataCnt + dataSize);
+      }
     }).catch((err) => {
       console.log(err)
     })
@@ -34,9 +36,9 @@ const NoticeList=()=>{
     console.log(srchTxt);
     CommonEvt.api.get("/httpApi/support/notice/list", {
       params:{
-        page:moreDataCnt,
+        page:0,
         size:dataSize,
-        content:srchTxt
+        title:srchTxt
       }
     }).then((res)=>{ 
       const dataSet = res.data.data.list;

@@ -25,34 +25,64 @@
 	.sec-div {
 		position:relative;
 		min-height:100vh;
+		padding-bottom:250px;
+		font-size:22px;
+		overflow:hidden;
 
 		.bg {
-			position:fixed;
-			top:0;
-			left:0;
-			width:100%;
+			@include positionAb(100%, 0, 0);
 			height:100%;
-			background:url("../../assets/images/Vangogh-StarryNight.jpg") no-repeat center / cover;
+			background-repeat:no-repeat;
+			background-position:center;
+			background-size:cover;
+			background-attachment:fixed;
 
 			&::before {
 				@include virtualAB(0, 0, 100%, 100%);
 				background:rgba(0,0,0,0.5);
 			}
 		}
+		
+		@for $i from 2 to 5 {
+			&.type#{$i} .bg {
+				background-image:url("../../assets/images/vangogh-bg#{$i}.jpg");
+			}
+		}
 
 		.txt-area {
-			@include positionAb(calc(50% - 350px), 50%, 50%);
-			transform:translateY(-50%);
+			position:relative;
+			left:50%;
+			padding-top:40vh;
+			width:calc(50% - 350px);
 		}
 
 		.title-div {
-			margin-bottom:25px;
+			margin:150px 0 25px;
 			color:#fff;
+
+			&:first-child {
+				margin-top:0;
+			}
+
+			p {
+				position:relative;
+				top:50px;
+				opacity:0;
+				color:rgba(255,255,255,0.8);
+				transition:all 0.6s ease;
+				transition-delay:0.3s;
+				
+				&.active {
+					top:0;
+					opacity:1;
+				}
+			}
 
 			.tit {
 				margin-bottom:10px;
-				font-size:35px;
+				font-size:45px;
 				font-weight:bold;
+				color:rgba(255,255,255,1);
 			}
 		}
 
@@ -61,12 +91,79 @@
 			word-break:keep-all;
 
 			& > p {
+				position:relative;
+				top:50px;
 				margin-bottom:20px;
+				opacity:0;
+				transition:all 0.6s ease;
+				transition-delay:0.3s;
 
 				&:last-child {
 					margin-bottom:0;
 				}
+
+				&.active {
+					top:0;
+					opacity:1;
+				}
 			}
+		}
+
+		&.type1 {
+			.bg {
+				#canvasBg {
+					@include positionAb(100%, 50%, 50%);
+					height:100%;
+					transform:translate(-50%, -50%);
+					background:#014035 url("../../assets/images/vangogh-bg1-1.png") repeat center / 900px auto;
+				}
+
+				&::before {
+					background:#014035;
+					z-index:1;
+					transition:all 1.2s ease; 
+				}
+
+				&::after {
+					@include virtualAB(0, 0 , 100%, 100%);
+					background:url("../../assets/images/vangogh-bg1.png") no-repeat 15% bottom / 600px auto;
+					opacity:0;
+					transition:all 0.6s ease;
+					transition-delay:1.3s;
+				}
+			}
+
+			.txt-area p {
+				top:50px;
+				opacity:0;
+				transition:all 0.6s ease;
+				transition-delay:1.6s;
+			}
+
+			&.active {
+				.bg {
+					&::before {
+						width:0;
+					}
+					&::after {
+						opacity:1;
+					}
+				}
+
+				.txt-area p {
+					top:0;
+					opacity:1;
+				}
+			}
+		}
+
+		&.type2 .txt-area {
+			left:55%;
+		}
+
+		&.type3 .txt-area {
+			left:10%;
+			text-align:right;
 		}
 	}
 }
@@ -76,6 +173,54 @@
 		.sec-div {
 			.txt-area {
 				width:calc(50% - 200px);
+			}
+
+			&.type1 {
+				.bg {
+					&::after {
+						background-position:8% bottom;
+					}
+				}
+			}
+		}
+	}
+}
+
+@include desktop-small(){
+	.intro-div {
+		.sec-div {
+			padding-bottom:120px;
+			font-size:20px;
+
+			.txt-area {
+				left:8%;
+				padding-top:25vh;
+				width:84%;
+			}
+
+			&.type1 {
+				.bg {
+					#canvasBg {
+						background-size: 100% auto;
+					}
+	
+					&::after {
+						background-position:8% center;
+						background-size:400px auto;
+					}
+				}
+
+				.txt-area {
+					left:50%;
+					width:46%;
+				}
+			}
+
+			&.type2 {
+				.txt-area {
+					left:8%;
+					width:84%;
+				}
 			}
 		}
 	}
@@ -106,6 +251,43 @@
 	.intro-div {
 		.audio-div {
 			top:65px;
+		}
+
+		.sec-div {
+			font-size:15px;
+
+			.bg {
+				background-attachment: initial;
+			}
+
+			.title-div {
+				.tit {
+					font-size:25px;
+				}
+			}
+			
+			&.type1 {
+				.bg {
+					#canvasBg {
+						background-size: 100% auto;
+					}
+	
+					&::after {
+						left:50%;
+						width:100%;
+						max-width:350px;
+						background-position:center 60px;
+						background-size:100% auto;
+						transform:translateX(-50%);
+					}
+				}
+
+				.txt-area {
+					left:8%;
+					width:84%;
+					padding-top:520px;
+				}
+			}
 		}
 	}
 }
