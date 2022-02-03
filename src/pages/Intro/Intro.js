@@ -6,9 +6,9 @@ import audio from "../../assets/video/vangogh_audio.mp3";
 import Canvas from "./Canvas";
 
 const Intro = () => {
-  const [scrollPosition, setScrollPosition] = useState(0);
   const [isAudio, setIsAudio] = useState(false);
   const audioPlayer = useRef();
+  const [isLoad, setIsLoad] = useState(false);
 
   const audioPlay=(e)=>{
     setIsAudio(!isAudio?true:false);
@@ -22,7 +22,16 @@ const Intro = () => {
   }
 
   const loadEvt=()=>{
-    $(".intro-div .sec-div.type1").addClass("active");
+    console.log(isLoad);
+    if(isLoad === false){
+      $(".intro-div .sec-div.type1").removeClass("active");
+      $(".intro-div .sec-div.type1").find(".txt-area p").removeClass("active");
+      setTimeout(() => {
+        setIsLoad(true);  
+      }, 10);
+    }else{
+      $(".intro-div .sec-div.type1").addClass("active");
+    }
   }
 
   const scrollEvt=()=>{
