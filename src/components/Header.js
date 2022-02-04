@@ -23,10 +23,12 @@ const Header=()=>{
     }
     
     if($("#cBody").hasClass("main")){
-      if(window.scrollY < $(".main-vis-wrap").height()){
-        $("#header").removeClass("bg-type");
-      }else{
-        $("#header").addClass("bg-type");
+      if(!$("#cBody").hasClass("t2")){
+        if(window.scrollY < $(".main-vis-wrap").height()){
+          $("#header").removeClass("bg-type");
+        }else{
+          $("#header").addClass("bg-type");
+        }
       }
     }else{
       if(window.scrollY < 100){

@@ -3,7 +3,7 @@ import $ from 'jquery';
 import axios from 'axios';
 
 export const headerStyle=()=>{
-	if(!$("#cBody").hasClass("main") && $(".detail-wrap").length === 0){
+	if(!$("#cBody").hasClass("main") && $(".detail-wrap").length === 0 || $("#cBody").hasClass("t2")){
 		$("#header").addClass("white-type");
 	}else{
 		$("#header").removeClass("white-type");
