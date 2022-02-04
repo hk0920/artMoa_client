@@ -67,7 +67,7 @@ const Canvas=()=>{
 
 	drawCircle=(x, y, size, r)=>{
 		if(ctx!==undefined){
-			ctx.fillStyle = "rgba(" +  r + "," + 0 + "," +  0 + "," + 0.8 +")";
+			ctx.fillStyle = "rgba(" +  r + ", 0, 0, 0.8)";
 			ctx.beginPath();
 			ctx.ellipse(x , y, size , 7, Math.PI / 4, 0, 2 * Math.PI);
 			ctx.fill();
