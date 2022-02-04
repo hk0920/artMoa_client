@@ -22,7 +22,6 @@ const Intro = () => {
   }
 
   const loadEvt=()=>{
-    console.log(isLoad);
     if(isLoad === false){
       $(".intro-div .sec-div.type1").removeClass("active");
       $(".intro-div .sec-div.type1").find(".txt-area p").removeClass("active");

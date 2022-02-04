@@ -5,10 +5,14 @@ class particle {
 	constructor(){
 		this.x = Math.random() * window.innerWidth;
 		this.y = Math.random() * window.innerHeight;
-		this.size = Math.random() * 15 + 1;
 		this.speedX = Math.random() * 2 - 1.2;
 		this.speedY = Math.random() * 2 - 1.2;
 		this.colorR = Math.floor(Math.random() * 256);
+		if(window.innerWidth < 767){
+			this.size = Math.random() * 5 + 1;
+		}else{
+			this.size = Math.random() * 15 + 1;
+		}
 	}
 	update(){
 		this.x -= this.speedX;

@@ -161,9 +161,11 @@
 			left:55%;
 		}
 
-		&.type3 .txt-area {
-			left:10%;
-			text-align:right;
+		&.type3 {
+			.txt-area {
+				left:10%;
+				text-align:right;
+			}
 		}
 	}
 }
@@ -242,6 +244,12 @@
 			.txt-area {
 				left:8%;
 				width:84%;
+			}
+
+			&.type2 {
+				.bg {
+					background-image:url("../../assets/images/vangogh-bg2.png");
+				}
 			}
 		}
 	}
