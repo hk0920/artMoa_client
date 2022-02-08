@@ -384,11 +384,14 @@
     position:relative;
     padding:280px 0 185px;
     margin-bottom:120px;
+    overflow:hidden;
 
     .bg {
       @include positionAb(100%, 0, 0);
       height:100%;
       z-index:-1;
+      transform:scale(1.2);
+      transition:all 1.2s ease; 
 
       @for $i from 1 to 6 {
         &.bg#{$i} {
@@ -401,6 +404,12 @@
       font-size:50px;
       color:#fff;
       @include widthGuide();
+    }
+    
+    &.active {
+      .bg {
+        transform:scale(1);
+      }
     }
   }  
 
