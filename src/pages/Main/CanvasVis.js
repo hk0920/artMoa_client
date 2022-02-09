@@ -180,7 +180,7 @@ class TextStyle {
 	update(){
 		for(let i=0; i<this.texts.length; i++){
 			this.opacity -= 0.002;
-			if(i%2 === 0){ // 홀수 
+			if(i%2 === 0){
 				this.texts[i].x -= 5;
 				
 				if(this.texts[i].x < -100){
@@ -198,7 +198,6 @@ class TextStyle {
 	draw(ctx){
 		ctx.font = "normal bold 120px sans-serif";
 		ctx.fillStyle = "rgba(255,255,255," + this.opacity + ")";
-		// ctx.textAlign = "center";
 		for(let i=0; i<this.texts.length; i++){
 			ctx.beginPath();
 			ctx.fillText(this.texts[i].text, this.texts[i].x, this.y + this.texts[i].y);

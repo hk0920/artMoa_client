@@ -7,6 +7,7 @@ import CanvasVis from "./CanvasVis";
 import CardList from "../../components/CardList";
 import TextList from "../../components/TextList";
 import * as CommonEvt from "../../CommonEvt";
+import artMoaVideo from "../../assets/video/main-artmoa-video.mp4";
 import "swiper/css/bundle";
 import "./main.scss";
 
@@ -126,6 +127,28 @@ const Main=({type})=>{
                     <Link to="/art" className="blue-btn">More</Link>
                   </div>
                 </div>	
+              </div>
+            </section>
+            <section className="main-sec company-sec">
+              <div className="inner">
+                <div className="info-div">
+                  <div className="title-div">
+                    <p className="sec-title">Collect Art</p>
+                    <p className="txt">공연, 전시, 예술을 모으다.</p>
+                  </div>
+                  <div className="video-div">
+                    <video autoPlay muted loop>
+                      <source src={artMoaVideo} type="video/mp4"></source>
+                    </video>
+                  </div>
+                  <div className="txt-div">
+                    <p className="txt" style={{marginTop:"50px"}}>
+                      아트모아의 뜻은 'art를 모으다' 라는 뜻으로 제작하게 되었습니다.<br/>
+                      아트모아는 한국문화정보원에서 제공하는 공연전시정보서비스 오픈 API를 제공받아 구현한 반응형 웹 사이트입니다.<br/>
+                      React, Scss, canvas 등 이용하여 구현하였습니다.
+                    </p>
+                  </div>
+                </div>
               </div>
             </section>
             <section className="main-sec notice-sec">
