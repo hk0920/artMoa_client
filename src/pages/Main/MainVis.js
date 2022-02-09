@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay, EffectFade, Navigation } from "swiper";
 import $ from "jquery";
+import { gsap, Power1} from "gsap";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
@@ -20,7 +21,7 @@ const MainVis=(props)=> {
   const swiperPrams = {
     effect:"fade",
     autoplay:{
-      "delay": 10000,
+      "delay": 6000,
       "disableOnInteraction": false
     },
     loop:true,
@@ -34,6 +35,13 @@ const MainVis=(props)=> {
     onSlideChange:(e)=> {
       numberChange(e.realIndex);
       activeIdxEvt(e.realIndex);
+      gsap.to($(".main-vis .swiper-slide .txt-div p"), 0 ,{delay:0, top:100, opacity:0, ease:Power1.easeOut});
+      gsap.to($(".main-vis .swiper-slide .blue-btn"), 0 ,{delay:0, opacity:0, ease:Power1.easeOut});
+
+      $(".main-vis .swiper-slide").eq(e.activeIndex).find(".txt-div p").each(function(i){
+        gsap.to($(this), 0.4 ,{delay:0.3*i,top:0, opacity:1, ease:Power1.easeOut});
+      });
+      gsap.to($(".main-vis .swiper-slide").eq(e.activeIndex).find(".blue-btn"), 0.4 ,{delay:0.6,opacity:1, ease:Power1.easeOut});
     }
   }
 
@@ -53,6 +61,20 @@ const MainVis=(props)=> {
     setActiveIdx(idx);
   }
 
+  const loadEvt=()=>{
+    resizeEvt();
+
+    $(".main-vis").addClass("active");
+    gsap.to($(".main-vis .swiper-slide").eq(0).find(".img-div"), 0.6, {delay:0.4, left:0, opacity:1, ease:Power1.easeOut, onComplete:function(){
+      $(".main-vis .swiper-slide").eq(0).find(".txt-div p").each(function(i){
+        gsap.to($(this), 0.4 ,{delay:0.3*i,top:0, opacity:1, ease:Power1.easeOut});
+      });
+      gsap.to($(".main-vis .swiper-slide").eq(0).find(".blue-btn"), 0.4 ,{delay:0.6,opacity:1, ease:Power1.easeOut});
+      gsap.to($(".main-vis-wrap .next-info, .main-vis .swiper-button-prev, .main-vis .swiper-button-next"), 0.6, {delay:0.6, opacity:1, ease:Power1.easeOut});
+    }});
+    
+    
+  }
 
   const resizeEvt=()=>{
     if(data.length > 0){
@@ -75,7 +97,7 @@ const MainVis=(props)=> {
   }
 
   useEffect(()=>{
-    resizeEvt();
+    loadEvt();
     window.addEventListener('resize', windowSizer);
 
     return()=>{
@@ -96,7 +118,9 @@ const MainVis=(props)=> {
                   <div className="txt-div">
                     <p className="tit">{item.title}</p>
                     <p className="txt">{item.startDate} - {item.endDate}</p>
-                    <Link to="" className="blue-btn">About Us</Link>
+                    <Link to={{
+                      pathname: "/art/detail/" + item.seq
+                    }} className="blue-btn">About Us</Link>
                   </div>
                 </div>
               </SwiperSlide>
