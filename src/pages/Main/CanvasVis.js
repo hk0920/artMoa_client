@@ -186,8 +186,8 @@ class TextStyle {
 
 			if(this.opacity < 0){
 				this.blackOpacity += 0.002;
-				if(this.blackOpacity > 0.9){
-					this.blackOpacity = 0.9;
+				if(this.blackOpacity > 0.7){
+					this.blackOpacity = 0.7;
 				}
 			}
 
@@ -218,7 +218,7 @@ class TextStyle {
 		}else{
 			ctx.fillStyle = "rgba(0,0,0," + this.blackOpacity +")";
 			ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
-			if(this.blackOpacity === 0.9) {
+			if(this.blackOpacity === 0.7) {
 				isCanvas = true;
 			}
 		}
