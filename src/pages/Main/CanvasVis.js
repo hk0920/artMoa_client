@@ -15,7 +15,7 @@ class Particle {
 			{r:255, g:182, b:155},
 			{r:162, g:153, b:202},
 			{r:124, g:202, b:174},
-			{r:54, g:233, b:84}
+			{r:0, g:185, b:206}
 		];
 		this.idx = Math.floor(Math.random() * 5);
 	}
@@ -285,14 +285,15 @@ const Canvas=()=>{
 
 	const animate=()=>{
 		if(ctx!==undefined){
-			ctx.clearRect(0, 0, windowSize.width, windowSize.height);
-			ctx.globalCompositeOperation = 'saturation';
-			handleParticles();
-			drawWave();
-			drawText();
-			let myReq = requestAnimationFrame(animate);
-
-			if(isCanvas){
+			let myReq;
+			if(!isCanvas){
+				ctx.clearRect(0, 0, windowSize.width, windowSize.height);
+				ctx.globalCompositeOperation = 'saturation';
+				handleParticles();
+				drawWave();
+				drawText();
+				myReq = requestAnimationFrame(animate);
+			}else{
 				cancelAnimationFrame(myReq);
 				drawWaterCircle();
 			}
