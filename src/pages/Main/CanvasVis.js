@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import waterVideo from "../../assets/video/water-video.mp4";
 
 let drawCircle;
 class Particle {
@@ -7,13 +8,13 @@ class Particle {
 		this.y = Math.random() * window.innerHeight;
 		this.speedX = Math.random() * 4;
 		this.speedY = Math.random() * 4;
-		this.size = Math.random() * (window.innerWidth / 4);
+		this.size = Math.random() * (window.innerWidth / 2);
 		this.maxSize = window.innerWidth / 2;
 		this.colors = [
-			{r:45, g:74, b:227},
-			{r:250, g:255, b:89},
-			{r:255, g:104, b:248},
-			{r:44, g:209, b:252},
+			{r:236, g:236, b:132},
+			{r:255, g:182, b:155},
+			{r:162, g:153, b:202},
+			{r:124, g:202, b:174},
 			{r:54, g:233, b:84}
 		];
 		this.idx = Math.floor(Math.random() * 5);
@@ -165,6 +166,7 @@ class WaveGroup {
 	}
 }
 
+let isCanvas = false;
 class TextStyle {
 	constructor(){
 		this.x = window.innerWidth / 4;
@@ -176,10 +178,19 @@ class TextStyle {
 			{text:"INFORMATION", x:this.x, y:240},
 		];
 		this.opacity = 1;
+		this.blackOpacity = 0;
 	}
 	update(){
 		for(let i=0; i<this.texts.length; i++){
 			this.opacity -= 0.002;
+
+			if(this.opacity < 0){
+				this.blackOpacity += 0.002;
+				if(this.blackOpacity > 0.9){
+					this.blackOpacity = 0.9;
+				}
+			}
+
 			if(i%2 === 0){
 				this.texts[i].x -= 5;
 				
@@ -197,11 +208,46 @@ class TextStyle {
 	}
 	draw(ctx){
 		ctx.font = "normal bold 120px sans-serif";
-		ctx.fillStyle = "rgba(255,255,255," + this.opacity + ")";
-		for(let i=0; i<this.texts.length; i++){
+		if(this.opacity > 0){
+			ctx.fillStyle = "rgba(255,255,255," + this.opacity + ")";
+			for(let i=0; i<this.texts.length; i++){
+				ctx.beginPath();
+				ctx.fillText(this.texts[i].text, this.texts[i].x, this.y + this.texts[i].y);
+				ctx.closePath();
+			}
+		}else{
+			ctx.fillStyle = "rgba(0,0,0," + this.blackOpacity +")";
+			ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+			if(this.blackOpacity === 0.9) {
+				isCanvas = true;
+			}
+		}
+	}
+}
+
+let alpha = 0;
+class WaterCircle {
+	draw(ctx){
+		const videoEle = document.querySelector("#waterVideo");
+		videoEle.addEventListener("canplaythrough", render());
+		
+		function render() {
+			ctx.save();
 			ctx.beginPath();
-			ctx.fillText(this.texts[i].text, this.texts[i].x, this.y + this.texts[i].y);
-			ctx.closePath();
+			alpha += 0.002;
+			console.log(alpha);
+			ctx.globalAlpha = alpha;
+			ctx.arc(window.innerWidth/2, window.innerHeight/2, 300, 0, Math.PI*2);
+			ctx.clip();
+			ctx.clearRect(20,20,100,50);
+			ctx.drawImage(videoEle, 0, 0, window.innerWidth, window.innerHeight);
+			ctx.restore();
+			ctx.fillStyle = "#ffffff";
+			ctx.font = "normal bold 90px sans-serif";
+			ctx.fillText("ART COLLECT", window.innerWidth/4, window.innerHeight/2.3);
+			ctx.font = "normal bold 160px sans-serif";
+			ctx.fillText("artMoa", window.innerWidth/2, window.innerHeight/1.5);
+			requestAnimationFrame(render);
 		}
 	}
 }
@@ -216,6 +262,7 @@ const Canvas=()=>{
 	let particleArray = [];
 	const waveGroup = new WaveGroup();
 	const textStyle = new TextStyle();
+	const waterCircle = new WaterCircle();
 
 	let resizeTimer
   let windowSizer = () => { 
@@ -243,7 +290,12 @@ const Canvas=()=>{
 			handleParticles();
 			drawWave();
 			drawText();
-			requestAnimationFrame(animate);
+			let myReq = requestAnimationFrame(animate);
+
+			if(isCanvas){
+				cancelAnimationFrame(myReq);
+				drawWaterCircle();
+			}
 		}
 	}
 
@@ -274,6 +326,12 @@ const Canvas=()=>{
 		}
 	}
 
+	const drawWaterCircle=()=>{
+		if(ctx !== undefined){
+			waterCircle.draw(ctx);
+		}
+	}
+
 	const init=()=>{
 		for(let i=0; i<10; i++){
 			particleArray.push(new Particle());
@@ -300,6 +358,9 @@ const Canvas=()=>{
 	return(
 		<div className="canvas-vis" style={{width:windowSize.width, height:windowSize.height}}>
 			<canvas id="canvasVis" ref={canvasRef} width={windowSize.width} height={windowSize.height}></canvas>
+			<video autoPlay muted loop id="waterVideo">
+				<source src={waterVideo} type="video/mp4" />
+			</video>
 		</div>
 	)
 }

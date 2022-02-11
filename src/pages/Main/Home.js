@@ -37,7 +37,9 @@ const Main=({type})=>{
 
     $(".main-sec").each(function(){
       if(scrollPosition > $(this).offset().top + $(this).height()/2){
-        gsap.to($(this).find(".sec-title"), 0.6, {top:0, opacity:1, ease:Power3.easeOut});
+        gsap.to($(this).find(".title-div .sec-title"), 0.6, {top:0, opacity:1, ease:Power3.easeOut});
+        gsap.to($(this).find(".title-div .txt"), 0.6, {delay:0.3, top:0, opacity:1, ease:Power3.easeOut});
+        gsap.to($(this).find(".list"), 0.6, {delay:0.4, top:0, opacity:1, ease:Power1.easeOut});
 
         if($(".list-btn").length > 0){
           if(topPosition1 === null){
@@ -45,8 +47,6 @@ const Main=({type})=>{
           }
           gsap.to($(this).find(".list-btn"), 0.4, {delay:0.1, top:topPosition1, opacity:1, ease:Power3.easeOut}); 
         }
-        gsap.to($(this).find(".list"), 0.6, {delay:0.4, top:0, opacity:1, ease:Power1.easeOut});
-        gsap.to($(this).find(".btn-wrap"), 0.6, {delay:0.7, opacity:1, ease:Power1.easeOut});
        
         if($(".notice-sec").length > 0){
           if(topPosition2 === null){
@@ -57,6 +57,8 @@ const Main=({type})=>{
           $(this).find(".list li").each(function(i){
             gsap.to($(this), 0.4, {delay:0.3*i, top:0, opacity:1, ease:Power1.easeOut});
           });
+        }else{
+          gsap.to($(this).find(".btn-wrap"), 0.6, {delay:0.7, opacity:1, ease:Power1.easeOut});
         }
       }
     })
