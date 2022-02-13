@@ -93,7 +93,7 @@ const Header=()=>{
             </>
         }
       </div>
-
+      
       <TotalSearch />
 
       <Outlet />
