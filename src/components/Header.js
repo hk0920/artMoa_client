@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {NavLink, Link, Outlet, useNavigate} from 'react-router-dom';
+import {NavLink, Link, Outlet, useNavigate, useLocation} from 'react-router-dom';
 import $ from 'jquery';
 import GnbNav from './GnbNav';
 import TotalSearch from './TotalSearch';
@@ -9,7 +9,9 @@ const Header=()=>{
   const [scrollPosition, setScrollPosition] = useState(0);
   let isLogin = false;
   const navigate = useNavigate();
+  const path = useLocation().pathname;
 
+  console.log(path)
   const updateScroll=()=>{
     setScrollPosition(window.scrollY);
     if(window.scrollY < 50){
@@ -94,7 +96,13 @@ const Header=()=>{
         }
       </div>
       
-      <TotalSearch />
+      <div className="right-util">
+        {
+          path === "/type2"?
+          <Link to={"/"}>메인 버전1</Link>:<Link to={"/type2"}>메인 버전2</Link>
+        }
+        <TotalSearch />
+      </div>
 
       <Outlet />
     </header>
