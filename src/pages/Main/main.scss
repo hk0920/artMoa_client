@@ -523,7 +523,7 @@
     }
 
     &:after {
-      @include virtualAB(-100px, auto, 500px, 700px);
+      @include virtualAB(-100px, auto, 500px, calc(100% - 250px));
       right:0;
       background:$_pointColor;
       z-index:-1;
@@ -560,7 +560,7 @@
     }
 
     .txt-div {
-      padding:20px 100px 60px;
+      padding:60px 100px;
     }
 
     .video-div {
@@ -608,6 +608,22 @@
       }
     }
 
+    &.company-sec {
+      &:after {
+        top:-50px;
+        min-height:350px;
+      }
+
+      .title-div {
+        right:4%;
+        max-width:300px;
+      }
+  
+      .txt-div {
+        padding:60px calc(8% + 80px);
+      }
+    }
+
     &.notice-sec {
       .btn-wrap {
         top:63px;
@@ -623,6 +639,29 @@
     .title-div {
       margin-bottom:20px;
     }
+    
+    &.company-sec {
+      &:before {
+        width:100px;
+        height:100px;
+      }
+      &:after {
+        top:-25px;
+        width:50%;
+        min-height:230px;
+        height:230px;
+      }
+
+      .title-div {
+        top:20%;
+        right:4%;
+        max-width:300px;
+      }
+  
+      .txt-div {
+        padding:30px 8% 60px;
+      }
+    }
   }
 }
 
@@ -632,6 +671,13 @@
 
 .canvas-vis {
   position:relative;
+  height:400vh;
+
+  .fixed-ob {
+    position:fixed;
+    top:0;
+    left:0;
+  }
 
   #canvasVis {
     background:url("../../assets/images/canvas-vis-bg.png") no-repeat center / cover;
@@ -639,7 +685,7 @@
   
   &::after {
     @include virtualAB(0, 0, 100%, 100%);
-    background:url("../../assets/images/canvas-vis-dot-bg.png") no-repeat right top / cover; 
+    background:url("../../assets/images/canvas-vis-dot-bg.png") no-repeat right top / 100% auto/ fixed; 
   }
 
   #waterVideo {

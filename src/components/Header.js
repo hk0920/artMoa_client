@@ -11,16 +11,17 @@ const Header=()=>{
   const navigate = useNavigate();
   const path = useLocation().pathname;
 
-  console.log(path)
   const updateScroll=()=>{
     setScrollPosition(window.scrollY);
     if(window.scrollY < 50){
       $("#header").removeClass("hide");
     }else{  
-      if(scrollPosition < window.scrollY){
-        $("#header").addClass("hide");
-      }else{
-        $("#header").removeClass("hide");
+      if(!$("#cBody").hasClass("t2")){
+        if(scrollPosition < window.scrollY){
+          $("#header").addClass("hide");
+        }else{
+          $("#header").removeClass("hide");
+        }
       }
     }
     

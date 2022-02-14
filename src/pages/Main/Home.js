@@ -144,7 +144,7 @@ const Main=({type})=>{
                     </video>
                   </div>
                   <div className="txt-div">
-                    <p className="txt" style={{marginTop:"50px"}}>
+                    <p className="txt">
                       아트모아의 뜻은 'art를 모으다' 라는 뜻으로 제작하게 되었습니다.<br/>
                       아트모아는 한국문화정보원에서 제공하는 공연전시정보서비스 오픈 API를 제공받아 구현한 반응형 웹 사이트입니다.<br/>
                       React, Scss, canvas 등 이용하여 구현하였습니다.

@@ -43,7 +43,7 @@
       background:#fff;
     }
 
-    .left-util a, .left-util button {
+    .left-util a, .left-util button, .right-util > a {
       color:#fff;
     }
 
@@ -184,6 +184,18 @@
     }
   }
   
+  .right-util {
+    float:right;
+
+    & > a {
+      float:right;
+      margin-left:55px;
+      padding:8px 0 7px;
+      font-weight:bold;
+      color:#1a1a1d;
+    }
+  }
+
   .search-div {
     float:right;
     width:auto;
@@ -1509,6 +1521,7 @@
 }
 
 #footer {
+  position:relative;
   padding:40px 60px;
   border-top:1px solid #e3eeee;
   background:#fff;
