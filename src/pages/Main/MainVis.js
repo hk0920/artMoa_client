@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay, EffectFade, Navigation } from "swiper";
 import $ from "jquery";
 import { gsap, Power1} from "gsap";
+import moment from "moment";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
@@ -107,40 +108,44 @@ const MainVis=(props)=> {
   
   return(
     <div className="main-vis-wrap">
-      <Swiper {...swiperPrams} ref={setSwiper} className="main-vis" >
-          {
-            data.map((item, i)=>(
-              <SwiperSlide key={i}>
-                <div className="swiper-content">
-                  <div className="img-div">
-                    <img src={item.thumbnail} alt="" />
-                  </div>
-                  <div className="txt-div">
-                    <p className="tit">{item.title}</p>
-                    <p className="txt">{item.startDate} - {item.endDate}</p>
-                    <Link to={{
-                      pathname: "/art/detail/" + item.seq
-                    }} className="blue-btn">About Us</Link>
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))
-          }
-      </Swiper>
-      <div className="next-info">
-        <p className="txt">Next</p>
-        {
-          data.length > 0?
-            data.length>1?
-              <p className="tit">{data[number].title}</p>
-            :
-              <p className="txt2">전시/공연이 없습니다.</p>
-          :""
-        }
-      </div>
-      <div className="left-util">
-        <p className="activeIdx">{activeIdx}</p>
-      </div>
+      {data.length > 0}{
+        <>
+          <Swiper {...swiperPrams} ref={setSwiper} className="main-vis" >
+              {
+                data.map((item, i)=>(
+                  <SwiperSlide key={i}>
+                    <div className="swiper-content">
+                      <div className="img-div">
+                        <img src={item.thumbnail} alt="" />
+                      </div>
+                      <div className="txt-div">
+                        <p className="tit">{item.title}</p>
+                        <p className="txt">{moment(item.startDate.toString()).format("YYYY.MM.DD")} - {moment(item.endDate.toString()).format("YYYY.MM.DD")}</p>
+                        <Link to={{
+                          pathname: "/art/detail/" + item.seq
+                        }} className="blue-btn">About Us</Link>
+                      </div>
+                    </div>
+                  </SwiperSlide>
+                ))
+              }
+          </Swiper>
+          <div className="next-info">
+            <p className="txt">Next</p>
+            {
+              data.length > 0?
+                data.length>1?
+                  <p className="tit">{data[number].title}</p>
+                :
+                  <p className="txt2">전시/공연이 없습니다.</p>
+              :""
+            }
+          </div>
+          <div className="left-util">
+            <p className="activeIdx">{activeIdx}</p>
+          </div>
+        </> 
+      }
     </div>
   )
 };

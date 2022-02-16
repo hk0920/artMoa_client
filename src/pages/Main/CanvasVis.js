@@ -215,7 +215,7 @@ const Canvas=()=>{
 		<div className="canvas-vis">
 			<div className="fixed-ob" style={{width:windowSize.width, height:windowSize.height}}>
 				<canvas id="canvasVis" ref={canvasRef} width={windowSize.width} height={windowSize.height}></canvas>
-				<video autoPlay muted loop id="waterVideo">
+				<video autoPlay muted loop playsInline id="waterVideo">
 					<source src={waterVideo} type="video/mp4" />
 				</video>
 			</div>

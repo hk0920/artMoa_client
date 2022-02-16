@@ -8,6 +8,8 @@ import CardList from "../../components/CardList";
 import TextList from "../../components/TextList";
 import * as CommonEvt from "../../CommonEvt";
 import artMoaVideo from "../../assets/video/main-artmoa-video.mp4";
+import visSampleData from "../../datas/VisSampleData";
+import noticeSampleData from "../../datas/NoticeSampleData";
 import "swiper/css/bundle";
 import "./main.scss";
 
@@ -19,6 +21,7 @@ const Main=({type})=>{
   useEffect(()=>{
     CommonEvt.headerStyle();
     if(type !== "canvas") {
+      loadEvt();
       getData();
       getArtList();
       getNoticeList();
@@ -29,6 +32,18 @@ const Main=({type})=>{
       window.removeEventListener("scroll", scrollEvt);
     }
   },[type]);
+
+  const loadEvt=()=>{
+    if(visData.length === 0){
+      setVisData(visSampleData);
+    }
+    if(artData.length === 0){
+      setArtData(visSampleData);
+    }
+    if(noticeData.length === 0){
+      setNoticeData(noticeSampleData);
+    }
+  }
   
   let topPosition1 = null;
   let topPosition2 = null;
@@ -139,7 +154,7 @@ const Main=({type})=>{
                     <p className="txt">공연, 전시, 예술을 모으다.</p>
                   </div>
                   <div className="video-div">
-                    <video autoPlay muted loop>
+                    <video autoPlay muted loop playsInline>
                       <source src={artMoaVideo} type="video/mp4"></source>
                     </video>
                   </div>

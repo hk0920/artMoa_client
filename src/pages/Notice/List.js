@@ -3,10 +3,11 @@ import TextList from "../../components/TextList";
 import * as CommonEvt from "../../CommonEvt";
 import TotalSearch from "../../components/TotalSearch";
 import { Link } from "react-router-dom";
+import noticeSampleData from "../../datas/NoticeSampleData";
 
 const NoticeList=()=>{
-  const [data, setData] = useState([]);
-  const [total, setTotal] = useState([]);
+  const [data, setData] = useState(noticeSampleData);
+  const [total, setTotal] = useState(data.length);
 	const [moreDataCnt, setMoreDataCnt] = useState(0);
   const dataSize = 8;
   

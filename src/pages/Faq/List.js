@@ -3,9 +3,10 @@ import {Link} from 'react-router-dom';
 import $ from "jquery";
 import Accordion from "../../components/Accordion";
 import * as CommonEvt from "../../CommonEvt";
+import faqSampleData from "../../datas/FaqSampleData";
 
 const FaqList=()=>{
-  const [faqData, setFaqData] = useState([]);
+  const [faqData, setFaqData] = useState(faqSampleData);
   const [param, setPram] = useState({
     type:"",
     expYn:"Y"

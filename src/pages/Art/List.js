@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import {Link} from 'react-router-dom';
 import CardList from "../../components/CardList";
 import * as CommonEvt from "../../CommonEvt";
+import visSampleData from "../../datas/VisSampleData";
 
 const ArtList=()=> {
-	const [artData, setArtData] = useState([]);
+	const [artData, setArtData] = useState(visSampleData);
 	const [moreDataCnt, setMoreDataCnt] = useState(0);
   const dataSize = 8;
 	

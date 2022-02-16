@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import * as CommonEvt from "../../CommonEvt";
 import "./notice.scss";
+import noticeSampleData from "../../datas/NoticeSampleData";
 
 const NoticeDetail=()=>{
 	const id = useParams("id").id;
@@ -16,6 +17,14 @@ const NoticeDetail=()=>{
 	const navigate = useNavigate();
 
 	useEffect(()=>{
+		setData({
+			id:noticeSampleData[id].id,
+			title:noticeSampleData[id].title,
+			content:noticeSampleData[id].content,
+			readCnt:noticeSampleData[id].readCnt,
+			register:noticeSampleData[id].register,
+			date:noticeSampleData[id].registerTime
+		});
 		getData();
 	},[])
 

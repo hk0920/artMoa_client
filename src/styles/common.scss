@@ -381,6 +381,12 @@
       bottom:30px;
       left:0;
     }
+
+    .right-util {
+      & > a {
+        margin-left:15px;
+      }
+    }
   }
 }
 
