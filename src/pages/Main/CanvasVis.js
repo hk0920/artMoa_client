@@ -180,11 +180,11 @@ const Canvas=()=>{
 			type = "up";
 		}
 
-		if(scrollPosition < $(".canvas-vis").height()/2.5){
+		if(scrollPosition < $(".canvas-vis").height()/2){
 			textStyle.update(type, scrollPosition);
 			textStyle.draw(ctx);
 			alpha = 0;
-		}else if(scrollPosition >= $(".canvas-vis").height()/2.5 && scrollPosition < $("#footer").offset().top){
+		}else if(scrollPosition >= $(".canvas-vis").height()/2 && scrollPosition < $("#footer").offset().top){
 			if(type === "down"){
 				if(alpha < 1) {
 					alpha += 0.1;
