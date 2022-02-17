@@ -16,8 +16,10 @@ class TextStyle {
 		this.opacity = 1;
 		if(this.width > 768 && this.width <= 1024){
 			this.fontSize = this.fontSize - 40;
-		}else if(this.width <= 768){
+		}else if(this.width > 420 && this.width <= 768){
 			this.fontSize = this.fontSize - 60;
+		}else if(this.width <= 420){
+			this.fontSize = this.fontSize - 80;
 		}
 		this.texts = [
 			{text:"COLLECT", x:this.x, y:-this.fontSize},
