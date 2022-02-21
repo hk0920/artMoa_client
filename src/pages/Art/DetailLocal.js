@@ -44,7 +44,7 @@ const DetailLocal=(props)=>{
 		}
 	}
 
-  let navermaps = window.naver.maps;
+  const navermaps = window.naver.maps;
 
   const searchAddressToCoordinate=(address)=>{
 		if(address !== ""){
@@ -86,17 +86,26 @@ const DetailLocal=(props)=>{
 	return(
 		<>
 			<div className="local-map">
-				<p className="map-addr">{gps.addr}</p>
-				<div className="map-div">
-					<RenderAfterNavermapsLoaded
-						ncpClientId={"h1b9ymo6a5"}
-						error={<p>Maps Load Error</p>}
-						loading={<p>Maps Loading...</p>}
-						submodules={["geocoder"]}
-					>
-						<NaverApiMap data={gps} />
-					</RenderAfterNavermapsLoaded>
-				</div>
+				{
+					gps.addr !== ""?
+						<>
+							<p className="map-addr">{gps.addr}</p>
+							<div className="map-div">
+								<RenderAfterNavermapsLoaded
+									ncpClientId={"h1b9ymo6a5"}
+									error={<p>Maps Load Error</p>}
+									loading={<p>Maps Loading...</p>}
+									submodules={["geocoder"]}
+								>
+									<NaverApiMap data={gps} />
+								</RenderAfterNavermapsLoaded>
+							</div>
+						</>
+					:
+						<div className="no-data">
+							<p className="txt">지도에서 장소를 찾을 수 없습니다.</p>
+						</div>
+				}
 			</div>
 		</>
 	)

@@ -1,10 +1,8 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { NaverMap, Marker } from "react-naver-maps";
 
 export const NaverAPIMap = (props) => {
   const gps = props.data;
-
   console.log(gps);
 
   return (
