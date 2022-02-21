@@ -15,7 +15,6 @@ const DetailLocal=(props)=>{
 	data.map((item)=>{
 		if(item.name === "place"){
 			gps.place = item.value;
-			console.log("순서1")
 		}
 	});
 	
@@ -32,7 +31,6 @@ const DetailLocal=(props)=>{
 				}
 			}).then(res=>{
 				if(gps.addr === ""){
-					console.log("순서 => getData")
 					setGps({
 						lat:gps.lat,
 						lng:gps.lng,
@@ -68,7 +66,6 @@ const DetailLocal=(props)=>{
 	
 					let item = response.v2.addresses[0];
 					if(gps.lat === ""){
-						console.log("순서 => search")
 						setGps({
 							lat:item.y,
 							lng:item.x,

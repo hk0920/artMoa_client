@@ -3,7 +3,6 @@ import { NaverMap, Marker } from "react-naver-maps";
 
 export const NaverAPIMap = (props) => {
   const gps = props.data;
-  console.log(gps);
 
   return (
     <>
