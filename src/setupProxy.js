@@ -21,4 +21,14 @@ module.exports = function(app){
 			}
 		})
 	)
+	app.use(
+		"/naverSrchApi" ,
+		createProxyMiddleware({
+			target:"https://openapi.naver.com/",
+			changeOrigin:true,
+			pathRewrite:{
+				'^/naverSrchApi':''
+			}
+		})
+	)
 };

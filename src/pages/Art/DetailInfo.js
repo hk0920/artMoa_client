@@ -12,7 +12,8 @@ const DetailInfo=({data})=>{
 		price:"",
 		phone:"",
 		startDate:"",
-		endDate:""
+		endDate:"",
+		placeUrl:""
 	};
 
 	getDataArr.map((item)=>{
@@ -43,7 +44,19 @@ const DetailInfo=({data})=>{
 		if(item.name === "endDate"){
 			dataInfo.endDate = item.value;
 		}
+		if(item.name === "placeUrl"){
+			dataInfo.placeUrl = item.value;
+		}
 	})
+
+	const moreEvt=(e)=>{
+		e.preventDefault();
+		if(dataInfo.placeUrl === ""){
+			alert("해당 주소가 없습니다.")	
+		}else{
+			window.open(dataInfo.placeUrl);
+		}
+	}
 	
 	return(
 		<div className="detail-info">
@@ -76,7 +89,7 @@ const DetailInfo=({data})=>{
 					</li>
 				</ul>
 				<div className="btn-wrap">
-					<a href="" className="blue-btn">More</a>
+					<a href="#" onClick={moreEvt} className="blue-btn">More</a>
 				</div>
 			</div>
 		</div>

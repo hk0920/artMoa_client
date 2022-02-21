@@ -8,7 +8,6 @@ import * as CommonEvt from "../../CommonEvt";
 import "./art.scss";
 import axios from "axios";
 
-
 const ArtDetail=()=>{
 	const seq = useParams("seq").seq;
 	const [performance, setPerformance] = useState([]);
@@ -38,7 +37,7 @@ const ArtDetail=()=>{
 			parseStr(res.data);
 		}).catch(error=>{
 			console.log(error.response);
-		})
+		});
 	}
 
 	useEffect(()=>{
@@ -53,7 +52,7 @@ const ArtDetail=()=>{
 				<div className="inner">
 					<DetailInfo data={performance} />
 				</div>
-				<DetailLocal />
+				<DetailLocal data={performance}/>
 			</div>
 		</div>
 	)

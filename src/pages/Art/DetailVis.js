@@ -1,10 +1,12 @@
 import React from "react";
+import moment from "moment";
 
 const DetailVis=({data})=>{
 	const getDataArr = data;
 	const dataInfo = {
 		title:"",
-		subTitle:"",
+		startDate:"",
+		endDate:"",
 		thumbnail:""
 	};
 
@@ -12,8 +14,11 @@ const DetailVis=({data})=>{
 		if(item.name === "title"){
 			dataInfo.title = item.value;
 		}
-		if(item.name === "subTitle"){
-			dataInfo.subTitle = item.value;
+		if(item.name === "startDate"){
+			dataInfo.startDate = item.value;
+		}
+		if(item.name === "endDate"){
+			dataInfo.endDate = item.value;
 		}
 		if(item.name === "imgUrl"){
 			dataInfo.thumbnail = item.value;
@@ -28,7 +33,7 @@ const DetailVis=({data})=>{
 				</div>
 				<div className="txt-div">
 					<p className="tit">{dataInfo.title}</p>
-					<p className="txt">{dataInfo.subTitle}</p>
+					<p className="txt">{moment(dataInfo.startDate.toString()).format("YYYY.MM.DD")} ~ {moment(dataInfo.endDate.toString()).format("YYYY.MM.DD")}</p>
 				</div>
 			</div>
 		</div>
