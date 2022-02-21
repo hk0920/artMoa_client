@@ -27,7 +27,11 @@ const ArtList=()=> {
 			}
     }).then(res=>{
 			const dataSet = res.data.data.list;
-			setArtData(artData.concat(dataSet));
+      if(moreDataCnt === 0){
+        setArtData(dataSet);
+      }else{
+        setArtData(artData.concat(dataSet));
+      }
 			setMoreDataCnt(moreDataCnt + parseInt(dataSize));
     }).catch(error=>{
       console.log("에러" + error);

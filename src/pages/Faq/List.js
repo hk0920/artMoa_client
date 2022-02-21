@@ -68,12 +68,6 @@ const FaqList=()=>{
     getData();
   }
 
-  const searchEvt=(search)=>{
-    const searchTxt = search;
-
-    console.log(searchTxt);
-  }
-
   return(
     <div id="cBody">
       <div className="sub-vis">
