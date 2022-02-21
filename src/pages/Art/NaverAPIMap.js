@@ -6,17 +6,23 @@ export const NaverAPIMap = (props) => {
   console.log(gps);
 
   return (
-    <NaverMap
-      mapDivId={"react-naver-map"} 
-      style={{
-        width: "100%", 
-        height: "100%"
-      }}
-      defaultCenter={{ lat: gps.lat, lng: gps.lng }}
-      defaultZoom={15}
-    >
-      <Marker position={{ lat: gps.lat, lng: gps.lng }} />
-    </NaverMap>
+    <>
+      {
+        gps.lat !== ""?    
+          <NaverMap
+            mapDivId={"react-naver-map"} 
+            style={{
+              width: "100%", 
+              height: "100%"
+            }}
+            defaultCenter={{ lat: gps.lat, lng: gps.lng }}
+            defaultZoom={15}
+          >
+            <Marker position={{ lat: gps.lat, lng: gps.lng }} />
+          </NaverMap>
+        :""
+      }
+    </>
   );
 };
 
