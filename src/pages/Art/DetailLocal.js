@@ -18,7 +18,7 @@ const DetailLocal=(props)=>{
 		}
 	});
 	
-  const getData=async()=>{
+  const getData=()=>{
 		if(gps.place !== "") {
 			let url = "/naverSrchApi/v1/search/local.json";
 			var queryParams = '?' + "query=" + gps.place;
