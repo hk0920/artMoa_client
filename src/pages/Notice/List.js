@@ -25,7 +25,11 @@ const NoticeList=()=>{
       const dataSet = res.data.data.list;
       setTotal(res.data.data.total);
       if(dataSet !== null){
-        setData(data.concat(dataSet));
+        if(moreDataCnt ===0){
+          setData(dataSet); 
+        }else{
+          setData(data.concat(dataSet));
+        }
         setMoreDataCnt(moreDataCnt + dataSize);
       }
     }).catch((err) => {
