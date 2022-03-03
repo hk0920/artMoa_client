@@ -1,70 +1,26 @@
-# Getting Started with Create React App
+# artMoa
+공공데이터 포털에서 제공해주는 공연전시정보조회 서비스를 이용한 공연, 전시 정보를 안내해주는 React 반응형 웹 프로젝트   
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![artmoa-img](https://user-images.githubusercontent.com/75876034/156549481-ed3d1980-f844-4c63-9adf-11570f76431d.png)
 
-## Available Scripts
+#### Project Info 
+> * **개발인원** : 2명 (front:1명 , back:1명)
+> * **개발기간** : 2022.02.17 ~ 2021.02.28  
+> * **개발환경** : 
+    <span><img src="https://img.shields.io/badge/react-61DAFB?style=flat&logo=react&logoColor=white"/></span>
+    <span><img src="https://img.shields.io/badge/Scss-cd669a?style=flat&logo=Sass&logoColor=white"/></span>
+    <span><img src="https://img.shields.io/badge/jQuery-0769ad?style=flat&logo=jquery&logoColor=white"/></span>
+    <span><img src="https://img.shields.io/badge/Git-f05032?style=flat&logo=git&logoColor=white"/></span>
+    <span><img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white"/></span>
 
-In the project directory, you can run:
+#### 기여 부분
+>   **1. 화면 페이지(React.js) 개발(100%)**  
+>    
+>   **2. Canvas Animation 화면 작업(100%)**  
+> 
+>   **3. axios 이용한 back-end와 데이터 통신(100%)**    
+>   
+>   **4. 사용자의 인터랙티브를 중요시 한 프로젝트라 스크롤, 터치 등 다양한 모션 작업(100%)**    
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)  
+#### 화면
+> 실제 구현 화면이 궁금하시다면 https://www.artmoa.ga/ 이동 후 확인해주세요.
