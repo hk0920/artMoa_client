@@ -17,14 +17,6 @@ const NoticeDetail=()=>{
 	const navigate = useNavigate();
 
 	useEffect(()=>{
-		setData({
-			id:noticeSampleData[id].id,
-			title:noticeSampleData[id].title,
-			content:noticeSampleData[id].content,
-			readCnt:noticeSampleData[id].readCnt,
-			register:noticeSampleData[id].register,
-			date:noticeSampleData[id].registerTime
-		});
 		getData();
 	},[])
 
@@ -45,6 +37,19 @@ const NoticeDetail=()=>{
 				date:info.registerTime
 			})
 		}).catch((error)=>{
+			for(let i=0; i<noticeSampleData.length; i++){
+				if(noticeSampleData[i].id === Number(id)){
+					console.log(noticeSampleData[i])
+					setData({
+						id:noticeSampleData[i].id,
+						title:noticeSampleData[i].title,
+						content:noticeSampleData[i].content,
+						readCnt:noticeSampleData[i].readCnt,
+						register:noticeSampleData[i].register,
+						date:noticeSampleData[i].registerTime
+					});
+				}
+			}
 			console.log(error);
 		})
 	}

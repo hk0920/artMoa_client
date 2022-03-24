@@ -8,7 +8,6 @@ import moment from "moment";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
-import * as CommonEvt from "../../CommonEvt";
 
 const MainVis=(props)=> {
   const data = props.data;
@@ -79,8 +78,6 @@ const MainVis=(props)=> {
 
   const resizeEvt=()=>{
     if(data.length > 0){
-      CommonEvt.imgSizeEvt(".main-vis .swiper-content .img-div");
-
       var nextInfoPosition = $(".main-vis .swiper-content").offset().top + $(".main-vis .swiper-content").height();
       $(".main-vis-wrap .next-info").css("top", nextInfoPosition);
       $(".main-vis .swiper-button-prev").css("top", nextInfoPosition);

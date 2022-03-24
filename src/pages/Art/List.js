@@ -12,11 +12,6 @@ const ArtList=()=> {
 	useEffect(()=>{
 		getData();
     CommonEvt.headerStyle();
-		window.addEventListener("resize", CommonEvt.imgSizeEvt(".list .img-div"));
-
-		return()=>{
-			window.removeEventListener("resize", CommonEvt.imgSizeEvt(".list .img-div"));
-		}
 	},[]);
 
 	const getData=()=>{

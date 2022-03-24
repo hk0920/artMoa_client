@@ -1,7 +1,6 @@
 import React from "react";
-import $, { data } from "jquery";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
+import $ from "jquery";
+import { Link, useLocation } from "react-router-dom";
 
 const Accordion=(props)=>{
 	const dataArr = props.data;
