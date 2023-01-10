@@ -2,20 +2,16 @@ import React, { useEffect, useState } from "react";
 import {Link} from 'react-router-dom';
 import CardList from "../../components/CardList";
 import * as CommonEvt from "../../CommonEvt";
+import visSampleData from "../../datas/VisSampleData";
 
 const ArtList=()=> {
-	const [artData, setArtData] = useState([]);
+	const [artData, setArtData] = useState(visSampleData);
 	const [moreDataCnt, setMoreDataCnt] = useState(0);
   const dataSize = 8;
 	
 	useEffect(()=>{
 		getData();
     CommonEvt.headerStyle();
-		window.addEventListener("resize", CommonEvt.imgSizeEvt(".list .img-div"));
-
-		return()=>{
-			window.removeEventListener("resize", CommonEvt.imgSizeEvt(".list .img-div"));
-		}
 	},[]);
 
 	const getData=()=>{
@@ -26,7 +22,11 @@ const ArtList=()=> {
 			}
     }).then(res=>{
 			const dataSet = res.data.data.list;
-			setArtData(artData.concat(dataSet));
+      if(moreDataCnt === 0){
+        setArtData(dataSet);
+      }else{
+        setArtData(artData.concat(dataSet));
+      }
 			setMoreDataCnt(moreDataCnt + parseInt(dataSize));
     }).catch(error=>{
       console.log("에러" + error);

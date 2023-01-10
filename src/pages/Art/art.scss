@@ -14,6 +14,12 @@
 		background:#dceded;
 	}
 
+	&:after {
+		@include virtualAB(auto, 0, 50%, 50%);
+		bottom:0;
+		background:rgba(220, 237, 237, 0.9);
+	}
+
 	.inner {
 		position:relative;
 		height:100%;
@@ -26,19 +32,19 @@
 	.img-div {
 		position:relative;
 		float:right;
-		width:75%;
+		width:70%;
 		height:100%;
-		overflow:hidden;
 
 		img {
-			@include positionAb(100%, 50%, 50%);
-			transform:translate(-50%, -50%);
+			width:100%;
+			height:100%;
+			object-fit:cover;
 		}
 	}
 
 	.txt-div {
-		@include positionAb(40%, 50%, 120px);
-		transform:translateY(-50%);
+		@include positionAb(40%, calc(50% + 50px), 120px);
+		z-index:1;
 
 		.tit {
 			margin-bottom:20px;
@@ -67,7 +73,12 @@
 		}
 	
 		.txt-div {
+			top:calc(50% + 20px);
 			left:4%;
+
+			.tit {
+				font-size:35px;
+			}
 		}
 	}
 }
@@ -77,6 +88,10 @@
 		&:before {
 			width:40%;
 			height:calc(100% - 130px);
+		}
+
+		&:after {
+			width:55%;
 		}
 
 		.img-div {
@@ -89,6 +104,15 @@
 			.tit {
 				margin-bottom:10px;
 				font-size:25px;
+			}
+		}
+		.txt-div {
+			top:calc(50% + 20px);
+			left:4%;
+			width:50%;
+
+			.tit {
+				font-size:20px;
 			}
 		}
 	}
@@ -121,6 +145,7 @@
 			margin-bottom:20px;
 			font-size:30px;
 			font-weight:bold;
+			word-break:keep-all;
 		}
 		
 		.use-info {
@@ -144,10 +169,11 @@
 @include tablet(){
 	.detail-info {
 		display:block;
-		margin-top:60px;
+		width:75%;
+		margin:60px auto 0;
 
 		.img-div {
-			width:75%;
+			width:100%;
 		}
 
 		.info-div {
@@ -160,6 +186,7 @@
 
 @include mobile(){
 	.detail-info {
+		width:90%;
 		margin-top:30px;
 
 		.info-div {
@@ -167,7 +194,7 @@
 
 			.tit {
 				margin-bottom:10px;
-				font-size:25px;
+				font-size:20px;
 			}
 			
 			.use-info {
@@ -192,12 +219,19 @@
 	margin-top:200px;
 
 	.map-addr {
-		@include positionAb(100%, 0, 0);
-		background:rgba(255,255,255,0.5);
+		@include positionAb(auto, 0, auto, 0);
+		padding:5px 10px;
+		font-weight:600;
+		color:#1a1a1d;
+		background:rgba(255,255,255,0.8);
+		z-index:1;
 	}
 
 	.map-div {
+		position:relative;
 		height:50vh;
+		background:rgba(220, 237, 237, 0.5);
+		z-index:0;
 	}
 }
 

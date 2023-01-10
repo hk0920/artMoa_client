@@ -8,6 +8,8 @@ import CardList from "../../components/CardList";
 import TextList from "../../components/TextList";
 import * as CommonEvt from "../../CommonEvt";
 import artMoaVideo from "../../assets/video/main-artmoa-video.mp4";
+import visSampleData from "../../datas/VisSampleData";
+import noticeSampleData from "../../datas/NoticeSampleData";
 import "swiper/css/bundle";
 import "./main.scss";
 
@@ -19,6 +21,7 @@ const Main=({type})=>{
   useEffect(()=>{
     CommonEvt.headerStyle();
     if(type !== "canvas") {
+      loadEvt();
       getData();
       getArtList();
       getNoticeList();
@@ -29,6 +32,18 @@ const Main=({type})=>{
       window.removeEventListener("scroll", scrollEvt);
     }
   },[type]);
+
+  const loadEvt=()=>{
+    if(visData.length === 0){
+      setVisData(visSampleData);
+    }
+    if(artData.length === 0){
+      setArtData(visSampleData);
+    }
+    if(noticeData.length === 0){
+      setNoticeData(noticeSampleData);
+    }
+  }
   
   let topPosition1 = null;
   let topPosition2 = null;
@@ -139,12 +154,12 @@ const Main=({type})=>{
                     <p className="txt">공연, 전시, 예술을 모으다.</p>
                   </div>
                   <div className="video-div">
-                    <video autoPlay muted loop>
+                    <video autoPlay muted loop playsInline>
                       <source src={artMoaVideo} type="video/mp4"></source>
                     </video>
                   </div>
                   <div className="txt-div">
-                    <p className="txt" style={{marginTop:"50px"}}>
+                    <p className="txt">
                       아트모아의 뜻은 'art를 모으다' 라는 뜻으로 제작하게 되었습니다.<br/>
                       아트모아는 한국문화정보원에서 제공하는 공연전시정보서비스 오픈 API를 제공받아 구현한 반응형 웹 사이트입니다.<br/>
                       React, Scss, canvas 등 이용하여 구현하였습니다.

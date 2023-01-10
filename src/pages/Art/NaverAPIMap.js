@@ -1,24 +1,27 @@
-import React from "react";
-import { RenderAfterNavermapsLoaded, NaverMap } from "react-naver-maps";
+import React, { useEffect, useState } from "react";
+import { NaverMap, Marker } from "react-naver-maps";
 
 export const NaverAPIMap = (props) => {
+  const gps = props.data;
+
   return (
-    <RenderAfterNavermapsLoaded
-      ncpClientId={"h1b9ymo6a5"}
-      error={<p>Maps Load Error</p>}
-      loading={<p>Maps Loading...</p>}
-    >
-      <NaverMap
-        mapDivId={"react-naver-map"} 
-        style={{
-          width: "100%", 
-          height: "100%"
-        }}
-        defaultCenter={{ lat: 37.554722, lng: 126.970833 }} 
-        zoom={props.zoom}
-      >
-      </NaverMap>
-    </RenderAfterNavermapsLoaded>
+    <>
+      {
+        gps.lat !== ""?    
+          <NaverMap
+            mapDivId={"react-naver-map"} 
+            style={{
+              width: "100%", 
+              height: "100%"
+            }}
+            defaultCenter={{ lat: gps.lat, lng: gps.lng }}
+            defaultZoom={15}
+          >
+            <Marker position={{ lat: gps.lat, lng: gps.lng }} />
+          </NaverMap>
+        :""
+      }
+    </>
   );
 };
 

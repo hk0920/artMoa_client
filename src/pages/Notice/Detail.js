@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import * as CommonEvt from "../../CommonEvt";
 import "./notice.scss";
+import noticeSampleData from "../../datas/NoticeSampleData";
 
 const NoticeDetail=()=>{
 	const id = useParams("id").id;
@@ -36,6 +37,19 @@ const NoticeDetail=()=>{
 				date:info.registerTime
 			})
 		}).catch((error)=>{
+			for(let i=0; i<noticeSampleData.length; i++){
+				if(noticeSampleData[i].id === Number(id)){
+					console.log(noticeSampleData[i])
+					setData({
+						id:noticeSampleData[i].id,
+						title:noticeSampleData[i].title,
+						content:noticeSampleData[i].content,
+						readCnt:noticeSampleData[i].readCnt,
+						register:noticeSampleData[i].register,
+						date:noticeSampleData[i].registerTime
+					});
+				}
+			}
 			console.log(error);
 		})
 	}
