@@ -22,8 +22,8 @@ const App=()=>{
 		<>
 			<Header />
 			<Routes>
-				<Route index path="/" element={<Main />}></Route>
-				<Route index path="/:type" element={<Main type={"canvas"}/>}></Route>
+				<Route index path="/" element={<Main type={"canvas"}/>}></Route>
+				<Route index path="/:type" element={<Main />}></Route>
 				<Route path="/intro" element={<Intro />}></Route>
 				<Route path="/art" element={<ArtList />}></Route>
 				<Route path="/art/detail/:seq" element={<ArtDetail />}></Route>
